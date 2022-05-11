@@ -1,0 +1,26 @@
+.style-header{
+    left: 54px;
+    right: 0px;
+    background: #dc3545;
+    color: #fff;
+    border-bottom-right-radius: 10px;
+    height: 80px;
+    border-bottom-left-radius: 10px;
+    margin-right: 80px;
+}
+
+.nav-item.header > a{
+    color: #fff !important;
+    font-weight: bold;
+}
+.nav-item.header > i{
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.brand-text{
+    color: #000;
+    font-weight: bold!important;
+}

@@ -1,3 +1,6 @@
+<?php 
+  use Illuminate\Support\Facades\Session;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +41,7 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color:#fff"></i></a>
       </li>
       <li class="nav-item header d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">@yield('title-link')</a>
+        <a href="/" class="nav-link">@yield('title-link')</a>
       </li>
       <li class="nav-item header d-none d-sm-inline-block">
        <i class="fa fa-chevron-right"></i>
@@ -47,6 +50,7 @@
         <a href="#" class="nav-link">@yield('sub-title-link')</a>
       </li>
     </ul>
+    
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Messages Dropdown Menu -->
@@ -62,7 +66,7 @@
             <i class="fas fa-user mr-2"></i> Profile
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="/logout" class="dropdown-item">
             <i class="fas fa-share mr-2"></i> Logout
           </a>
        
@@ -103,7 +107,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/" class="nav-link {{ Request::is('/') ? 'active' : '' }}">
+            <a href="/" class="nav-link {{ Request::is('home') ? 'active' : '' }}">
               <i class="nav-icon fas fa-home "></i>
               <p>
                 Beranda  
@@ -111,6 +115,7 @@
             </a>
             
           </li>
+          <?php if(Session::get('dataUsers')->role == 1){ ?> 
           <li class="nav-item">
             <a href="/data-warga" class="nav-link {{ Request::is('data-warga') ? 'active' : '' }}">
               <i class="nav-icon fas fa-address-card"></i>
@@ -120,11 +125,30 @@
             </a>
             
           </li>
+          <?php } ?>
           <li class="nav-item">
             <a href="#" class="nav-link ">
               <i class="nav-icon fas fa-credit-card"></i>
               <p>
                 Data Iuran
+              </p>
+            </a>
+            
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-credit-card"></i>
+              <p>
+                Pengeluaran
+              </p>
+            </a>
+            
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link ">
+              <i class="nav-icon fas fa-credit-card"></i>
+              <p>
+                Pemasukan
               </p>
             </a>
             

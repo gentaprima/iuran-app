@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,5 +18,14 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/','DashboardController@home');
+Route::get('/','LoginController@index');
+Route::get('/home','DashboardController@home');
 Route::get('/data-warga','DashboardController@dataWarga');
+Route::post('/auth','LoginController@auth');
+Route::get('/register','LoginController@register');
+Route::post('/process_register','LoginController@proccesRegister');
+
+Route::get('/logout',function(){
+    Session::flush();
+    return redirect('/');
+});

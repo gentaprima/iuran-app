@@ -2,6 +2,7 @@
 
 @section('title-link','Beranda')
 @section('sub-title-link','Beranda')
+@section('active','beranda')
 
 @section('content')
 <!-- Content Wrapper. Contains page content -->

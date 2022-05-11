@@ -18,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/','DashboardController@home');
+Route::get('/data-warga','DashboardController@dataWarga');

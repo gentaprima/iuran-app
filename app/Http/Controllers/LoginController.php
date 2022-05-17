@@ -100,7 +100,8 @@ class LoginController extends Controller
             'email'    => $request->email,
             'phone_number'    => $request->phoneNumber,
             'password'    => Hash::make($request->password),
-            'role'         => 0
+            'role'         => 0,
+            'is_verif'         => 0
         ]);
         $users->save();
         Session::flash('message', 'Berhasil membuat akun, Silahkan login.'); 

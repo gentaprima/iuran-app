@@ -25,6 +25,7 @@ class TblUsers extends Migration
             $table->string('number_family_card')->nullable();
             $table->string('photo')->nullable();
             $table->integer('number_of_family')->nullable();
+            $table->integer('is_verif')->nullable();
             $table->string('gender')->nullable();
         });
     }

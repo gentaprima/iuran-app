@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>@yield('title')</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -29,9 +29,14 @@
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('dashboard/plugins/summernote/summernote-bs4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dashboard/new-style.css') }}">
+   <!-- DataTables -->
+   <link rel="stylesheet" href="{{ asset('dashboard/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dashboard/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dashboard/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
+<div class="wrapper" style="background-color: #f4f6f9;">
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light  style-header">
@@ -50,6 +55,10 @@
         <a href="#" class="nav-link">@yield('sub-title-link')</a>
       </li>
     </ul>
+    @if(Session::has('message'))
+    <p hidden="true" id="message">{{ Session::get('message') }}</p>
+    <p hidden="true" id="icon">{{ Session::get('icon') }}</p>
+    @endif
     
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -58,11 +67,15 @@
       <!-- Notifications Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" style="height: 0px !important;">
-         <img src="{{asset('dashboard/dist/img/user1-128x128.jpg')}}" alt="User Avatar" style="margin-top: -25px;" class="img-size-50 img-circle">
+        <?php if(Session::get('dataUsers')->photo == null){ ?>
+          <img src="{{asset('user.png')}}" alt="User Avatar" style="margin-top: -25px;border:3px solid #fff;" class="img-size-50 img-circle">
+        <?php }else{ ?>
+          <img src="{{asset('uploads/profile')}}/{{Session::get('dataUsers')->photo}}" alt="User Avatar" style="margin-top: -25px;border:3px solid #fff;" class="img-size-50 img-circle">
+          <?php } ?>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="margin-top: 30px;">
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
+          <a href="/profile" class="dropdown-item">
             <i class="fas fa-user mr-2"></i> Profile
           </a>
           <div class="dropdown-divider"></div>
@@ -90,7 +103,7 @@
   <aside class="main-sidebar elevation-4 sidebar-light-danger"> 
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link mb-3" style="margin-top:21px;">
-      <img src="{{ asset('dashboard/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <img src="{{ asset('dashboard/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8;  ">
       <span class="brand-text font-weight-light">IURAN APP</span>
     </a>
 
@@ -116,15 +129,30 @@
             
           </li>
           <?php if(Session::get('dataUsers')->role == 1){ ?> 
-          <li class="nav-item">
-            <a href="/data-warga" class="nav-link {{ Request::is('data-warga') ? 'active' : '' }}">
+        
+          <li class="nav-item {{ Request::is('data-warga') || Request::is('verifikasi-warga') ? 'menu-open' : '' }}">
+            <a href="/verifikasi-warga" class="nav-link {{ Request::is('data-warga') || Request::is('verifikasi-warga') ? 'active' : '' }}">
               <i class="nav-icon fas fa-address-card"></i>
               <p>
-                Data Warga
+                Warga
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview ">
+              <li class="nav-item">
+                <a href="/verifikasi-warga" class="nav-link {{ Request::is('verifikasi-warga') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Verifikasi Warga</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/data-warga" class="nav-link {{ Request::is('data-warga') ? 'active' : '' }}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Warga</p>
+                </a>
+              </li>
+            </ul>
             
-          </li>
           <?php } ?>
           <li class="nav-item">
             <a href="#" class="nav-link ">
@@ -162,73 +190,25 @@
             </a>
             
           </li>
-          <!-- <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Layout Options
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation + Sidebar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Boxed</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Navbar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Footer</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Collapsed Sidebar</p>
-                </a>
-              </li> -->
+            <?php if(Session::get('dataUsers')->role == 1){ ?> 
+              <li class="nav-item {{ Request::is('data-rekening') ? 'menu-open' : '' }}">
+              <a href="/verifikasi-warga" class="nav-link {{ Request::is('data-rekening') ? 'active' : '' }}" >
+                <i class="nav-icon fas fa-toolbox"></i>
+                <p>
+                  Pengaturan
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview ">
+                <li class="nav-item">
+                  <a href="/data-rekening" class="nav-link {{ Request::is('data-rekening') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Data Rekening</p>
+                  </a>
+                </li>
+              
+              </ul>
+            <?php } ?>
             </ul>
           </li>
           
@@ -289,5 +269,65 @@
 <script src="{{asset('dashboard/dist/js/demo.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{asset('dashboard/dist/js/pages/dashboard.js')}}"></script>
+<script src="{{asset('dashboard/plugins/bs-custom-file-input/bs-custom-file-input.min.js')}}"></script>
+
+<!-- DataTables  & Plugins -->
+<script src="{{asset('dashboard/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('dashboard/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('dashboard/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('dashboard/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('dashboard/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('dashboard/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('dashboard/plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{asset('dashboard/plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{asset('dashboard/plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{asset('dashboard/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('dashboard/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('dashboard/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script>
+$(function () {
+  bsCustomFileInput.init();
+});
+</script>
+<script>
+ const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-right',
+  iconColor: 'white',
+  customClass: {
+    popup: 'colored-toast'
+  },
+  showConfirmButton: false,
+  timer: 5000,
+  timerProgressBar: true
+})
+let icon = document.getElementById('icon');
+if(icon != null){
+  let message = document.getElementById('message');
+  Toast.fire({
+   icon: icon.innerHTML,
+   title: message.innerHTML
+ });
+}
+</script>
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 </body>
 </html>
+

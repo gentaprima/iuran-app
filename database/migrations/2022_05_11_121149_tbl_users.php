@@ -37,6 +37,6 @@ class TblUsers extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_users');
+        k
     }
 }

@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="{{ asset('dashboard/plugins/summernote/summernote-bs4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dashboard/new-style.css') }}">
    <!-- DataTables -->
-   <link rel="stylesheet" href="{{ asset('dashboard/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('dashboard/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dashboard/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('dashboard/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -68,7 +68,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#" style="height: 0px !important;">
         <?php if(Session::get('dataUsers')->photo == null){ ?>
-          <img src="{{asset('user.png')}}" alt="User Avatar" style="margin-top: -25px;border:3px solid #fff;" class="img-size-50 img-circle">
+          k
         <?php }else{ ?>
           <img src="{{asset('uploads/profile')}}/{{Session::get('dataUsers')->photo}}" alt="User Avatar" style="margin-top: -25px;border:3px solid #fff;" class="img-size-50 img-circle">
           <?php } ?>

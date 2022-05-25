@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Session;
         if(Session::get('dataUsers')->role == 0){ ?> 
           <?php if(Session::get('dataUsers')->number_family_card == null){ ?>
           <div class="alert alert-warning" style="padding: 0; padding-left:20px;padding-top:10px;">
-            <p><span class="font-weight-bold">Pemberitahuan!!</span> Silahkan lengkapi data anda terlebih dahulu untuk melanjutkan pembayaran iuran.</p>
+            <p><span class="font-weight-bold">Pemberitahuan!!</span> Silahkan lengkapi data anda terlebih dahulu untuk melanjutkan pembayaran iuran. <a href="/profile"> Lengkapi Data</a></p>
           </div>
           <?php } ?>
           <?php if(Session::get('dataUsers')->is_verif == 0 && Session::get('dataUsers')->number_family_card != null){ ?>

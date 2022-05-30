@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\sendEmail;
 use App\Models\ModelIuran;
+use App\Models\ModelUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -71,6 +75,7 @@ class IuranController extends Controller
         $iuran->nominal = $request->nominal;
         $iuran->image = $filename;
         $iuran->date = date('Y-m-d');
+        $iuran->is_pay = 1;
         $iuran->save();
 
         Session::flash('message', 'Iuran berhasil diperbarui, Silahkan tunggu verifikasi oleh admin.'); 
@@ -82,6 +87,32 @@ class IuranController extends Controller
         $iuran = ModelIuran::find($id);
         $iuran->delete();
         Session::flash('message', 'Iuran berhasil dihapus.'); 
+        Session::flash('icon', 'success'); 
+        return redirect()->back();
+    }
+
+    public function addBill(){
+        $getDataWarga = DB::table('tbl_users')
+                            ->where('role',0)
+                            ->where('is_verif',1)
+                            ->get();
+        $dataIuran = [];
+    
+        foreach($getDataWarga as $key => $warga){
+            array_push($dataIuran,[
+                'id_users' => $warga->id,
+                'to_rekening' => 1,
+                'nominal' => 0,
+                'image' => "",
+                'is_verif' => 0,
+                'is_pay' => 0,
+                'date' => date('Y-m-d'),
+            ]);
+            Mail::to($warga)->send(New sendEmail($warga));
+        }
+
+        DB::table('tbl_iuran')->insert($dataIuran);
+        Session::flash('message', 'Notifikasi tagihan berhasil dikirim keseluruh warga.'); 
         Session::flash('icon', 'success'); 
         return redirect()->back();
     }

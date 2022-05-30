@@ -51,16 +51,28 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>@php echo number_format($row->nominal, 2, ".", ","); @endphp</td>
-                            <td>{{$row->bank_name}}</td>
-                            <td><a href="{{asset('uploads/bukti')}}/{{$row->image}}" target="_blank"><img src="{{asset('uploads/bukti')}}/{{$row->image}}" style="width: 50px; height:50px;" alt=""></td></a>
+                            <?php if($row->is_pay == 0){ ?>
+                                <td>-</td>
+                            <?php }else{ ?>
+                                <td>{{$row->bank_name}}</td>
+                            <?php } ?>
+                            <?php if($row->is_pay == 0){ ?>
+                                <td>-</td>
+                            <?php }else{ ?>
+                                <td><a href="{{asset('uploads/bukti')}}/{{$row->image}}" target="_blank"><img src="{{asset('uploads/bukti')}}/{{$row->image}}" style="width: 50px; height:50px;" alt=""></a></td>
+                            <?php } ?>
+                            
                             <td>
-                                <?php 
-                                if($row->is_verif == 0){
-                                ?>
-                                <button class="btn btn-outline-primary">Belum Diverikasi</button>
+                                <?php if($row->is_pay == 0){ ?>
+                                    <button class="btn btn-outline-primary">Belum Dibayar</button>
                                 <?php }else{ ?>
-                                <button class="btn btn-outline-success">Sudah Diverikasi</button>
+                                    <?php if($row->is_verif == 0){  ?>
+                                        <button class="btn btn-outline-primay">Belum Diverikasi</button>
+                                        <?php }else{ ?>
+                                        <button class="btn btn-outline-success">Sudah Diverikasi</button>
+                                        <?php } ?>
                                 <?php } ?>
+                                
                             </td>
                             <td>{{$row->date}}</td>
                             <td>

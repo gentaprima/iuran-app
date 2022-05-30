@@ -54,6 +54,24 @@ use Illuminate\Support\Facades\Session;
       <?php } ?>
       <?php
       if (Session::get('dataUsers')->role == 1) { ?>
+        <?php if($dataIuran == null){ ?>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="alert alert-success">
+                <div class="row">
+  
+                  <div class="col-md-6 mt-2" >
+                  Silahkan klik tombol untuk tagih iuran bulan ini kepada warga 
+                </div>
+                <div class="col-md-6">
+                  
+                  <button type="button" data-toggle="modal" data-target="#modal-form" style="float: right;" class="btn btn-outline-white">Tagih Iuran</button>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        <?php } ?>
         <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box bg-navy">
@@ -118,5 +136,26 @@ use Illuminate\Support\Facades\Session;
     </div><!-- /.container-fluid -->
   </section>
   <!-- /.content -->
+</div>
+<div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-lg" role="document">
+      <div class="modal-content rounded">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Tagih Iuran</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <h5>Anda yakin ingin memulai tagihan untuk bulan ini?</h5>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+              <a href="/tagih-iuran" type="submit" class="btn btn-primary">Proses</a>
+              </form>
+          </div>
+          <div class="bg-red rounded-modal" style="color: red;height:15px;"></div>
+      </div>
+  </div>
 </div>
 @endsection

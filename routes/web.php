@@ -39,6 +39,7 @@ Route::post('/add-iuran','IuranController@store');
 Route::post('/update-iuran/{id}','IuranController@update');
 Route::get('/delete-iuran/{id}','IuranController@destroy');
 Route::get('/data-iuran-warga','DashboardController@dataIuranWarga');
+Route::get('/tagih-iuran','IuranController@addBill');
 
 Route::get('/logout',function(){
     Session::flush();

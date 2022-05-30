@@ -101,6 +101,7 @@ class RekeningController extends Controller
         $rekening->bank_name = $request->bankName;
         $rekening->account_name = $request->accountName;
         $rekening->save();
+        dd($rekening);
         Session::flash('message', 'Berhasil memperbarui data rekening'); 
         Session::flash('icon', 'success'); 
         return redirect()->back();

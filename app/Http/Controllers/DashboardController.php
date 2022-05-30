@@ -15,10 +15,14 @@ class DashboardController extends Controller
 
     public function home(){
         $isLogin = Session::get('login');
+        $dataIuran = DB::table('tbl_iuran')->whereMonth('date',date('m'))->first();
+        $data = [
+            'dataIuran' => $dataIuran
+        ];
         if($isLogin == null){
             return redirect('/');
         }
-        return view('dashboard');
+        return view('dashboard',$data);
     }
 
     public function dataWarga(){

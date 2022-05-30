@@ -34,6 +34,11 @@ Route::post('/update-profile/{id}','ProfileController@update');
 Route::get('/warga/verif-data/{id}','WargaController@verifData');
 Route::post('/warga/update/{id}','WargaController@update');
 Route::get('/warga/delete/{id}','WargaController@destroy');
+Route::get('/data-iuran','DashboardController@dataIuran');
+Route::post('/add-iuran','IuranController@store');
+Route::post('/update-iuran/{id}','IuranController@update');
+Route::get('/delete-iuran/{id}','IuranController@destroy');
+Route::get('/data-iuran-warga','DashboardController@dataIuranWarga');
 
 Route::get('/logout',function(){
     Session::flush();

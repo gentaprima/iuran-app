@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ModelIuran;
+use App\Models\ModelRekening;
 use App\Models\ModelUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +50,43 @@ class DashboardController extends Controller
             'dataVerifikasi'    => $dataVerifikasi
         ];
         return view('data-verifikasi-warga',$data);
+    }
+
+    public function dataIuran(){
+        $isLogin = Session::get('login');
+        if($isLogin == null){
+            return redirect('/');
+        }
+        $dataIuran = DB::table('tbl_iuran')
+                        ->select('tbl_iuran.*','tbl_rekening.number_account','tbl_rekening.bank_name','tbl_rekening.account_name')
+                        ->leftJoin('tbl_users','tbl_iuran.id_users','=','tbl_users.id')
+                        ->leftJoin('tbl_rekening','tbl_iuran.to_rekening','=','tbl_rekening.id')
+                        ->where('id_users','=',Session::get('dataUsers')->id)
+                        ->get();
+        $dataRekening = ModelRekening::all();
+        $data = [
+            'dataIuran' => $dataIuran,
+            'dataRekening' => $dataRekening
+        ];
+        return view('data-iuran',$data);
+    }
+
+    public function dataIuranWarga(){
+        $isLogin = Session::get('login');
+        if($isLogin == null){
+            return redirect('/');
+        }
+        $dataIuran = DB::table('tbl_iuran')
+                        ->select('tbl_iuran.*','tbl_rekening.number_account','tbl_rekening.bank_name','tbl_rekening.account_name')
+                        ->leftJoin('tbl_users','tbl_iuran.id_users','=','tbl_users.id')
+                        ->leftJoin('tbl_rekening','tbl_iuran.to_rekening','=','tbl_rekening.id')
+                        ->get();
+        $dataRekening = ModelRekening::all();
+        $data = [
+            'dataIuran' => $dataIuran,
+            'dataRekening' => $dataRekening
+        ];
+        return view('data-iuran',$data);
     }
 
     

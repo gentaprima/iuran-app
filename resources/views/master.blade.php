@@ -1,3 +1,4 @@
+
 <?php 
   use Illuminate\Support\Facades\Session;
 ?>
@@ -40,45 +41,46 @@
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
-  <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light  style-header">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" style="color:#fff"></i></a>
-      </li>
-      <li class="nav-item header d-none d-sm-inline-block">
-        <a href="/" class="nav-link">@yield('title-link')</a>
-      </li>
-      <li class="nav-item header d-none d-sm-inline-block">
-       <i class="fa fa-chevron-right"></i>
-      </li>
-      <li class="nav-item header d-none d-sm-inline-block">
-        <a href="#" class="nav-link">@yield('sub-title-link')</a>
-      </li>
-    </ul>
-    @if(Session::has('message'))
-    <p hidden="true" id="message">{{ Session::get('message') }}</p>
-    <p hidden="true" id="icon">{{ Session::get('icon') }}</p>
-    @endif
-    
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-      
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#" style="height: 0px !important;">
-        <?php if(Session::get('dataUsers')->photo == null){ ?>
-          k
-        <?php }else{ ?>
-          <img src="{{asset('uploads/profile')}}/{{Session::get('dataUsers')->photo}}" alt="User Avatar" style="margin-top: -25px;border:3px solid #fff;" class="img-size-50 img-circle">
-          <?php } ?>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="margin-top: 30px;">
-          <div class="dropdown-divider"></div>
-          <a href="/profile" class="dropdown-item">
-            <i class="fas fa-user mr-2"></i> Profile
+<body class="sidebar-mini layout-fixed sidebar-collapse">
+  <div class="wrapper" style="background-color: #f4f6f9;">
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light  style-header">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <!-- <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"
+              style="color:#fff"></i></a>
+        </li> -->
+        <li class="nav-item header d-none d-sm-inline-block">
+          <a href="/" class="nav-link">@yield('title-link')</a>
+        </li>
+        <li class="nav-item header d-none d-sm-inline-block">
+          <i class="fa fa-chevron-right"></i>
+        </li>
+        <li class="nav-item header d-none d-sm-inline-block">
+          <a href="#" class="nav-link">@yield('sub-title-link')</a>
+        </li>
+      </ul>
+      @if(Session::has('message'))
+      <p hidden="true" id="message">{{ Session::get('message') }}</p>
+      <p hidden="true" id="icon">{{ Session::get('icon') }}</p>
+      @endif
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Messages Dropdown Menu -->
+
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" data-toggle="dropdown" href="#" style="height: 0px !important;">
+            <?php if(Session::get('dataUsers')->photo == null){ ?>
+            <img src="{{asset('user.png')}}" alt="User Avatar" style="margin-top: -25px;border:3px solid #fff;"
+              class="img-size-50 img-circle">
+            <?php }else{ ?>
+            <img src="{{asset('uploads/profile')}}/{{Session::get('dataUsers')->photo}}" alt="User Avatar"
+              style="margin-top: -25px;border:3px solid #fff;" class="img-size-50 img-circle">
+            <?php } ?>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="margin-top: 30px;">
             <div class="dropdown-divider"></div>
@@ -138,10 +140,18 @@
             @if(Session::get('dataUsers')->role == 0)
 
             <li class="nav-item">
-              <a href="/" class="nav-link">
+              <a href="/data-iuran" class="nav-link">
                 <i class="nav-icon fas fa-money-check-alt"></i>
                 <p>
-                  Bayar Iuran
+                  Data Iuran
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/" class="nav-link">
+                <i class="nav-icon fas fa-table"></i>
+                <p>
+                  Report Anggaran
                 </p>
               </a>
             </li>

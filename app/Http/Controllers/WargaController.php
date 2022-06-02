@@ -64,6 +64,7 @@ class WargaController extends Controller
         $account->number_family_card = $request->numberFamilyCard;
         $account->number_of_family = $request->numberOfFamily;
         $account->gender = $request->gender;
+        $account->blok = $request->blok;
         $account->save();
         Session::flash('message', 'Berhasil memperbarui data warga.'); 
         Session::flash('icon', 'success'); 

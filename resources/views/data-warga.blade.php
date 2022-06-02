@@ -48,8 +48,8 @@
               <td>{{$row->first_name}} {{$row->last_name}}</td>
               <td>{{$row->phone_number}}</td>
               <td>
-                <button type="button" data-target="#modal-form" data-toggle="modal" onclick="viewData('{{$row->id}}','{{$row->number_identity_card}}','{{$row->first_name}}','{{$row->last_name}}','{{$row->phone_number}}','{{$row->number_family_card}}','{{$row->photo}}','{{$row->number_of_family}}','{{$row->gender}}','{{$row->email}}')" class="btn btn-secondary btn-sm"><i class="fa fa-eye"></i></button>
-                <button type="button" data-target="#modal-form" data-toggle="modal" onclick="updateData('{{$row->id}}','{{$row->number_identity_card}}','{{$row->first_name}}','{{$row->last_name}}','{{$row->phone_number}}','{{$row->number_family_card}}','{{$row->photo}}','{{$row->number_of_family}}','{{$row->gender}}','{{$row->email}}')" class="btn btn-secondary btn-sm"><i class="fa fa-edit"></i></button>
+                <button type="button" data-target="#modal-form" data-toggle="modal" onclick="viewData('{{$row->id}}','{{$row->number_identity_card}}','{{$row->first_name}}','{{$row->last_name}}','{{$row->phone_number}}','{{$row->number_family_card}}','{{$row->photo}}','{{$row->number_of_family}}','{{$row->gender}}','{{$row->email}}','{{$row->blok}}')" class="btn btn-secondary btn-sm"><i class="fa fa-eye"></i></button>
+                <button type="button" data-target="#modal-form" data-toggle="modal" onclick="updateData('{{$row->id}}','{{$row->number_identity_card}}','{{$row->first_name}}','{{$row->last_name}}','{{$row->phone_number}}','{{$row->number_family_card}}','{{$row->photo}}','{{$row->number_of_family}}','{{$row->gender}}','{{$row->email}}','{{$row->blok}}')" class="btn btn-secondary btn-sm"><i class="fa fa-edit"></i></button>
                 <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id}}')" class="btn btn-secondary btn-sm"><i class="fa fa-trash"></i></button>
               </td>
             </tr>
@@ -82,6 +82,8 @@
             <p id="email"></p>
             <p class="font-weight-bold">NIK</p>
             <p id="nik"></p>
+            <p class="font-weight-bold">Blok Rumah</p>
+            <p id="blok"></p>
           </div>
           <div class="col-6">
             <p class="font-weight-bold">Nomor Kartu Keluarga</p>
@@ -142,6 +144,12 @@
               </div>
             </div>
             <div class="form-group row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Blok Rumah</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="blokForm" value="{{old('blok')}}" name="blok" placeholder="Blok Rumah">
+              </div>
+            </div>
+            <div class="form-group row">
               <label for="inputPassword" class="col-sm-2 col-form-label">Jenis Kelamin</label>
               <div class="col-sm-10">
                 <select class="form-control" id="genderForm" value="{{old('gender')}}" name="gender">
@@ -191,13 +199,14 @@
   </div>
 </div>
 <script>
-  function viewData(id, nik, firstName, lastName, phoneNumber, numberFamilyCard, photo, numberOfFamily, gender, email) {
+  function viewData(id, nik, firstName, lastName, phoneNumber, numberFamilyCard, photo, numberOfFamily, gender, email,blok) {
     document.getElementById("nik").innerHTML = nik;
     document.getElementById("numberFamilyCard").innerHTML = numberFamilyCard;
     document.getElementById("phoneNumber").innerHTML = phoneNumber;
     document.getElementById("numberOfFamily").innerHTML = numberOfFamily;
     document.getElementById("gender").innerHTML = gender;
     document.getElementById("email").innerHTML = email;
+    document.getElementById("blok").innerHTML = blok;
     document.getElementById("fullName").innerHTML = firstName + ' ' + lastName;
     document.getElementById("titleModal").innerHTML = 'Lihat Data';
     document.getElementById("updateData").hidden = true;
@@ -206,7 +215,7 @@
 
   }
 
-  function updateData(id, nik, firstName, lastName, phoneNumber, numberFamilyCard, photo, numberOfFamily, gender, email) {
+  function updateData(id, nik, firstName, lastName, phoneNumber, numberFamilyCard, photo, numberOfFamily, gender, email,blok) {
     document.getElementById("titleModal").innerHTML = 'Perbarui Data';
     document.getElementById("footerModal").hidden = false;
     document.getElementById("updateData").hidden = false;
@@ -219,6 +228,7 @@
     document.getElementById('genderForm').value = gender;
     document.getElementById('numberOfFamilyForm').value = numberOfFamily;
     document.getElementById('phoneNumberForm').value = phoneNumber;
+    document.getElementById('blokForm').value = blok;
     document.getElementById("form").action = `/warga/update/${id}`;
   }
 

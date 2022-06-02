@@ -201,7 +201,7 @@
               <ul class="nav nav-treeview" style="display: none;">
                 
                 <li class="nav-item">
-                  <a href="#" class="nav-link {{ Request::is('data-pemasukan') ? 'active' : '' }}">
+                  <a href="/data-pemasukan" class="nav-link {{ Request::is('data-pemasukan') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                       Pemasukan

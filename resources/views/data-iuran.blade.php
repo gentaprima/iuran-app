@@ -32,54 +32,75 @@
     <section class="content">
         <div class="container-fluid">
             <div class="card p-5 rounded mb-3">
-                <h4>Data Iuran Bulan <?= date('F') ?></h4>
-                <button class="btn btn-outline-primary size-btn" onclick="addData()" data-toggle="modal" data-target="#modal-form">Tambah Data</button>
+                <h4>Data Iuran</h4>
+                <a href="/form-tambah-iuran" class="btn btn-outline-primary size-btn">Tambah Data</a>
+                <!-- <button class="btn btn-outline-primary size-btn" onclick="addData()" data-toggle="modal" data-target="#modal-form">Tambah Data</button> -->
                 <table id="example1" class="table table-striped">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nominal Transfer</th>
+                            <th>ID transaksi</th>
+                            <th>Nominal Pembayaran</th>
+                            <th>Jenis</th>
                             <th>No Rekening</th>
                             <th>Bukti</th>
-                            <th>Tanggal</th>
                             <th>Status</th>
+                            <th>Tanggal</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($dataIuran as $row)
+                        @php
+                        $jenisIuran = $row->jenis_iuran;
+                        $splitIuran = explode(',',$jenisIuran);
+                        $month = $row->month;
+                        $splitMonth = explode(',',$month);
+                        @endphp
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>@php echo number_format($row->nominal, 2, ".", ","); @endphp</td>
-                            <?php if($row->is_pay == 0){ ?>
+                            <?php if ($row->is_pay == 1) { ?>
+                                <td>{{$row->id_transaction}}</td>
+                            <?php } else { ?>
                                 <td>-</td>
-                            <?php }else{ ?>
-                                <td>{{$row->bank_name}}</td>
                             <?php } ?>
-                            <?php if($row->is_pay == 0){ ?>
+                            <td>@php echo number_format($row->sub_total, 2, ".", ","); @endphp</td>
+                            <td>
+                                <ul>
+                                    <?php for($i = 0;$i <count($splitIuran);$i++){ ?>
+                                        <li><?= $splitIuran[$i] ?> (<?= $splitMonth[$i] ?>)</li>
+                                    <?php } ?>
+                                </ul>
+                            </td>
+                            <?php if ($row->is_pay == 0) { ?>
                                 <td>-</td>
-                            <?php }else{ ?>
+                                <td>-</td>
+                            <?php } else { ?>
+                                <td>{{$row->bank_name}}</td>
                                 <td><a href="{{asset('uploads/bukti')}}/{{$row->image}}" target="_blank"><img src="{{asset('uploads/bukti')}}/{{$row->image}}" style="width: 50px; height:50px;" alt=""></a></td>
                             <?php } ?>
-                            
+
                             <td>
-                                <?php if($row->is_pay == 0){ ?>
-                                    <button class="btn btn-outline-primary">Belum Dibayar</button>
-                                <?php }else{ ?>
-                                    <?php if($row->is_verif == 0){  ?>
-                                        <button class="btn btn-outline-primay">Belum Diverikasi</button>
-                                        <?php }else{ ?>
-                                        <button class="btn btn-outline-success">Sudah Diverikasi</button>
-                                        <?php } ?>
+                                <?php if ($row->is_pay == 0) { ?>
+                                    <p class="badge badge-danger">Belum Dibayar</p>
+                                <?php } else { ?>
+                                    <?php if ($row->is_verif == 0) {  ?>
+                                        <p class="badge badge-warning">Belum Diverikasi</p>
+                                    <?php } else { ?>
+                                        <p class="badge badge-success">Sudah Diverikasi</p>
+                                    <?php } ?>
                                 <?php } ?>
-                                
+
                             </td>
-                            <td>{{$row->date}}</td>
+                            <?php if ($row->is_pay == 1) { ?>
+                                <td>{{$row->date}}</td>
+                            <?php } else { ?>
+                                <td>-</td>
+                            <?php } ?>
                             <td>
-                                <?php if($row->is_verif == 0){ ?>
-                                <button type="button" data-target="#modal-form" data-toggle="modal" onclick="updateData('{{$row->id}}','{{$row->nominal}}','{{$row->image}}','{{$row->to_rekening}}')" class="btn btn-secondary btn-sm"><i class="fa fa-edit"></i></button>
-                               
-                                <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id}}')" class="btn btn-secondary btn-sm"><i class="fa fa-trash"></i></button>
+                                <?php if ($row->is_verif == 0) { ?>
+                                    <button type="button" data-target="#modal-form" data-toggle="modal" onclick="updateData('{{$row->id_transaction}}','{{$row->sub_total}}','{{$row->image}}','{{$row->to_rekening}}')" class="btn btn-secondary btn-sm mt-1"><i class="fa fa-edit"></i></button>
+                                    <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id_transaction}}')" class="btn btn-secondary btn-sm mt-1"><i class="fa fa-trash"></i></button>
                                 <?php } ?>
                             </td>
                         </tr>
@@ -108,7 +129,7 @@
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Nominal</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="nominal" required value="{{old('nominal')}}" name="nominal" placeholder="Nominal">
+                            <input type="text" class="form-control" readonly id="nominal" required value="{{old('nominal')}}" name="nominal" placeholder="Nominal">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -170,17 +191,17 @@
 </div>
 <script>
     function updateData(id, nominal, image, toRekening) {
-        document.getElementById("nominal").value = nominal;
+        document.getElementById("nominal").value = 'Rp ' + (parseInt(nominal)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");;
         document.getElementById("toRekening").value = toRekening;
         document.getElementById("imageLabel").innerHTML = image;
         document.getElementById("titleModal").innerHTML = 'Perbarui Iuran';
-        document.getElementById("optionalImage").hidden =false;
+        document.getElementById("optionalImage").hidden = false;
         document.getElementById("form").action = `/update-iuran/${id}`;
         document.getElementById("image").required = false;
     }
-    
+
     function addData() {
-        document.getElementById("optionalImage").hidden =true;
+        document.getElementById("optionalImage").hidden = true;
         document.getElementById("nominal").value = "";
         document.getElementById("toRekening").value = "";
         document.getElementById("imageLabel").innerHTML = "";

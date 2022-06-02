@@ -140,7 +140,7 @@
             @if(Session::get('dataUsers')->role == 0)
 
             <li class="nav-item">
-              <a href="/data-iuran" class="nav-link">
+              <a href="/data-iuran" class="nav-link {{ Request::is('data-iuran') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-money-check-alt"></i>
                 <p>
                   Data Iuran
@@ -183,15 +183,15 @@
               <?php } ?>
               @if(Session::get('dataUsers')->role == 1)
             <li class="nav-item">
-              <a href="#" class="nav-link ">
+              <a href="/data-iuran-warga" class="nav-link {{ Request::is('data-iuran-warga') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-credit-card"></i>
                 <p>
                   Data Iuran
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="/docs/3.2/components" class="nav-link">
+            <li class="nav-item {{ Request::is('data-pemasukan') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::is('data-pemasukan')  ? 'active' : '' }}">
                 <i class="nav-icon fas fa-th"></i>
                 <p>
                   Arus Kas
@@ -201,7 +201,7 @@
               <ul class="nav nav-treeview" style="display: none;">
                 
                 <li class="nav-item">
-                  <a href="#" class="nav-link ">
+                  <a href="#" class="nav-link {{ Request::is('data-pemasukan') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>
                       Pemasukan
@@ -229,8 +229,8 @@
             @endif
 
             <?php if(Session::get('dataUsers')->role == 1){ ?>
-            <li class="nav-item {{ Request::is('data-rekening') ? 'menu-open' : '' }}">
-              <a href="/verifikasi-warga" class="nav-link {{ Request::is('data-rekening') ? 'active' : '' }}">
+            <li class="nav-item {{ Request::is('data-rekening')  || Request::is('data-jenis-iuran') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::is('data-rekening')  || Request::is('data-jenis-iuran') ? 'active' : '' }}">
                 <i class="nav-icon fas fa-toolbox"></i>
                 <p>
                   Pengaturan
@@ -242,6 +242,12 @@
                   <a href="/data-rekening" class="nav-link {{ Request::is('data-rekening') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Data Rekening</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/data-jenis-iuran" class="nav-link {{ Request::is('data-jenis-iuran') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Jenis Iuran</p>
                   </a>
                 </li>
 

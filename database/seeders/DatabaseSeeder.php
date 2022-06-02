@@ -49,6 +49,21 @@ class DatabaseSeeder extends Seeder
             ];
         DB::table('tbl_users')->insert($dataUsers);  
 
+        DB::table('tbl_jenis_iuran')->insert([
+            [
+                'jenis_iuran'   => "Iuran Kebersihan DKPP",
+                'nominal'   => 30000,
+            ],
+            [
+                'jenis_iuran'   => "Iuran Keamanan",
+                'nominal'   => 30000,
+            ],
+            [
+                'jenis_iuran'   => "Iuran Sukarela",
+                'nominal'   => 20000,
+            ],
+        ]);
+
         ModelRekening::create(
             [
                 'number_account'  => 123456789,

@@ -77,4 +77,9 @@ class WargaController extends Controller
         Session::flash('icon', 'success'); 
         return redirect()->back();
     }
+
+    public function getDataById($id){
+        $data = ModelUsers::find($id);
+        return response()->json($data);
+    }
 }

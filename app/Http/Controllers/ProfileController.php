@@ -95,6 +95,7 @@ class ProfileController extends Controller
         $account->number_of_family = $request->numberOfFamily;
         $account->gender = $request->gender;
         $account->photo = $filename;
+        $account->blok = $request->blok;
         $account->save();
         Session::put('dataUsers',$account);
         Session::flash('message', 'Berhasil memperbarui data diri.'); 

@@ -40,7 +40,18 @@ Route::post('/update-iuran/{id}','IuranController@update');
 Route::get('/delete-iuran/{id}','IuranController@destroy');
 Route::get('/data-iuran-warga','DashboardController@dataIuranWarga');
 Route::get('/tagih-iuran','IuranController@addBill');
-
+Route::get('/data-jenis-iuran','DashboardController@jenisIuran');
+Route::post('/add-jenis-iuran','JenisIuranController@store');
+Route::post('/update-jenis-iuran/{id}','JenisIuranController@update');
+Route::get('/delete-jenis-iuran/{id}','JenisIuranController@destroy');
+Route::get('/form-tambah-iuran','DashboardController@formAddIuran');
+Route::get('/form-update-iuran','DashboardController@formUpdateIuran');
+Route::post('/add-new-iuran','IuranController@addIuran');
+Route::get('/data-iuran-warga','DashboardController@verifikasiIuran');
+Route::get('/get-data-users-by-id/{id}','WargaController@getDataById');
+Route::get('/get-data-iuran-by-id/{id}','IuranController@getDataById');
+Route::get('/confirm-iuran/{id}','IuranController@confirmIuran');
+Route::get('/data-pemasukan','DashboardController@dataPemasukan');
 Route::get('/logout',function(){
     Session::flush();
     return redirect('/');

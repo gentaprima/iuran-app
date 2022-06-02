@@ -50,6 +50,8 @@
                                 <p>{{$dataProfile->email}} </p>
                                 <p class="font-weight-bold">NIK</p>
                                 <p>{{$dataProfile->number_identity_card}} </p>
+                                <p class="font-weight-bold">Blok Rumah</p>
+                                <p>{{$dataProfile->blok}} </p>
                             </div>
                             <div class="col-6">
                                 <p class="font-weight-bold">Nomor Kartu Keluarga</p>
@@ -62,7 +64,7 @@
                                 <p>{{$dataProfile->phone_number}} </p>
                             </div>
                         </div>
-                        <button type="button" onclick="updateData(`{{$dataProfile->id}}`,`{{$dataProfile->email}}`,`{{$dataProfile->first_name}}`,`{{$dataProfile->last_name}}`,`{{$dataProfile->number_identity_card}}`,`{{$dataProfile->number_family_card}}`,`{{$dataProfile->gender}}`,`{{$dataProfile->number_of_family}}`,`{{$dataProfile->phone_number}}`)" data-target="#modal-form" data-toggle="modal" class="btn btn-outline-primary">Perbarui Data</button>
+                        <button type="button" onclick="updateData(`{{$dataProfile->id}}`,`{{$dataProfile->email}}`,`{{$dataProfile->first_name}}`,`{{$dataProfile->last_name}}`,`{{$dataProfile->number_identity_card}}`,`{{$dataProfile->number_family_card}}`,`{{$dataProfile->gender}}`,`{{$dataProfile->number_of_family}}`,`{{$dataProfile->phone_number}}`,`{{$dataProfile->blok}}`)" data-target="#modal-form" data-toggle="modal" class="btn btn-outline-primary">Perbarui Data</button>
 
 
                     </div>
@@ -129,6 +131,12 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-2 col-form-label">Blok Rumah</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="blok" value="{{old('blok')}}" name="blok" placeholder="Blok Rumah">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                         <div class="col-sm-10">
                             <select class="form-control" id="gender" value="{{old('gender')}}" name="gender">
@@ -184,7 +192,7 @@
 </div>
 
 <script>
-    function updateData(id,email,firstName,lastName,nik,kk,gender,numberFamily,phoneNumber){
+    function updateData(id,email,firstName,lastName,nik,kk,gender,numberFamily,phoneNumber,blok){
         document.getElementById('email').value = email;
         document.getElementById('firstName').value = firstName;
         document.getElementById('lastName').value = lastName;
@@ -193,6 +201,7 @@
         document.getElementById('gender').value = gender;
         document.getElementById('numberOfFamily').value = numberFamily;
         document.getElementById('phoneNumber').value = phoneNumber;
+        document.getElementById('blok').value = blok;
         document.getElementById("form").action = `/update-profile/${id}`;
     }
 </script>

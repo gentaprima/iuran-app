@@ -21,6 +21,7 @@ class TblUsers extends Migration
             $table->string('password');
             $table->string('phone_number');
             $table->integer('role');
+            $table->string('blok')->nullable();
             $table->string('number_identity_card')->nullable();
             $table->string('number_family_card')->nullable();
             $table->string('photo')->nullable();

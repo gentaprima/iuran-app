@@ -55,7 +55,7 @@ use Illuminate\Support\Facades\Session;
       <?php
       if (Session::get('dataUsers')->role == 1) { ?>
         <?php if($dataIuran == null){ ?>
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-12">
               <div class="alert alert-success">
                 <div class="row">
@@ -70,7 +70,7 @@ use Illuminate\Support\Facades\Session;
               </div>
               </div>
             </div>
-          </div>
+          </div> -->
         <?php } ?>
         <div class="row">
           <div class="col-md-3 col-sm-6 col-12">
@@ -79,7 +79,7 @@ use Illuminate\Support\Facades\Session;
 
               <div class="info-box-content">
                 <span class="info-box-text">Warga Terdaftar</span>
-                <span class="info-box-number">10</span>
+                <span class="info-box-number"><?= count($dataWarga); ?></span>
 
                
               </div>
@@ -94,7 +94,7 @@ use Illuminate\Support\Facades\Session;
 
               <div class="info-box-content">
                 <span class="info-box-text">Pemasukan</span>
-                <span class="info-box-number">Rp 41,410</span>
+                <span class="info-box-number">Rp @php echo number_format($dataPemasukan, 2, ".", ","); @endphp</span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -121,7 +121,7 @@ use Illuminate\Support\Facades\Session;
 
               <div class="info-box-content">
                 <span class="info-box-text">Iuran (unverifikasi)</span>
-                <span class="info-box-number">10</span>
+                <span class="info-box-number"><?= count($dataIuranUnVerif) ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>

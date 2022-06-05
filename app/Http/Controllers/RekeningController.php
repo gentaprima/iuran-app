@@ -17,14 +17,14 @@ class RekeningController extends Controller
     public function index()
     {
         $isLogin = Session::get('login');
-        if($isLogin == null){
+        if ($isLogin == null) {
             return redirect('/');
         }
         $dataRekening = ModelRekening::all();
         $data = [
             'dataRekening' => $dataRekening
         ];
-        return view('data-rekening',$data);
+        return view('data-rekening', $data);
     }
 
     /**
@@ -34,7 +34,7 @@ class RekeningController extends Controller
      */
     public function create()
     {
-        //
+        return view("form-tambah-rekening");
     }
 
     /**
@@ -45,23 +45,23 @@ class RekeningController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = Validator::make($request->all(),[
+        $validate = Validator::make($request->all(), [
             'numberAccount' => 'required|numeric',
             'accountName'  => 'required',
             'bankName'      => 'required'
-        ],[
+        ], [
             'numberAccount.required' => 'Nomor Rekening harus dilengkapi',
             'numberAccount.numeric' => 'Nomor Rekening harus angka',
             'accountName.required' => 'Nama Pemilik Rekening harus dilengkapi',
             'bankName.required' => 'Nama Bank harus dilengkapi',
         ]);
 
-        if($validate->fails()){
-            Session::flash('message', $validate->errors()->first()); 
-            Session::flash('icon', 'error'); 
+        if ($validate->fails()) {
+            Session::flash('message', $validate->errors()->first());
+            Session::flash('icon', 'error');
             return redirect()->back()
-                    ->withInput($request->input())
-                    ->withErrors($validate);
+                ->withInput($request->input())
+                ->withErrors($validate);
         }
 
         $rekening = ModelRekening::create([
@@ -70,30 +70,39 @@ class RekeningController extends Controller
             'account_name'         => $request->accountName,
         ]);
         $rekening->save();
-        Session::flash('message', 'Berhasil menambahkan data rekening'); 
-        Session::flash('icon', 'success'); 
+        Session::flash('message', 'Berhasil menambahkan data rekening');
+        Session::flash('icon', 'success');
         return redirect()->back();
+    }
+    public function show($id)
+    {
+        $dataRekening = ModelRekening::find($id);
+        $data = [
+            'dataRekening' => $dataRekening
+        ];
+    
+        return view("form-tambah-rekening", $data);
     }
 
     public function update(Request $request, $id)
     {
-        $validate = Validator::make($request->all(),[
+        $validate = Validator::make($request->all(), [
             'numberAccount' => 'required|numeric',
             'accountName'  => 'required',
             'bankName'      => 'required'
-        ],[
+        ], [
             'numberAccount.required' => 'Nomor Rekening harus dilengkapi',
             'numberAccount.numeric' => 'Nomor Rekening harus angka',
             'accountName.required' => 'Nama Pemilik Rekening harus dilengkapi',
             'bankName.required' => 'Nama Bank harus dilengkapi',
         ]);
 
-        if($validate->fails()){
-            Session::flash('message', $validate->errors()->first()); 
-            Session::flash('icon', 'error'); 
+        if ($validate->fails()) {
+            Session::flash('message', $validate->errors()->first());
+            Session::flash('icon', 'error');
             return redirect()->back()
-                    ->withInput($request->input())
-                    ->withErrors($validate);
+                ->withInput($request->input())
+                ->withErrors($validate);
         }
 
         $rekening = ModelRekening::find($id);
@@ -101,9 +110,8 @@ class RekeningController extends Controller
         $rekening->bank_name = $request->bankName;
         $rekening->account_name = $request->accountName;
         $rekening->save();
-        dd($rekening);
-        Session::flash('message', 'Berhasil memperbarui data rekening'); 
-        Session::flash('icon', 'success'); 
+        Session::flash('message', 'Berhasil memperbarui data rekening');
+        Session::flash('icon', 'success');
         return redirect()->back();
     }
 
@@ -117,9 +125,8 @@ class RekeningController extends Controller
     {
         $rekening = ModelRekening::find($id);
         $rekening->delete();
-        Session::flash('message', 'Berhasil menghapus data rekening'); 
-        Session::flash('icon', 'success'); 
+        Session::flash('message', 'Berhasil menghapus data rekening');
+        Session::flash('icon', 'success');
         return redirect()->back();
-        
     }
 }

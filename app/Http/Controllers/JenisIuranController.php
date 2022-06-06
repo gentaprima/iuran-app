@@ -10,19 +10,20 @@ use Illuminate\Support\Facades\Validator;
 
 class JenisIuranController extends Controller
 {
-    public function store(Request $request){
-        $validate = Validator::make($request->all(),[
+    public function store(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
             'nominal'   => 'required|numeric'
-        ],[
+        ], [
             'nominal.numeric'   => "Nominal Pembayaran harus angka."
         ]);
 
-        if($validate->fails()){
-            Session::flash('message', $validate->errors()->first()); 
-            Session::flash('icon', 'error'); 
+        if ($validate->fails()) {
+            Session::flash('message', $validate->errors()->first());
+            Session::flash('icon', 'error');
             return redirect()->back()
-                    ->withInput($request->input())
-                    ->withErrors($validate);
+                ->withInput($request->input())
+                ->withErrors($validate);
         }
 
         $jenisIuran = ModelJenisIuran::create([
@@ -30,40 +31,52 @@ class JenisIuranController extends Controller
             'nominal'   => $request->nominal
         ]);
         $jenisIuran->save();
-        Session::flash('message', 'Berhasil menambahkan data jenis iuran.'); 
-        Session::flash('icon', 'success'); 
+        Session::flash('message', 'Berhasil menambahkan data jenis iuran.');
+        Session::flash('icon', 'success');
         return redirect()->back();
     }
+    public function create()
+    {
+        return view("form-jenis-iuran");
+    }
 
-    public function update(Request $request,$id){
-        $validate = Validator::make($request->all(),[
+    public function show($id)
+    {
+        $data['iuran'] = ModelJenisIuran::find($id);
+        
+        return view("form-jenis-iuran", $data);
+    }
+    public function update(Request $request, $id)
+    {
+        $validate = Validator::make($request->all(), [
             'nominal'   => 'required|numeric'
-        ],[
+        ], [
             'nominal.numeric'   => "Nominal Pembayaran harus angka."
         ]);
 
-        if($validate->fails()){
-            Session::flash('message', $validate->errors()->first()); 
-            Session::flash('icon', 'error'); 
+        if ($validate->fails()) {
+            Session::flash('message', $validate->errors()->first());
+            Session::flash('icon', 'error');
             return redirect()->back()
-                    ->withInput($request->input())
-                    ->withErrors($validate);
+                ->withInput($request->input())
+                ->withErrors($validate);
         }
 
         $jenisIuran = ModelJenisIuran::find($id);
         $jenisIuran->nominal = $request->nominal;
         $jenisIuran->jenis_iuran = $request->jenisIuran;
         $jenisIuran->save();
-        Session::flash('message', 'Berhasil memperbarui data jenis iuran'); 
-        Session::flash('icon', 'success'); 
+        Session::flash('message', 'Berhasil memperbarui data jenis iuran');
+        Session::flash('icon', 'success');
         return redirect()->back();
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $jenisIuran = ModelJenisIuran::find($id);
         $jenisIuran->delete();
-        Session::flash('message', 'Berhasil menghapus data jenis iuran.'); 
-        Session::flash('icon', 'success'); 
+        Session::flash('message', 'Berhasil menghapus data jenis iuran.');
+        Session::flash('icon', 'success');
         return redirect()->back();
     }
 }

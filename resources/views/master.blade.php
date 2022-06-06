@@ -14,6 +14,22 @@
     {{-- <link rel="stylesheet" href="{{ asset('assets/vendors/css/vendor.bundle.base.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <style>
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background: none;
+            color: black !important;
+            /*change the hover text color*/
+        }
+
+
+        /*below block of css for change style when active*/
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button:active {
+            background: none;
+            color: black !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -23,8 +39,7 @@
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
                 <a class="navbar-brand brand-logo" href="index.html">
-                    <span>LOGO</span>
-                    {{-- <img src="" alt="logo" /> --}}
+                    <img src="{{ asset('iuran-logo.png') }}" alt="logo" />
                 </a>
                 <a class="navbar-brand brand-logo-mini" href="index.html">
                     <span>LOGO</span>
@@ -182,7 +197,28 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
+
+    <script src="{{ asset('assets/vendors/chart.js/Chart.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.cookie.js') }}" type="text/javascript"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+    <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
+    <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
+    <script src="{{ asset('assets/js/misc.js') }}"></script>
+
+    <script src="{{ asset('assets/js/dashboard.js') }}"></script>
+    <script src="{{ asset('assets/js/todolist.js') }}"></script>
     <script>
+        $('.paginate_button.previous').html("<<<");
+        $('.paginate_button.next').html(">>>");
+
+        $('#example1').DataTable({
+            dom: 'Bfrtip',
+            "searching": false
+        });
+        $('#example1').removeClass("dataTable")
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-right',
@@ -203,17 +239,6 @@
             });
         }
     </script>
-    <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
-
-    <script src="{{ asset('assets/vendors/chart.js/Chart.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.cookie.js') }}" type="text/javascript"></script>
-
-    <script src="{{ asset('assets/js/off-canvas.js') }}"></script>
-    <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('assets/js/misc.js') }}"></script>
-
-    <script src="{{ asset('assets/js/dashboard.js') }}"></script>
-    <script src="{{ asset('assets/js/todolist.js') }}"></script>
 </body>
 
 </html>

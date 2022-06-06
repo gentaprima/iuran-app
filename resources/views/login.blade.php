@@ -28,8 +28,8 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo">
-                                {{-- <img src=""> --}}
-                                LOGO
+                                <img src="{{asset('iuran-logo.png')}}" style="  object-fit: cover;">
+                                
                             </div>
                             <h4>Selamat Datang</h4>
                             <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>

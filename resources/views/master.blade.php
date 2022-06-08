@@ -87,42 +87,46 @@
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
                     </li>
+                    @if (Session::get('dataUsers')->role == 1)
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#ui-house" aria-expanded="false"
+                                aria-controls="ui-house">
+                                <span class="menu-title">Data Perumahan</span>
+                                <i class="menu-arrow"></i>
+                                <i class="mdi mdi-city menu-icon"></i>
+                            </a>
+                            <div class="collapse" id="ui-house">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="data-rumah/data-blok">Data Blok</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a class="nav-link" href="/data-rumah">Data Rumah</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="collapse" href="#ui-citizen" aria-expanded="false"
+                                aria-controls="ui-citizen">
+                                <span class="menu-title">Data Warga</span>
+                                <i class="menu-arrow"></i>
+                                <i class="mdi mdi-account-multiple menu-icon"></i>
+                            </a>
+                            <div class="collapse" id="ui-citizen">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="/data-warga">Data
+                                            Warga</a>
+                                    </li>
+                                    <li class="nav-item"> <a class="nav-link"
+                                            href="/verifikasi-warga">Verifikasi Warga</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endif
                     <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-house" aria-expanded="false"
-                            aria-controls="ui-house">
-                            <span class="menu-title">Data Perumahan</span>
-                            <i class="menu-arrow"></i>
-                            <i class="mdi mdi-city menu-icon"></i>
-                        </a>
-                        <div class="collapse" id="ui-house">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="data-rumah/data-blok">Data Blok</a>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="/data-rumah">Data Rumah</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-citizen" aria-expanded="false"
-                            aria-controls="ui-citizen">
-                            <span class="menu-title">Data Warga</span>
-                            <i class="menu-arrow"></i>
-                            <i class="mdi mdi-account-multiple menu-icon"></i>
-                        </a>
-                        <div class="collapse" id="ui-citizen">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="/data-warga">Data Warga</a>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="/verifikasi-warga">Verifikasi Warga</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/data-iuran-warga">
+                        <a class="nav-link"
+                            href="{{ Session::get('dataUsers')->role == 0 ? '/data-iuran' : '/data-iuran-warga' }}">
                             <span class="menu-title">Data Iuran</span>
                             <i class="mdi mdi-arrow-up-bold-circle menu-icon"></i>
                         </a>
@@ -145,41 +149,45 @@
                         </a>
                     </li>
                     </li>
-                    <li class="nav-item sidebar-actions">
-                        {{-- <div class="mt-4"> --}}
-                        <div class="border-bottom">
-                            <p class="menu-title" style="font-weight:800">Laporan</p>
-                        </div>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="index.html">
-                            <span class="menu-title">Jurnal Pemasukkan</span>
-                            <i class="mdi mdi-file-export menu-icon"></i>
-                        </a>
+                    @if (Session::get('dataUsers')->role == 1)
+                        <li class="nav-item sidebar-actions">
+                            {{-- <div class="mt-4"> --}}
+                            <div class="border-bottom">
+                                <p class="menu-title" style="font-weight:800">Laporan</p>
+                            </div>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="index.html">
+                                <span class="menu-title">Jurnal Pemasukkan</span>
+                                <i class="mdi mdi-file-export menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">
+                                <span class="menu-title">Jurnal Pengeluaran</span>
+                                <i class="mdi mdi-file-import menu-icon"></i>
+                            </a>
+                        </li>
+                    @endif
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">
-                            <span class="menu-title">Jurnal Pengeluaran</span>
-                            <i class="mdi mdi-file-import menu-icon"></i>
-                        </a>
-                    </li>
-                    </li>
-                    <li class="nav-item sidebar-actions">
-                        {{-- <div class="mt-4"> --}}
-                        <div class="border-bottom">
-                            <p class="menu-title" style="font-weight:800">Pengaturan</p>
-                        </div>
-                    <li class="nav-item {{ Request::is('data-rekening') ? 'active' : '' }}">
-                        <a class="nav-link" href="/data-rekening">
-                            <span class="menu-title">Rekening</span>
-                            <i class="mdi mdi-account-card-details menu-icon"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item {{ Request::is('data-jenis-iuran') ? 'active' : '' }}">
-                        <a class="nav-link" href="/data-jenis-iuran">
-                            <span class="menu-title">Jenis Iuran</span>
-                            <i class="mdi mdi-animation menu-icon"></i>
-                        </a>
-                    </li>
+                    @if (Session::get('dataUsers')->role == 1)
+                        <li class="nav-item sidebar-actions">
+                            {{-- <div class="mt-4"> --}}
+                            <div class="border-bottom">
+                                <p class="menu-title" style="font-weight:800">Pengaturan</p>
+                            </div>
+                        <li class="nav-item {{ Request::is('data-rekening') ? 'active' : '' }}">
+                            <a class="nav-link" href="/data-rekening">
+                                <span class="menu-title">Rekening</span>
+                                <i class="mdi mdi-account-card-details menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item {{ Request::is('data-jenis-iuran') ? 'active' : '' }}">
+                            <a class="nav-link" href="/data-jenis-iuran">
+                                <span class="menu-title">Jenis Iuran</span>
+                                <i class="mdi mdi-animation menu-icon"></i>
+                            </a>
+                        </li>
+                    @endif
                     </li>
                 </ul>
             </nav>

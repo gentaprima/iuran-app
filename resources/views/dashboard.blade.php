@@ -60,5 +60,27 @@ use Illuminate\Support\Facades\Session;
                 </div>
             </div>
         </div>
+        <div class="row">
+            <?php
+      if (Session::get('dataUsers')->role == 0) { ?>
+            <?php if (Session::get('dataUsers')->number_family_card == null) { ?>
+            <div class="alert alert-warning" style="padding: 0; padding-left:20px;padding-top:10px;">
+                <p><span class="font-weight-bold">Pemberitahuan!!</span> Silahkan lengkapi data anda terlebih dahulu untuk
+                    melanjutkan pembayaran iuran. <a class="btn btn-link btn-fw" href="/profile"> Lengkapi Data</a></p>
+            </div>
+            <?php } ?>
+            <?php if (Session::get('dataUsers')->is_verif == 0 && Session::get('dataUsers')->number_family_card != null) { ?>
+            <div class="alert alert-warning" style="padding: 0; padding-left:20px;padding-top:10px;">
+                <p><span class="font-weight-bold">Pemberitahuan!!</span> Anda belum dapat melakukan pembayaran iuran, karena
+                    data anda belum dikonfirmasi oleh admin kami.</p>
+            </div>
+            <?php } else { ?>
+            <div class="alert alert-success" style="padding: 0; padding-left:20px;padding-top:10px;">
+                <p><span class="font-weight-bold">Pemberitahuan!!</span> Silahkan lakukan pembayaran iuran tepat waktu.</p>
+            </div>
+            <?php } ?>
+
+            <?php } ?>
+        </div>
     </div>
 @endsection

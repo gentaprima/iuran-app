@@ -131,6 +131,7 @@
                             <i class="mdi mdi-arrow-up-bold-circle menu-icon"></i>
                         </a>
                     </li>
+                    @if(Session::get("dataUsers")->role == 1)
                     <li class="nav-item sidebar-actions">
                         {{-- <div class="mt-4"> --}}
                         <div class="border-bottom">
@@ -149,6 +150,7 @@
                         </a>
                     </li>
                     </li>
+                    @endif
                     @if (Session::get('dataUsers')->role == 1)
                         <li class="nav-item sidebar-actions">
                             {{-- <div class="mt-4"> --}}

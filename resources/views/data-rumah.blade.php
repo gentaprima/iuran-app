@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Session;
@@ -25,24 +24,59 @@ use Illuminate\Support\Facades\Session;
             <div class="container-fluid">
                 <div class="card p-5 rounded mb-3">
                     <div class="col-sm-12 col-lg">
-                        <button class="btn btn-primary btn-fw" onclick="addData()" data-toggle="modal"
-                            data-target="#modal-form">Tambah Data</button>
+                        <a href="/data-rumah/form?type=create" class="btn btn-primary btn-fw">Tambah Data</a>
                     </div>
                     <!-- <button class="btn btn-outline-primary size-btn" onclick="addData()" data-toggle="modal" data-target="#modal-form">Tambah Data</button> -->
-                    <table id="example1" class="table table-striped">
+                    <table id="example1" class="example1 table table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>Nama Kepemilikan</th>
-                                <th>Blok</th>
-                                <th>No Rumah</th>
+                                <th>No Rumah - Blok</th>
                                 <th>Status Tempat Tinggal</th>
                                 <th>Tahun Ditempati</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($house as $row)
+                                <tr>
+                                    <td>
+                                        {{ $i }}.
+                                    </td>
+                                    <td>
+                                        {{ $row->atas_nama }}
+                                    </td>
+                                    <td>
+                                        {{ $row->no_rumah . ' - ' . $row->blok }}
+                                    </td>
+                                    <td>
+                                        @php
+                                            $status = ($row->status == 0 ? 'Rumah Kosong' : $row->status == 1) ? 'Rumah Dijual' : 'Rumah Terisi';
+                                        @endphp
+                                        {{ $status }}
+                                    </td>
+                                    <td>
+                                        {{ $row->tahun }}
+                                    </td>
+                                    <td>
+                                        <a href="/data-rumah/form?type=update&id={{ $row->id_rumah }}"><button
+                                                class="btn btn-gradient-warning btn-rounded btn-icon">
+                                                <i class="mdi mdi-table-edit"></i>
+                                            </button></a>
+                                        <a href="/data-rumah/delete/{{ $row->id }}"> <button type="button"
+                                                class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                <i class="mdi mdi-delete-sweep"></i>
+                                            </button></a>
+                                    </td>
+                                </tr>
+                                @php
+                                    $i++;
+                                @endphp
+                            @endforeach
                         </tbody>
 
                     </table>

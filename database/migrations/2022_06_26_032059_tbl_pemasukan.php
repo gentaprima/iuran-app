@@ -38,6 +38,7 @@ class TblPemasukan extends Migration
      */
     public function down()
     {
+        
         Schema::dropIfExists('tbl_pemasukan');
     }
 }

@@ -8,27 +8,22 @@ use Illuminate\Support\Facades\Session;
 @section('sub-title-link', 'Beranda')
 @section('active', 'beranda')
 @section('title', 'Dashboard')
-
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="padding: 10px 12px 0px 37px;">
-        <!-- Content Header (Page header) -->
         <div class="page-header">
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                     <i class="mdi mdi-home"></i>
-                </span> Data Blok
+                </span> Data Jenis Iuran
             </h3>
         </div>
         <div class="row">
             <div class="container-fluid">
                 <div class="card p-5 rounded mb-3">
                     <div class="col-sm-12 col-lg">
-                        <button class="btn btn-primary btn-fw" onclick="addData()" data-toggle="modal"
-                            data-target="#modal-form">Tambah Data</button>
+                        <a href="/data-rumah/data-blok/form?type=create" class="btn btn-primary btn-fw">Tambah Data</a>
                     </div>
-                    <!-- <button class="btn btn-outline-primary size-btn" onclick="addData()" data-toggle="modal" data-target="#modal-form">Tambah Data</button> -->
-                    <table id="example1" class="table table-striped">
+                    <table id="table" class="example1 table table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -38,12 +33,33 @@ use Illuminate\Support\Facades\Session;
                             </tr>
                         </thead>
                         <tbody>
-
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($blok as $row)
+                                <tr>
+                                    <td>{{ $i }}.</td>
+                                    <td>{{ $row->blok }}</td>
+                                    <td>{{ $row->no_rumah }}</td>
+                                    <td>
+                                        <a href="/data-rumah/data-blok/form?type=update&id={{ $row->id }}"><button
+                                                class="btn btn-gradient-warning btn-rounded btn-icon">
+                                                <i class="mdi mdi-table-edit"></i>
+                                            </button></a>
+                                        <a href="/data-rumah/data-blok/delete/{{ $row->id }}"> <button type="button"
+                                                class="btn btn-gradient-danger btn-rounded btn-icon">
+                                                <i class="mdi mdi-delete-sweep"></i>
+                                            </button></a>
+                                    </td>
+                                </tr>
+                                @php
+                                    $i++;
+                                @endphp
+                            @endforeach
                         </tbody>
-
                     </table>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+
+    @endsection

@@ -21,7 +21,7 @@
                 </h3>
             </div>
             <div class="card p-5 rounded mb-3">
-                @if (Session::get('dataUsers')->role == 0 && Session::get('dataUsers')->number_family_card != null )
+                @if (Session::get('dataUsers')->role == 0 )
                     <div class="col-sm-12 col-lg">
                         <a href="/form-tambah-iuran" class="btn btn-primary btn-fw">Tambah Data</a>
                     </div>

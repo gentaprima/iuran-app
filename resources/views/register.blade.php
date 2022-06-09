@@ -28,27 +28,47 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo">
-                                {{-- <img src=""> --}}
-                                LOGO
+                                <img src="{{asset('iuran-logo.png')}}" style="  object-fit: cover;">                                
                             </div>
-                            <h4>Selamat Datang</h4>
-                            <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
-                            <form method="post" action="/auth" class="pt-3">
+                            <h4>Form Pendaftaran</h4>
+                            <h6 class="font-weight-light">Silahkan Lakukan Pendaftaran.</h6>
+                            <form method="post" action="/process_register" class="pt-3">
+                                @csrf
+                                <div class="form-group">
+                                    <input name="nik" type="nik" class="form-control form-control-lg"
+                                        id="exampleInputnik1" placeholder="NIK">
+                                </div>
+                                <div class="form-group">
+                                    <input name="firstName" type="firstName" class="form-control form-control-lg"
+                                        id="exampleInputfirstName" placeholder="Nama Depan">
+                                </div>
+                                <div class="form-group">
+                                    <input name="lastName" type="lastName" class="form-control form-control-lg"
+                                        id="exampleInputfirstName" placeholder="Nama Belakang">
+                                </div>
                                 <div class="form-group">
                                     <input name="email" type="email" class="form-control form-control-lg"
                                         id="exampleInputEmail1" placeholder="Email">
                                 </div>
                                 <div class="form-group">
+                                    <input name="phoneNumber" type="phoneNumber" class="form-control form-control-lg"
+                                        id="exampleInputphoneNumber1" placeholder="No telepon">
+                                </div>
+                                <div class="form-group">
                                     <input type="password" class="form-control form-control-lg"
                                         id="exampleInputPassword1" name="password" placeholder="Password">
                                 </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-lg"
+                                        id="exampleInputconfirmPassword1" name="confirmPassword" placeholder="Konfirmasi Password">
+                                </div>
                                 <div class="mt-3">
                                     <button type="submit"
-                                        class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Masuk</a>
+                                        class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Daftar</a>
                                 </div>
                                 @csrf
-                                <div class="text-center mt-4 font-weight-light"> Tidak Punya Akun ? <a
-                                        href="register.html" class="text-primary">Daftar Warga</a>
+                                <div class="text-center mt-4 font-weight-light"> Sudah Punya Akun ? <a
+                                        href="../" class="text-primary">Login</a>
                                 </div>
                             </form>
                         </div>

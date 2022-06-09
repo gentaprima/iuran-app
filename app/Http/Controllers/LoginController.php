@@ -36,8 +36,9 @@ class LoginController extends Controller
                     ->withInput($request->input())
                     ->withErrors($validate);
         }
-
+        
         $checkUsers = ModelUsers::where('email',$request->email)->first();
+        
         if($checkUsers == null){
             Session::flash('message', 'Mohon maaf, Akun tidak ditemukan.'); 
             Session::flash('alert-class', 'alert-danger'); 
@@ -80,6 +81,7 @@ class LoginController extends Controller
         ]);
 
         if($validate->fails()){
+            return $validate->errors()->first();
             return redirect()->back()
                     ->withInput($request->input())
                     ->withErrors($validate);

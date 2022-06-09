@@ -47,7 +47,7 @@ Route::get('/delete-jenis-iuran/{id}', 'JenisIuranController@destroy');
 Route::get('/form-tambah-iuran', 'DashboardController@formAddIuran');
 Route::get('/form-update-iuran', 'DashboardController@formUpdateIuran');
 Route::post('/add-new-iuran', 'IuranController@addIuran');
-Route::get('/data-iuran-warga', 'DashboardController@verifikasiIuran');
+// Route::get('/data-iuran-warga', 'DashboardController@verifikasiIuran');
 Route::get('/get-data-users-by-id/{id}', 'WargaController@getDataById');
 Route::get('/get-data-iuran-by-id/{id}', 'IuranController@getDataById');
 Route::get('/confirm-iuran/{id}', 'IuranController@confirmIuran');

@@ -71,7 +71,7 @@ class DashboardController extends Controller
             return redirect('/');
         }
         $dataIuran = DB::table('tbl_iuran')
-            ->select('tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*', DB::raw('GROUP_CONCAT(tbl_jenis_iuran.jenis_iuran) as jenis_iuran'), DB::raw('GROUP_CONCAT(tbl_iuran.month) as month'))
+            ->select('tbl_users.*','tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*', DB::raw('GROUP_CONCAT(tbl_jenis_iuran.jenis_iuran) as jenis_iuran'), DB::raw('GROUP_CONCAT(tbl_iuran.month) as month'))
             ->leftJoin('tbl_jenis_iuran', 'tbl_iuran.id_jenis_iuran', '=', 'tbl_jenis_iuran.id')
             ->leftJoin('tbl_users', 'tbl_iuran.id_users', '=', 'tbl_users.id')
             ->leftJoin('tbl_rekening', 'tbl_iuran.to_rekening', '=', 'tbl_rekening.id')
@@ -93,7 +93,7 @@ class DashboardController extends Controller
             return redirect('/');
         }
         $dataIuran = DB::table('tbl_iuran')
-            ->select('tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*', DB::raw('GROUP_CONCAT(tbl_jenis_iuran.jenis_iuran) as jenis_iuran'), DB::raw('GROUP_CONCAT(tbl_iuran.month) as month'))
+            ->select('tbl_users.*','tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*', DB::raw('GROUP_CONCAT(tbl_jenis_iuran.jenis_iuran) as jenis_iuran'), DB::raw('GROUP_CONCAT(tbl_iuran.month) as month'))
             ->leftJoin('tbl_jenis_iuran', 'tbl_iuran.id_jenis_iuran', '=', 'tbl_jenis_iuran.id')
             ->leftJoin('tbl_users', 'tbl_iuran.id_users', '=', 'tbl_users.id')
             ->leftJoin('tbl_rekening', 'tbl_iuran.to_rekening', '=', 'tbl_rekening.id')
@@ -104,6 +104,7 @@ class DashboardController extends Controller
             'dataIuran' => $dataIuran,
             'dataRekening' => $dataRekening
         ];
+        
         return view('data-iuran', $data);
     }
 

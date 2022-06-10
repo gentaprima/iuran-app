@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Session;
         </div>
         <div class="row">
             <div class="row">
-                @if (Session::get('dataUsers')->role === 0)
+                @if (Session::get('dataUsers')->role === 1)
                     <div class="col-md-4 stretch-card grid-margin">
                         <div class="card bg-gradient-danger card-img-holder text-white">
                             <div class="card-body">

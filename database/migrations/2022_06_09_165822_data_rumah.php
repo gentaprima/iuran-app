@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class DataRumah extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create("rumah", function ($table) {
+            $table->id();
+            $table->unsignedBigInteger('blok');
+            $table->text('atas_nama');
+            $table->integer('status');
+            $table->integer('tahun');
+            $table->foreign('blok')->references('id')->on('blok')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}

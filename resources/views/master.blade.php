@@ -62,7 +62,7 @@
                             </div>
                         </a>
                         <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="/profile">
                                 <i class="mdi mdi-cached me-2 text-success"></i> Akun </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/logout">
@@ -98,7 +98,7 @@
                             <div class="collapse" id="ui-house">
                                 <ul class="nav flex-column sub-menu">
                                     <li class="nav-item ">
-                                        <a class="nav-link" href="data-rumah/data-blok">Data Blok</a>
+                                        <a class="nav-link" href="/data-rumah/data-blok">Data Blok</a>
                                     </li>
                                     <li class="nav-item ">
                                         <a class="nav-link" href="/data-rumah">Data Rumah</a>
@@ -223,12 +223,11 @@
     <script>
         $('.paginate_button.previous').html("<<<");
         $('.paginate_button.next').html(">>>");
-
-        $('#example1').DataTable({
+        $('.example1').DataTable({
             dom: 'Bfrtip',
             "searching": false
         });
-        $('#example1').removeClass("dataTable")
+        $('.example1').removeClass("dataTable")
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-right',

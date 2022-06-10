@@ -60,9 +60,15 @@ Route::get('/jenis-iuran/form-update/{id}', 'JenisIuranController@show');
 
 Route::group(['prefix' => '/data-rumah'], function () {
     Route::get("/", 'HouseController@index');
-    Route::get("/create", 'HouseController@create');
+    Route::get("/form", 'HouseController@create');
+    Route::post("/store", 'HouseController@store');
+    Route::get("/delete/{id}", 'HouseController@destroy');
+    Route::post("/update/{id}", 'HouseController@update');
     Route::get("/data-blok", 'HouseController@blok');
-    Route::get("/data-blok/create", 'HouseController@blokCreate');
+    Route::get("/data-blok/form", 'HouseController@blokCreate');
+    Route::post("/data-blok/add", 'HouseController@addblok');
+    Route::post("/data-blok/update/{id}", 'HouseController@updateBlok');
+    Route::get("/data-blok/delete/{id}", 'HouseController@deleteblok');
 });
 Route::get('/logout', function () {
     Session::flush();

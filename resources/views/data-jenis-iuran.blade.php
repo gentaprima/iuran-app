@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Session;
                     <div class="col-sm-12 col-lg">
                         <a href="/jenis-iuran/form-jenis-iuran" class="btn btn-primary btn-fw">Tambah Data</a>
                     </div>
-                    <table id="example1" class="table table-striped">
+                    <table id="example1" class="example1 table table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>

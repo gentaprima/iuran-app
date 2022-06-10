@@ -21,7 +21,7 @@
                 </h3>
             </div>
             <div class="card p-5 rounded mb-3">
-                @if (Session::get('dataUsers')->role == 0 )
+                @if (Session::get('dataUsers')->role == 0)
                     <div class="col-sm-12 col-lg">
                         <a href="/form-tambah-iuran" class="btn btn-primary btn-fw">Tambah Data</a>
                     </div>
@@ -31,6 +31,7 @@
                         <tr>
                             <th>No</th>
                             <th>ID transaksi</th>
+                            <th>Nama</th>
                             <th>Nominal Pembayaran</th>
                             <th>Jenis</th>
                             <th>No Rekening</th>
@@ -55,6 +56,8 @@
                                 <?php } else { ?>
                                 <td>-</td>
                                 <?php } ?>
+                                <td>{{ $row->first_name." ".$row->last_name }}</td>
+
                                 <td>@php echo number_format($row->sub_total, 2, ".", ","); @endphp</td>
                                 <td>
                                     <ul>

@@ -51,16 +51,9 @@ class DatabaseSeeder extends Seeder
 
         DB::table('tbl_jenis_iuran')->insert([
             [
-                'jenis_iuran'   => "Iuran Kebersihan DKPP",
-                'nominal'   => 30000,
-            ],
-            [
-                'jenis_iuran'   => "Iuran Keamanan",
-                'nominal'   => 30000,
-            ],
-            [
-                'jenis_iuran'   => "Iuran Sukarela",
-                'nominal'   => 20000,
+                'jenis_iuran'   => "Iuran 1 Bulan",
+                'nominal'   => 80000,
+                'keterangan'   => "Iuran Kebersihan DKPP, Iuran Keamanan, Iuran Sukarela",
             ],
         ]);
 

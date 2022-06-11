@@ -16,6 +16,7 @@ class TblJenisIuran extends Migration
         Schema::create('tbl_jenis_iuran', function (Blueprint $table) {
             $table->id();
             $table->string('jenis_iuran');
+            $table->string('keterangan');
             $table->integer('nominal');
         });
     }

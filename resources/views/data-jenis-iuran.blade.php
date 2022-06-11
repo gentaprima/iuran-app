@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Session;
             <div class="container-fluid">
                 <div class="card p-5 rounded mb-3">
                     <div class="col-sm-12 col-lg">
-                        <a href="/jenis-iuran/form-jenis-iuran" class="btn btn-primary btn-fw">Tambah Data</a>
+                        <!-- <a href="/jenis-iuran/form-jenis-iuran" class="btn btn-primary btn-fw">Tambah Data</a> -->
                     </div>
                     <table id="example1" class="example1 table table-striped">
                         <thead>

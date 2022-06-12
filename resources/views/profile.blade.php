@@ -56,7 +56,7 @@
                         </div>
                         <button type="button"
                             onclick="updateData(`{{ $dataProfile->id }}`,`{{ $dataProfile->email }}`,`{{ $dataProfile->first_name }}`,`{{ $dataProfile->last_name }}`,`{{ $dataProfile->number_identity_card }}`,`{{ $dataProfile->number_family_card }}`,`{{ $dataProfile->gender }}`,`{{ $dataProfile->number_of_family }}`,`{{ $dataProfile->phone_number }}`,`{{ $dataProfile->blok }}`)"
-                            data-target="#modal-form" data-toggle="modal" class="btn btn-outline-primary">Perbarui
+                            data-target="#modal-form" data-toggle="modal" class="btn btn-gradient-primary">Perbarui
                             Data</button>
 
 
@@ -69,7 +69,7 @@
     <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog  modal-xl" role="document">
-            <div class="modal-content rounded">
+            <div class="modal-content rounded p-5 bg-white">
                 <div class="modal-header">
                     <h5 class="modal-title" id="titleModal">Perbarui Data Diri</h5>
                     {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -190,7 +190,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-gradient-primary">Simpan</button>
                     </form>
                 </div>
                 <div class="bg-red rounded-modal" style="color: red;height:15px;"></div>

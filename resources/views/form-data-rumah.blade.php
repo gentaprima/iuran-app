@@ -78,7 +78,7 @@
                         <div class="form-group row">
                             <div class="col-sm-2"></div>
                             <div class="col-sm-10">
-                                <button class="btn btn-primary">Simpan</button>
+                                <button class="btn btn-gradient-primary">Simpan</button>
                                 <a href="/data-rumah" class="btn btn-secondary">Kembali</a>
                             </div>
                         </div>

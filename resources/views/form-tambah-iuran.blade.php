@@ -102,7 +102,7 @@
                     <div class="form-group row">
                         <div class="col-sm-2"></div>
                         <div class="col-sm-10">
-                            <button class="btn btn-primary">Proses transaksi</button>
+                            <button class="btn btn-gradient-primary">Proses transaksi</button>
                             <a href="/data-iuran" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>

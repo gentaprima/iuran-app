@@ -23,10 +23,10 @@
         <div class="card p-5 rounded mb-3">
             @if (Session::get('dataUsers')->role == 0)
             <div class="col-sm-12 col-lg">
-                <a href="/form-tambah-iuran" class="btn btn-primary btn-fw">Tambah Data</a>
+                <a href="/form-tambah-iuran" class="btn btn-gradient-primary btn-fw">Tambah Data</a>
             </div>
             @endif
-            <div class="col-sm-12 col-lg">
+            <div class="col-sm-12 col-lg table-responsive">
                 <table id="example1" class="table mt-3">
                     <thead>
                         <tr>

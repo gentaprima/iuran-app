@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Session;
                             </div>
                             <div class="col-md-6">
 
-                                <button type="button" data-toggle="modal" data-target="#modal-form" style="float: right;" class="btn btn-outline-dark">Tagih Iuran</button>
+                                <button type="button" data-toggle="modal" data-target="#modal-form" style="float: right;" class="btn btn-gradient-primary">Tagih Iuran</button>
                             </div>
                         </div>
                     </div>

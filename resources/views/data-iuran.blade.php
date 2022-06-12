@@ -27,7 +27,7 @@
             </div>
             @endif
             <div class="col-sm-12 col-lg table-responsive">
-                <table id="example1" class="table mt-3">
+                <table id="example1" class="example1 table table-striped">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -113,8 +113,8 @@
                                     @php } @endphp
                                     @php if($row->is_verif == 0){ @endphp
                                     @php if(Session::get('dataUsers')->role == 1){ @endphp
-                                    <button type="button" data-target="#modal-detail" data-toggle="modal" onclick="checkData('{{$row->id_transaction}}','{{$row->id_users}}',`{{asset('')}}`)" class="btn btn-secondary btn-sm mt-1"><i class="mdi mdi-eye"></i></button>
-                                    <button type="button" data-target="#modal-check" onclick="confirmData('{{$row->id_transaction}}')" data-toggle="modal" class="btn btn-secondary btn-sm mt-1"><i class="mdi mdi-check"></i></button>
+                                        <button type="button" data-target="#modal-check" onclick="confirmData('{{$row->id_transaction}}')" data-toggle="modal" class="btn btn-gradient-success btn-rounded btn-icon mt-1"><i class="mdi mdi-check-circle"></i></button>
+                                    <button type="button" data-target="#modal-detail" data-toggle="modal" onclick="checkData('{{$row->id_transaction}}','{{$row->id_users}}',`{{asset('')}}`)" class="btn btn-gradient-info btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></button>
                                     @php } @endphp
                                     <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id_transaction}}')" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></i></button>
                                     @php } @endphp
@@ -134,11 +134,11 @@
 </div>
 
 <div class="modal fade" id="modal-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog  modal-xl" role="document">
-        <div class="modal-content rounded">
+    <div class="modal-dialog bg-white modal-xl" role="document">
+        <div class="modal-content rounded bg-white">
             <div class="modal-header">
                 <h5 class="modal-title" id="titleModal">Detail Transaksi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn btn-gradient-primary close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -269,10 +269,10 @@
 </div>
 <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-md" role="document">
-        <div class="modal-content rounded">
+        <div class="modal-content rounded bg-white">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Rekening</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title" id="exampleModalLabel">Hapus Iuran</h5>
+                <button type="button" class="btn btn-gradient-primary close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -281,19 +281,18 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                <a id="btnDelete" type="submit" class="btn btn-primary">Hapus</a>
+                <a id="btnDelete" type="submit" class="btn btn-gradient-primary">Hapus</a>
                 </form>
             </div>
-            <div class="bg-red rounded-modal" style="color: red;height:15px;"></div>
         </div>
     </div>
 </div>
 <div class="modal fade" id="modal-check" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-md" role="document">
-        <div class="modal-content rounded">
+        <div class="modal-content rounded bg-white">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Pembayaran</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn btn-gradient-primary close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -302,7 +301,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                <a id="btnKonfirmasi" type="submit" class="btn btn-primary">Konfirmasi</a>
+                <a id="btnKonfirmasi" type="submit" class="btn btn-gradient-primary">Konfirmasi</a>
                 </form>
             </div>
             <div class="bg-red rounded-modal" style="color: red;height:15px;"></div>

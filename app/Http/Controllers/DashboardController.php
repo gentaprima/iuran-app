@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModelIuran;
 use App\Models\ModelJenisIuran;
+use App\Models\ModelPengeluaran;
 use App\Models\ModelRekening;
 use App\Models\ModelUsers;
 use Illuminate\Http\Request;
@@ -21,9 +22,10 @@ class DashboardController extends Controller
         $dataIuran = DB::table('tbl_iuran')->whereMonth('date', date('m'))->first();
         $data = [
             'dataIuran' => $dataIuran,
-            'dataWarga' => DB::table('tbl_users')->where('is_verif', 1)->where('role', 0)->get(),
+            'dataWarga' => DB::table('tbl_users')->where('is_verif', 1)->where('role', 0)->count(),
             'dataPemasukan' => DB::table('tbl_pemasukan')->sum('jumlah'),
-            'dataIuranUnVerif'  => DB::table('tbl_iuran')->where('is_verif', 0)->groupBy('id_transaction')->get()
+            'dataPengeluaran'=>ModelPengeluaran::sum('nominal'),
+            'dataIuranUnVerif'  => DB::table('tbl_iuran')->where('is_verif', 0)->groupBy('id_transaction')->count()
         ];
         if ($isLogin == null) {
             return redirect('/');
@@ -55,7 +57,6 @@ class DashboardController extends Controller
         }
         $dataVerifikasi =  DB::table('tbl_users')
             ->where('role', '=', 0)
-            ->where('number_family_card', '!=', NULL)
             ->where('is_verif', '=', 0)
             ->get();
         $data = [
@@ -71,7 +72,7 @@ class DashboardController extends Controller
             return redirect('/');
         }
         $dataIuran = DB::table('tbl_iuran')
-            ->select('tbl_users.*','tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*', DB::raw('GROUP_CONCAT(tbl_jenis_iuran.jenis_iuran) as jenis_iuran'), DB::raw('GROUP_CONCAT(tbl_iuran.month) as month'))
+            ->select('tbl_users.*', 'tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*', DB::raw('GROUP_CONCAT(tbl_jenis_iuran.jenis_iuran) as jenis_iuran'), DB::raw('GROUP_CONCAT(tbl_iuran.month) as month'))
             ->leftJoin('tbl_jenis_iuran', 'tbl_iuran.id_jenis_iuran', '=', 'tbl_jenis_iuran.id')
             ->leftJoin('tbl_users', 'tbl_iuran.id_users', '=', 'tbl_users.id')
             ->leftJoin('tbl_rekening', 'tbl_iuran.to_rekening', '=', 'tbl_rekening.id')
@@ -93,7 +94,7 @@ class DashboardController extends Controller
             return redirect('/');
         }
         $dataIuran = DB::table('tbl_iuran')
-            ->select('tbl_users.*','tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*', DB::raw('GROUP_CONCAT(tbl_jenis_iuran.jenis_iuran) as jenis_iuran'), DB::raw('GROUP_CONCAT(tbl_iuran.month) as month'))
+            ->select('tbl_users.*', 'tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*', DB::raw('GROUP_CONCAT(tbl_jenis_iuran.jenis_iuran) as jenis_iuran'), DB::raw('GROUP_CONCAT(tbl_iuran.month) as month'))
             ->leftJoin('tbl_jenis_iuran', 'tbl_iuran.id_jenis_iuran', '=', 'tbl_jenis_iuran.id')
             ->leftJoin('tbl_users', 'tbl_iuran.id_users', '=', 'tbl_users.id')
             ->leftJoin('tbl_rekening', 'tbl_iuran.to_rekening', '=', 'tbl_rekening.id')
@@ -104,7 +105,7 @@ class DashboardController extends Controller
             'dataIuran' => $dataIuran,
             'dataRekening' => $dataRekening
         ];
-        
+
         return view('data-iuran', $data);
     }
 

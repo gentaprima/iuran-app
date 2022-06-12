@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Session;
         <div class="row">
             <div class="container-fluid">
                 <div class="card p-5 rounded mb-3">
-                    <table id="example1" class="table table-striped">
+                    <table id="example1" class="example1 table table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>

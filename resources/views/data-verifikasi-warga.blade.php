@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Session;
         <div class="row">
           <div class="container-fluid">
             <div class="card p-5 rounded mb-3">
-              <table id="example1" class="table table-striped">
+              <table id="example1" class="example1 table table-striped">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -42,9 +42,9 @@ use Illuminate\Support\Facades\Session;
                     <td>{{$row->first_name}} {{$row->last_name}}</td>
                     <td>{{$row->phone_number}}</td>
                     <td>
-                      <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="checkData('{{$row->id}}')" class="btn btn-secondary btn-sm"><i class="fa fa-check"></i></button>
-                      <button type="button" data-target="#modal-form" data-toggle="modal" onclick="viewData('{{$row->id}}','{{$row->number_identity_card}}','{{$row->first_name}}','{{$row->last_name}}','{{$row->phone_number}}','{{$row->number_family_card}}','{{$row->photo}}','{{$row->number_of_family}}','{{$row->gender}}','{{$row->email}}','{{$row->blok}}')" class="btn btn-secondary btn-sm"><i class="fa fa-eye"></i></button>
-                      <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id}}')" class="btn btn-secondary btn-sm"><i class="fa fa-trash"></i></button>
+                      <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="checkData('{{$row->id}}')" class="btn btn-gradient-success btn-rounded btn-icon"><i class="mdi mdi-check-circle"></i></button>
+                      <button type="button" data-target="#modal-form" data-toggle="modal" onclick="viewData('{{$row->id}}','{{$row->number_identity_card}}','{{$row->first_name}}','{{$row->last_name}}','{{$row->phone_number}}','{{$row->photo}}','{{$row->gender}}','{{$row->email}}')" class="btn btn-gradient-warning btn-rounded btn-icon"><i class="mdi mdi-table-edit"></i></button>
+                      <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id}}')" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete-sweep"></i></button>
                     </td>
                   </tr>
                   @endforeach

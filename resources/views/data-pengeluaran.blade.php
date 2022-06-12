@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Session;
 @section('title', 'Dashboard')
 
 @section('content')
+    @if (Session::has('message'))
+        <p hidden="true" id="message">{{ Session::get('message') }}</p>
+        <p hidden="true" id="icon">{{ Session::get('icon') }}</p>
+    @endif
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="padding: 10px 12px 0px 37px;">
         <!-- Content Header (Page header) -->
@@ -16,45 +20,45 @@ use Illuminate\Support\Facades\Session;
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                     <i class="mdi mdi-home"></i>
-                </span> Data Pemasukkan
+                </span> Data Pengeluaran
             </h3>
         </div>
         <div class="row">
             <div class="container-fluid">
                 <div class="card p-5 rounded mb-3">
                     <div class="col-sm-12 col-lg">
-                        <button class="btn btn-gradient-primary btn-fw" data-target="#modal-filter" data-toggle="modal">Filter Data</button>
+                        <button class="btn btn-gradient-primary btn-fw" data-target="#modal-form" data-toggle="modal">Buat
+                            Anggaran</button>
                     </div>
                     <table id="example1" class="example1 table table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>
                                 <th>ID transaksi</th>
-                                <th>Nama</th>
-                                <th>Jumlah</th>
-                                <th>Tanggal</th>
-                                <th>Aksi</th>
+                                <th>Penanggung Jawab</th>
+                                <th>Tujuan</th>
+                                <th>Nominal</th>
+                                <th>Tanggal Pengeluaran</th>
+                                <th>Tanggal Transaksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dataPemasukan as $row)
+                            @php
+                                $i = 1;
+                            @endphp
+                            @foreach ($pengeluaran as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->id_transaction }}</td>
-                                    <td>{{ $row->first_name }} {{ $row->last_name }}</td>
-                                    <td>@php echo number_format($row->sub_total, 2, ".", ","); @endphp</td>
-                                    <?php if ($row->is_pay == 1) { ?>
-                                    <td>{{ $row->date }}</td>
-                                    <?php } else { ?>
-                                    <td>-</td>
-                                    <?php } ?>
-                                    <td>
-                                        <button type="button" data-target="#modal-form" data-toggle="modal"
-                                            onclick="updateData('{{ $row->id_transaction }}','{{ $row->id_users }}',`{{ asset('') }}`)"
-                                            class="btn btn-gradient-success btn-rounded btn-icon"><i
-                                                class="mdi mdi-account-card-details"></i></button>
-                                    </td>
+                                    <td>{{ $i }}</td>
+                                    <td>{{ $item->id_transaksi }}</td>
+                                    <td>{{ $item->penanggung_jawab }}</td>
+                                    <td>{{ $item->tujuan }}</td>
+                                    <td>{{ number_format($item->nominal, 2, ".", ",")}}</td>
+                                    <td>{{ $item->tanggal_pengeluaran }}</td>
+                                    <td>{{ $item->created_at }}</td>
                                 </tr>
+                            @php
+                                $i++
+                            @endphp
                             @endforeach
                         </tbody>
 
@@ -68,68 +72,50 @@ use Illuminate\Support\Facades\Session;
         <div class="modal-dialog  modal-xl" role="document">
             <div class="modal-content rounded bg-white">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="titleModal">Detail Transaksi</h5>
+                    <h5 class="modal-title" id="titleModal">Buat Anggaran Baru</h5>
                     <button type="button" class="btn btn-gradient-primary close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-4">
-                            <img class="ml-5" id="profilePicture" width="40%" alt="">
-                            <!-- <img class="ml-5" src="{{ asset('uploads/profile') }}/{{ Session::get('dataUsers')->photo }}" width="50%" alt=""> -->
-                        </div>
-                        <div class="col-8">
-                            <div class="row">
-                                <div class="col-6">
-                                    <p class="font-weight-bold">Nama Lengkap</p>
-                                    <p class="name-user" id="fullName"></p>
-                                    <p class="font-weight-bold">Email</p>
-                                    <p id="email"></p>
-                                    <p class="font-weight-bold">NIK</p>
-                                    <p id="nik"></p>
+                <div class="modal-body px-5">
+                    <form action="/data-pengeluaran" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Penanggung Jawab</label>
+                                    <input name="penanggung_jawab" type="text" class="form-control"
+                                        id="exampleInputUsername1" placeholder="Penanggung Jawab">
                                 </div>
-                                <div class="col-6">
-                                    <p class="font-weight-bold">Nomor Kartu Keluarga</p>
-                                    <p id="kk"></p>
-                                    <p class="font-weight-bold">Jenis Kelamin</p>
-                                    <p id="gender"></p>
-                                    <p class="font-weight-bold">Jumlah Anggota Keluarga</p>
-                                    <p id="numberOfFamily"></p>
-                                    <p class="font-weight-bold">Nomor Telepon</p>
-                                    <p id="phoneNumber"></p>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Tujuan</label>
+                                    <input name="tujuan" type="text" class="form-control" id="exampleInputUsername1"
+                                        placeholder="Tujuan">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Nominal</label>
+                                    <input name="nominal" type="number" class="form-control" id="exampleInputUsername1"
+                                        placeholder="Nominal">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Tanggal Pengeluaran</label>
+                                    <input name="tanggal_pengeluaran" type="date" class="form-control"
+                                        id="exampleInputUsername1" placeholder="Nominal">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-4">
-                            <img class="ml-5" id="buktiTransfer" width="40%" alt="">
-                            <p style="margin-left:70px;margin-top:10px;" class="font-weight-bold">Bukti Transfer</p>
-                        </div>
-                        <div class="col-8">
-                            <table id="tableData" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Jenis Iuran</th>
-                                        <th>Bulan</th>
-                                        <th>Nominal</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-
-                            </table>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
-                    <!-- <button type="submit" class="btn btn-primary">Simpan</button> -->
+                    <button type="submit" class="btn btn-gradient-primary">Simpan</button>
                 </div>
+                </form>
                 <div class="bg-red rounded-modal" style="color: red;height:15px;"></div>
             </div>
         </div>

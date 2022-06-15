@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Session;
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                     <i class="mdi mdi-home"></i>
-                </span> Data Jenis Iuran
+                </span> Data Blok
             </h3>
         </div>
         <div class="row">
             <div class="container-fluid">
                 <div class="card p-5 rounded mb-3">
                     <div class="col-sm-12 col-lg">
-                        <a href="/data-rumah/data-blok/form?type=create" class="btn btn-primary btn-fw">Tambah Data</a>
+                        <a href="/data-rumah/data-blok/form?type=create" class="btn btn-gradient-primary btn-fw">Tambah Data</a>
                     </div>
                     <table id="table" class="example1 table table-striped">
                         <thead>

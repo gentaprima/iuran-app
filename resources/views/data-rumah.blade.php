@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Session;
             <div class="container-fluid">
                 <div class="card p-5 rounded mb-3">
                     <div class="col-sm-12 col-lg">
-                        <a href="/data-rumah/form?type=create" class="btn btn-primary btn-fw">Tambah Data</a>
+                        <a href="/data-rumah/form?type=create" class="btn btn-gradient-primary btn-fw">Tambah Data</a>
                     </div>
                     <!-- <button class="btn btn-outline-primary size-btn" onclick="addData()" data-toggle="modal" data-target="#modal-form">Tambah Data</button> -->
                     <table id="example1" class="example1 table table-striped">

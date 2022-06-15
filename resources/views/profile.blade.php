@@ -28,35 +28,44 @@
                         <img class="ml-5" src="{{ asset('user.png') }}" width="50%" alt="">
                         <?php }else{ ?>
                         <img class="ml-5"
-                            src="{{ asset('uploads/profile') }}/{{ Session::get('dataUsers')->photo }}" width="50%" alt="">
+                            src="{{ asset('uploads/profile') }}/{{ Session::get('dataUsers')->photo }}" width="50%"
+                            alt="">
                         <?php } ?>
                     </div>
                     <div class="col-8">
                         <div class="row">
                             <div class="col-6">
                                 <p class="font-weight-bold">Nama Lengkap</p>
-                                <p class="name-user">{{ $dataProfile->first_name }} {{ $dataProfile->last_name }}</p>
+                                <p class="name-user">{{ $dataProfile->first_name }} {{ $dataProfile->last_name }}
+                                </p>
                                 <p class="font-weight-bold">Email</p>
                                 <p>{{ $dataProfile->email }} </p>
                                 <p class="font-weight-bold">NIK</p>
                                 <p>{{ $dataProfile->number_identity_card }} </p>
-                                <p class="font-weight-bold">Blok Rumah</p>
-                                <p>{{ $dataProfile->blok }} </p>
-                            </div>
-                            <div class="col-6">
-                                <p class="font-weight-bold">Nomor Kartu Keluarga</p>
-                                <p>{{ $dataProfile->number_family_card }} </p>
+                                <p class="font-weight-bold">No Telepon</p>
+                                <p>{{ $dataProfile->phone_number }} </p>
                                 <p class="font-weight-bold">Jenis Kelamin</p>
                                 <p>{{ $dataProfile->gender }} </p>
-                                <p class="font-weight-bold">Jumlah Anggota Keluarga</p>
-                                <p>{{ $dataProfile->number_of_family }} </p>
-                                <p class="font-weight-bold">Nomor Telepon</p>
-                                <p>{{ $dataProfile->phone_number }} </p>
+                            </div>
+                            <div class="col-6">
+                                <p class="font-weight-bold">Atas Nama Rumah</p>
+                                <p>{{ $dataProfile->atas_nama }} </p>
+                                <p class="font-weight-bold">No Rumah</p>
+                                <p>{{ $dataProfile->no_rumah }} </p>
+                                <p class="font-weight-bold">Blok Rumah</p>
+                                <p>{{ $dataProfile->blok }} </p>
+                                <p class="font-weight-bold">Status Tempat Tinggal</p>
+                                @php
+                                    $status = $dataProfile->status == 0 ? 'Rumah Kosong' : ($dataProfile->status == 1 ? 'Rumah Dijual' : 'Rumah Terisi');
+                                @endphp
+                                <p>{{ $status }} </p>
+                                <p class="font-weight-bold">Tahun Ditempati</p>
+                                <p>{{ $dataProfile->tahun }} </p>
                             </div>
                         </div>
                         <button type="button"
                             onclick="updateData(`{{ $dataProfile->id }}`,`{{ $dataProfile->email }}`,`{{ $dataProfile->first_name }}`,`{{ $dataProfile->last_name }}`,`{{ $dataProfile->number_identity_card }}`,`{{ $dataProfile->number_family_card }}`,`{{ $dataProfile->gender }}`,`{{ $dataProfile->number_of_family }}`,`{{ $dataProfile->phone_number }}`,`{{ $dataProfile->blok }}`)"
-                            data-target="#modal-form" data-toggle="modal" class="btn btn-outline-primary">Perbarui
+                            data-target="#modal-form" data-toggle="modal" class="btn btn-gradient-primary">Perbarui
                             Data</button>
 
 
@@ -69,17 +78,25 @@
     <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog  modal-xl" role="document">
-            <div class="modal-content rounded">
+            <div class="modal-content rounded bg-white">
                 <div class="modal-header">
                     <h5 class="modal-title" id="titleModal">Perbarui Data Diri</h5>
-                    {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="btn btn-gradient-primary close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                    </button> --}}
+                    </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body px-5">
                     <form class="form" method="post" id="form" action="/update-profile"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="numberIndentityCard"
+                                    value="{{ old('number_identity_card') }}" name="numberIdentityCard"
+                                    placeholder="numberIndentityCard">
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group row">
@@ -110,39 +127,24 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
+                            <label for="inputPassword" class="col-sm-2 col-form-label">No Rumah - Blok</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="numberIndentityCard"
-                                    value="{{ old('numberIndentityCard') }}" name="numberIdentityCard" placeholder="NIK">
+                                <select class="form-control form-control-sm" id="id_rumah" value="{{ old('id_rumah') }}"
+                                    name="id_rumah">
+                                    <option value="">-- Pilih No-Blok Rumah --</option>
+                                    @foreach ($dataRumah as $item)
+                                        <option value="{{ $item->id }}">{{ $item->no_rumah . ' - ' . $item->blok }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Nomor Kartu Keluarga</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="numberFamilyCard"
-                                    value="{{ old('numberFamilyCard') }}" name="numberFamilyCard"
-                                    placeholder="Nomor Kartu Keluarga">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Jumlah Anggota Keluarga</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="numberOfFamily"
-                                    value="{{ old('numberOfFamily') }}" name="numberOfFamily"
-                                    placeholder="Jumlah Anggota Keluarga">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">Blok Rumah</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="blok" value="{{ old('blok') }}" name="blok"
-                                    placeholder="Blok Rumah">
-                            </div>
-                        </div>
+
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Jenis Kelamin</label>
                             <div class="col-sm-10">
-                                <select class="form-control" id="gender" value="{{ old('gender') }}" name="gender">
+                                <select class="form-control form-control-sm" id="gender" value="{{ old('gender') }}"
+                                    name="gender">
                                     <option value="">-- Pilih Jenis Kelamin --</option>
                                     <option value="Pria">Pria</option>
                                     <option value="Wanita">Wanita</option>
@@ -152,23 +154,17 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-sm-10">
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="image" id="exampleInputFile">
-                                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
-                                    </div>
+                                <div class="input-group col-xs-12">
+                                    <input type="file" class="form-control file-upload-info" placeholder="Upload Image">
                                 </div>
-                                <p class="mt-1">(kosongkan jika tidak ingin mengubah foto)</p>
                             </div>
+                            <p class="mt-1">(kosongkan jika tidak ingin mengubah foto)</p>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Nomor Telepon</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="phoneNumber" value="{{ old('phoneNumber') }}"
-                                    name="phoneNumber" placeholder="Nomor Telepon">
+                                <input type="text" class="form-control" id="phoneNumber"
+                                    value="{{ old('phoneNumber') }}" name="phoneNumber" placeholder="Nomor Telepon">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -190,10 +186,9 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-gradient-primary">Simpan</button>
                     </form>
                 </div>
-                <div class="bg-red rounded-modal" style="color: red;height:15px;"></div>
             </div>
         </div>
     </div>

@@ -30,7 +30,7 @@ Route::post('/add-rekening', 'RekeningController@store');
 Route::post('/update-rekening/{id}', 'RekeningController@update');
 Route::get('/delete-rekening/{id}', 'RekeningController@destroy');
 Route::get('/profile', 'ProfileController@index');
-Route::post('/update-profile/{id}', 'ProfileController@update');
+Route::post('/update-profile', 'ProfileController@update');
 Route::get('/warga/verif-data/{id}', 'WargaController@verifData');
 Route::post('/warga/update/{id}', 'WargaController@update');
 Route::get('/warga/delete/{id}', 'WargaController@destroy');
@@ -69,6 +69,11 @@ Route::group(['prefix' => '/data-rumah'], function () {
     Route::post("/data-blok/add", 'HouseController@addblok');
     Route::post("/data-blok/update/{id}", 'HouseController@updateBlok');
     Route::get("/data-blok/delete/{id}", 'HouseController@deleteblok');
+});
+
+Route::group(['prefix' => '/data-pengeluaran'], function () {
+    Route::get('/', 'PengeluaranController@index');
+    Route::post('/', 'PengeluaranController@store');
 });
 Route::get('/logout', function () {
     Session::flush();

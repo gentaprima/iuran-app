@@ -32,6 +32,13 @@
                                 id="exampleInputUsername2" placeholder="Username">
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="exampleInputUsername2" class="col-sm-2 col-form-label">Bulan Iuran</label>
+                        <div class="col-sm-9">
+                            <input name="month"  type="month" class="form-control form-control-sm" id="monthPick"
+                                placeholder="Bulan">
+                        </div>
+                    </div>
                     <div class="form group row">
                         <label class="label col-sm-2">Jenis Iuran</label>
                         <div class="col-sm-10">
@@ -112,8 +119,6 @@
         </section>
         <!-- /.content -->
     </div>
-
-
     <script>
         function checkIuran(val, iteration, nominal, count) {
             let total = 0;

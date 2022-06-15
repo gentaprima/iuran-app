@@ -96,6 +96,7 @@ class IuranController extends Controller
 
     public function addBill()
     {
+
         $getDataWarga = DB::table('tbl_users')
             ->where('role', 0)
             ->where('is_verif', 1)
@@ -126,13 +127,14 @@ class IuranController extends Controller
 
     public function addIuran(Request $request)
     {
+
         $image = $request->file('image');
         $filename = uniqid() . time() . "."  . explode("/", $image->getMimeType())[1];
         Storage::disk('uploads')->put('bukti/' . $filename, File::get($image));
         $dataUsers = Session::get('dataUsers')->id;
         if ($request->checkManyMonths == null) {
 
-            $dateMonth = date('m');
+            $dateMonth = (int)explode('-',$request->month)[1];
             $dateYear = date('Y');
             $checkIuran = DB::table('tbl_iuran')->whereMonth('date', $dateMonth)->whereYear('date', $dateYear)->first();
             if ($checkIuran == null) {
@@ -155,7 +157,7 @@ class IuranController extends Controller
                         'image' => $filename,
                         'is_verif'  => 0,
                         'is_pay'  => 1,
-                        'month'  => date('F'),
+                        'month'  => date("F", mktime(0, 0, 0, $dateMonth, 10)),
                         'date'  => date('Y-m-d'),
                     ];
                     array_push($dataInsert, $data);
@@ -196,9 +198,14 @@ class IuranController extends Controller
                 return redirect()->back();
             }
         } else {
-            DB::table('tbl_iuran')->whereMonth('date',date('m'))->whereYear('date',date('Y'))->delete();
+            DB::table('tbl_iuran')
+                    ->whereMonth('date',date('m'))
+                    ->whereYear('date',date('Y'))
+                    ->where('id_users',Session::get('dataUsers')->id)
+                    ->where('is_verif',0)
+                    ->delete();
             $idTransaction = 'I-' . random_int(100000, 999999);
-            $monthNumber = date('m');
+            $monthNumber = (int)explode('-',$request->month)[1];
             $jenisIuran = DB::table('tbl_jenis_iuran')->get();
             for ($i = 0; $i < $request->manyMonths; $i++) {
                 $dataInsert = [];

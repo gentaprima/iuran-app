@@ -49,6 +49,12 @@ use Illuminate\Support\Facades\Session;
                                         id="exampleInputUsername1" placeholder="Nominal Iuran">
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Keterangan</label>
+                                    <input type="text" name="keterangan" class="form-control">
+                                </div>
+                            </div>
                             @csrf
                             <div class="col-md-12 my-auto">
                                 <button type="submit" style="width: 100%;height:100%"

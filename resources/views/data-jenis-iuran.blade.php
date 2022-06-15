@@ -32,6 +32,8 @@ use Illuminate\Support\Facades\Session;
                                 <th>No</th>
                                 <th>Jenis Iuran</th>
                                 <th>Nominal Pembayaran</th>
+                                <th>Keterangan</th>
+
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -41,6 +43,7 @@ use Illuminate\Support\Facades\Session;
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row->jenis_iuran }}</td>
                                     <td>Rp @php echo number_format($row->nominal, 2, ".", ","); @endphp</td>
+                                    <td>{{ $row->keterangan }}</td>
                                     <td>
                                         <a href="/jenis-iuran/form-update/{{ $row->id }}?type=update"><button
                                                 type="button" class="btn btn-gradient-warning btn-rounded btn-icon">

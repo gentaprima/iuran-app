@@ -17,14 +17,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"> -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <style>
         .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
             background: none;
             color: black !important;
             /*change the hover text color*/
         }
-
-
         /*below block of css for change style when active*/
 
         .dataTables_wrapper .dataTables_paginate .paginate_button:active {
@@ -36,7 +35,10 @@
 
 <body>
     <div class="container-scroller">
-
+        @if (Session::has('message'))
+            <p hidden="true" id="message">{{ Session::get('message') }}</p>
+            <p hidden="true" id="icon">{{ Session::get('icon') }}</p>
+        @endif
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
@@ -55,8 +57,8 @@
                 </button>
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
-                        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="nav-profile-text">
                                 <p class="mb-1 text-black">
                                     {{ Session::get('dataUsers')->first_name . ' ' . Session::get('dataUsers')->last_name }}
@@ -76,6 +78,7 @@
                     data-toggle="offcanvas">
                     <span class="mdi mdi-menu"></span>
                 </button>
+
             </div>
         </nav>
         <!-- partial -->
@@ -111,7 +114,7 @@
                         <li class="nav-item">
                             <a class="nav-link" data-bs-toggle="collapse" href="#ui-citizen" aria-expanded="false"
                                 aria-controls="ui-citizen">
-                                <span class="menu-title">Data Warga</span>
+                                <span class="menu-title">Warga</span>
                                 <i class="menu-arrow"></i>
                                 <i class="mdi mdi-account-multiple menu-icon"></i>
                             </a>
@@ -120,8 +123,8 @@
                                     <li class="nav-item"> <a class="nav-link" href="/data-warga">Data
                                             Warga</a>
                                     </li>
-                                    <li class="nav-item"> <a class="nav-link"
-                                            href="/verifikasi-warga">Verifikasi Warga</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="/verifikasi-warga">Verifikasi
+                                            Warga</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -160,15 +163,9 @@
                                 <p class="menu-title" style="font-weight:800">Laporan</p>
                             </div>
                         <li class="nav-item ">
-                            <a class="nav-link" href="index.html">
-                                <span class="menu-title">Jurnal Pemasukkan</span>
+                            <a class="nav-link" href="/jurnal">
+                                <span class="menu-title">Jurnal Pemasukkan <br> & Pengeluaran</span>
                                 <i class="mdi mdi-file-export menu-icon"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">
-                                <span class="menu-title">Jurnal Pengeluaran</span>
-                                <i class="mdi mdi-file-import menu-icon"></i>
                             </a>
                         </li>
                     @endif
@@ -210,7 +207,6 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="{{ asset('assets/vendors/js/vendor.bundle.base.js') }}"></script>
 
     <script src="{{ asset('assets/vendors/chart.js/Chart.min.js') }}"></script>
@@ -259,7 +255,7 @@
         $('.paginate_button.next').html(">>>");
         $('.example1').DataTable({
             dom: 'Bfrtip',
-            "searching": false
+            "searching": true
         });
         $('.example1').removeClass("dataTable")
     </script>

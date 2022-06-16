@@ -57,6 +57,8 @@ Route::get('/rekening/form-update/{id}', 'RekeningController@show');
 Route::get('/jenis-iuran/form-jenis-iuran', 'JenisIuranController@create');
 Route::get('/jenis-iuran/form-update/{id}', 'JenisIuranController@show');
 
+Route::get('/jurnal','JurnalController@index');
+
 
 Route::group(['prefix' => '/data-rumah'], function () {
     Route::get("/", 'HouseController@index');

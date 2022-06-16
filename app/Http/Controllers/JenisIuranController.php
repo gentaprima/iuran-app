@@ -65,6 +65,7 @@ class JenisIuranController extends Controller
         $jenisIuran = ModelJenisIuran::find($id);
         $jenisIuran->nominal = $request->nominal;
         $jenisIuran->jenis_iuran = $request->jenisIuran;
+        $jenisIuran->keterangan = $request->keterangan;
         $jenisIuran->save();
         Session::flash('message', 'Berhasil memperbarui data jenis iuran');
         Session::flash('icon', 'success');

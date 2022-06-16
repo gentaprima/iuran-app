@@ -39,7 +39,7 @@ use Illuminate\Support\Facades\Session;
                             </div>
                         </div>
                     </div>
-                </div>>
+                </div>
                 <?php } ?>
                 <div class="row">
                     <div class="col-md-4 stretch-card grid-margin">

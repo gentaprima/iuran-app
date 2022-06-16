@@ -53,7 +53,12 @@ class DatabaseSeeder extends Seeder
             [
                 'jenis_iuran'   => "Iuran 1 Bulan",
                 'nominal'   => 80000,
-                'keterangan'   => "Iuran Kebersihan DKPP, Iuran Keamanan, Iuran Sukarela",
+                'keterangan'   => "Iuran Kebersihan, Iuran Keamanan, Kas RT",
+            ],
+            [
+                'jenis_iuran'   => "Iuran Sukarela",
+                'nominal'   => 0,
+                'keterangan'   => "Untuk Iuran Sukarela di bayar seiklasnya",
             ],
         ]);
 

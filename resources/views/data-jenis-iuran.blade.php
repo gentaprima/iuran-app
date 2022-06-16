@@ -49,10 +49,7 @@ use Illuminate\Support\Facades\Session;
                                                 type="button" class="btn btn-gradient-warning btn-rounded btn-icon">
                                                 <i class="mdi mdi-table-edit"></i>
                                             </button></a>
-                                        <a href="/delete-jenis-iuran/{{ $row->id }}"> <button type="button"
-                                                class="btn btn-gradient-danger btn-rounded btn-icon">
-                                                <i class="mdi mdi-delete-sweep"></i>
-                                            </button></a>
+                                      
                                     </td>
                                 </tr>
                             @endforeach

@@ -85,6 +85,8 @@ class HouseController extends Controller
     public function deleteBlok($id)
     {
         $data = $this->modelBlok->find($id);
+        Session::flash('message', 'Berhasil Hapus Blok');
+        Session::flash('icon', 'success');
         $data->delete();
         return redirect()->back();
     }

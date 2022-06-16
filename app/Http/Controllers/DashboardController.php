@@ -24,7 +24,7 @@ class DashboardController extends Controller
             'dataIuran' => $dataIuran,
             'dataWarga' => DB::table('tbl_users')->where('is_verif', 1)->where('role', 0)->count(),
             'dataPemasukan' => DB::table('tbl_pemasukan')->sum('jumlah'),
-            'dataPengeluaran'=>ModelPengeluaran::sum('nominal'),
+            'dataPengeluaran' => ModelPengeluaran::sum('nominal'),
             'dataIuranUnVerif'  => DB::table('tbl_iuran')->where('is_verif', 0)->groupBy('id_transaction')->count()
         ];
         if ($isLogin == null) {
@@ -39,7 +39,9 @@ class DashboardController extends Controller
         if ($isLogin == null) {
             return redirect('/');
         }
-        $dataWarga =  DB::table('tbl_users')
+        $dataWarga =  DB::table('tbl_users')->select('rumah.*', 'blok.*', 'tbl_users.*', 'tbl_users.id as id_user')
+            ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
+            ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
             ->where('role', '=', 0)
             ->where('is_verif', '=', 1)
             ->get();
@@ -60,11 +62,11 @@ class DashboardController extends Controller
         //     ->where('is_verif', '=', 0)
         //     ->get();
 
-        $dataVerifikasi = ModelUsers::select('rumah.*','blok.*','tbl_users.*', 'tbl_users.id as id_user')
-                            ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
-                            ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
-                            ->where('role','=',0)
-                            ->where('is_verif','=',0)->get();
+        $dataVerifikasi = ModelUsers::select('rumah.*', 'blok.*', 'tbl_users.*', 'tbl_users.id as id_user')
+            ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
+            ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
+            ->where('role', '=', 0)
+            ->where('is_verif', '=', 0)->get();
         $data = [
             'dataVerifikasi'    => $dataVerifikasi
         ];

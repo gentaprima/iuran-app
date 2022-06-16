@@ -43,7 +43,7 @@ use Illuminate\Support\Facades\Session;
               <td>{{$row->phone_number}}</td>
               <td>
                 <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="checkData('{{$row->id}}')" class="btn btn-gradient-success btn-rounded btn-icon"><i class="mdi mdi-check-circle"></i></button>
-                <button type="button" data-target="#modal-form" data-toggle="modal" onclick="viewData('{{$row->id}}','{{$row->number_identity_card}}','{{$row->first_name}}','{{$row->last_name}}','{{$row->phone_number}}','{{$row->photo}}','{{$row->gender}}','{{$row->email}}','{{$row->blok}}','{{$row->no_rumah}}')" class="btn btn-gradient-warning btn-rounded btn-icon"><i class="mdi mdi-table-edit"></i></button>
+                <button type="button" data-target="#modal-form" data-toggle="modal" onclick="viewData('{{$row->id}}','{{$row->number_identity_card}}','{{$row->first_name}}','{{$row->last_name}}','{{$row->phone_number}}','{{$row->photo}}','{{$row->gender}}','{{$row->email}}','{{$row->blok}}','{{$row->no_rumah}}')" class="btn btn-gradient-info btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></button>
                 <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id}}')" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete-sweep"></i></button>
               </td>
             </tr>
@@ -57,14 +57,14 @@ use Illuminate\Support\Facades\Session;
   </div>
   <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-xl" role="document">
-      <div class="modal-content rounded">
+      <div class="modal-content rounded bg-white">
         <div class="modal-header">
           <h5 class="modal-title" id="titleModal">Tambah Rekening</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close btn btn-gradient-primary" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="modal-body pt-3">
+        <div class="modal-body px-5">
 
           <div class="row">
             <div class="col-6">
@@ -93,22 +93,22 @@ use Illuminate\Support\Facades\Session;
   </div>
   <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-md" role="document">
-      <div class="modal-content rounded">
+      <div class="modal-content rounded bg-white">
         <div class="modal-header">
           <h5 class="modal-title" id="title-modal-confirm">Tambah Rekening</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <a href="">
+          <button type="button" class="close btn-gradient-primary" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
+        </a>
         </div>
         <div class="modal-body">
           <h5 id="text-description">Anda yakin ingin menghapus data tersebut?</h5>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-          <a id="btnDelete" type="submit" class="btn btn-primary">Hapus</a>
-          </form>
+            <a id="btnDelete" class="btn btn-gradient-primary" href="">Hapus</a>
         </div>
-        <div class="bg-red rounded-modal" style="color: red;height:15px;"></div>
       </div>
     </div>
   </div>
@@ -124,7 +124,7 @@ use Illuminate\Support\Facades\Session;
     }
 
     function deleteData(id) {
-      document.getElementById("btnDelete").href = `/delete-rekening/${id}`;
+      document.getElementById("btnDelete").href = `/warga/delete/${id}`;
       document.getElementById("btnDelete").innerHTML = 'Hapus';
       document.getElementById("text-description").innerHTML = 'Anda yakin ingin menghapus data tersebut?';
       document.getElementById("title-modal-confirm").innerHTML = 'Hapus Data';

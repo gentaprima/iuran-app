@@ -35,6 +35,8 @@ class LoginController extends Controller
         ]);
 
         if ($validate->fails()) {
+            Session::flash('message', $validate->errors()->first());
+            Session::flash('icon', 'error');
             return redirect()->back()
                 ->withInput($request->input())
                 ->withErrors($validate);
@@ -87,7 +89,8 @@ class LoginController extends Controller
         ]);
 
         if ($validate->fails()) {
-            return $validate->errors()->first();
+            Session::flash('message', $validate->errors()->first());
+            Session::flash('icon', 'error');
             return redirect()->back()
                 ->withInput($request->input())
                 ->withErrors($validate);

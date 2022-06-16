@@ -18,12 +18,15 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" />
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="{{ asset('dashboard/new-style.css') }}">
+
 </head>
 
 <body>
     @if (Session::has('message'))
-    <p hidden="true" id="message">{{ Session::get('message') }}</p>
-    <p hidden="true" id="icon">{{ Session::get('icon') }}</p>
+        <p hidden="true" id="message">{{ Session::get('message') }}</p>
+        <p hidden="true" id="icon">{{ Session::get('icon') }}</p>
     @endif
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
@@ -32,23 +35,27 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo">
-                                <img src="{{asset('iuran-logo.png')}}" style="  object-fit: cover;">
+                                <img src="{{ asset('iuran-logo.png') }}" style="  object-fit: cover;">
 
                             </div>
                             <h4>Selamat Datang</h4>
                             <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
                             <form method="post" action="/auth" class="pt-3">
                                 <div class="form-group">
-                                    <input name="email" type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                                    <input name="email" type="email" class="form-control form-control-lg"
+                                        id="exampleInputEmail1" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" name="password" placeholder="Password">
+                                    <input type="password" class="form-control form-control-lg"
+                                        id="exampleInputPassword1" name="password" placeholder="Password">
                                 </div>
                                 <div class="mt-3">
-                                    <button style="width: 100%;" type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Masuk</a>
+                                    <button style="width: 100%;" type="submit"
+                                        class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Masuk</a>
                                 </div>
                                 @csrf
-                                <div class="text-center mt-4 font-weight-light"> Tidak Punya Akun ? <a href="/register" class="text-primary">Daftar Warga</a>
+                                <div class="text-center mt-4 font-weight-light"> Tidak Punya Akun ? <a href="/register"
+                                        class="text-primary">Daftar Warga</a>
                                 </div>
                             </form>
                         </div>
@@ -70,6 +77,27 @@
     <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('assets/js/misc.js') }}"></script>
     <!-- endinject -->
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-right',
+            iconColor: 'white',
+            customClass: {
+                popup: 'colored-toast'
+            },
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true
+        })
+        let icon = document.getElementById('icon');
+        if (icon != null) {
+            let message = document.getElementById('message');
+            Toast.fire({
+                icon: icon.innerHTML,
+                title: message.innerHTML
+            });
+        }
+    </script>
 </body>
 
 </html>

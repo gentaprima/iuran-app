@@ -29,6 +29,8 @@ class HouseController extends Controller
     public function destroy($id)
     {
         $data = $this->modelHouse->find($id);
+        Session::flash('message', 'Berhasil Hapus Rumah');
+        Session::flash('icon', 'success');
         $data->delete();
         return redirect()->back();
     }

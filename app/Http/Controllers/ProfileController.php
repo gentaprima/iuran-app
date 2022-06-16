@@ -20,7 +20,10 @@ class ProfileController extends Controller
             return redirect('/');
         }
         $dataRumah = ModelHouse::select('rumah.*', 'blok.*', 'blok.id as id_blok')->join("blok", 'rumah.blok', '=', 'blok.id')->get();
-        $dataProfile = ModelUsers::select('rumah.*','blok.*','tbl_users.*', 'tbl_users.id as id_user')->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')->leftJoin("blok", 'rumah.blok', '=', 'blok.id')->where('tbl_users.id', session::get('dataUsers')->id)->first();
+        $dataProfile = ModelUsers::select('rumah.*','blok.*','tbl_users.*', 'tbl_users.id as id_user')
+                                ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
+                                ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
+                                ->where('tbl_users.id', session::get('dataUsers')->id)->first();
         $data = [
             'dataProfile' => $dataProfile,
             'dataRumah' => $dataRumah

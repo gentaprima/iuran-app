@@ -63,7 +63,7 @@
                                         id="exampleInputconfirmPassword1" name="confirmPassword" placeholder="Konfirmasi Password">
                                 </div>
                                 <div class="mt-3">
-                                    <button type="submit"
+                                    <button style="width: 100%;" type="submit"
                                         class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Daftar</a>
                                 </div>
                                 @csrf

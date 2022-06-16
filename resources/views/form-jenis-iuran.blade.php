@@ -52,7 +52,7 @@ use Illuminate\Support\Facades\Session;
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="">Keterangan</label>
-                                    <input type="text" name="keterangan" class="form-control">
+                                    <input type="text" name="keterangan" value="{{ Request::get('type') === 'update' ? $iuran->keterangan : '' }}"  class="form-control">
                                 </div>
                             </div>
                             @csrf

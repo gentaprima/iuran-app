@@ -10,56 +10,62 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $isLogin = Session::get('login');
-        if($isLogin != null){
+        if ($isLogin != null) {
             return redirect('/home');
         }
         return view('login');
     }
 
-    public function register(){
+    public function register()
+    {
         return view('register');
     }
 
-    public function auth(Request $request){
-        $validate = Validator::make($request->all(),[
+    public function auth(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
             'email' => 'required|email',
             'password'  => 'required'
-        ],[
+        ], [
             'email.required' => "Email harus dilengkapi",
             'password.required' => "Password harus dilengkapi"
         ]);
 
-        if($validate->fails()){
+        if ($validate->fails()) {
             return redirect()->back()
-                    ->withInput($request->input())
-                    ->withErrors($validate);
-        }
-        
-        $checkUsers = ModelUsers::where('email',$request->email)->first();
-        
-        if($checkUsers == null){
-            Session::flash('message', 'Mohon maaf, Akun tidak ditemukan.'); 
-            Session::flash('alert-class', 'alert-danger'); 
-            return redirect()->back()
-                            ->withInput($request->input());
+                ->withInput($request->input())
+                ->withErrors($validate);
         }
 
-        if(!Hash::check($request->password, $checkUsers->password)){
-            Session::flash('message', 'Mohon maaf, Email atau Password tidak sesuai.'); 
-            Session::flash('alert-class', 'alert-danger'); 
+        $checkUsers = ModelUsers::where('email', $request->email)->first();
+
+        if ($checkUsers == null) {
+            Session::flash('message', 'Mohon maaf, Akun tidak ditemukan.');
+            Session::flash('icon', 'error');
             return redirect()->back()
-                                ->withInput($request->input());
+            ->withInput($request->input());
+        }
+        
+        if (!Hash::check($request->password, $checkUsers->password)) {
+
+            Session::flash('message', 'Mohon maaf, Email atau Password tidak sesuai.');
+            Session::flash('icon', 'error');
+            
+            return redirect()->back()
+                ->withInput($request->input());
         }
 
-        Session::put('dataUsers',$checkUsers);
+        Session::put('dataUsers', $checkUsers);
         Session::put('login', true);
         return redirect('/home');
     }
 
-    public function proccesRegister(Request $request){
-        $validate = Validator::make($request->all(),[
+    public function proccesRegister(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
             'firstName'    => 'required',
             'lastName'    => 'required',
             'email'    => 'required|email',
@@ -68,7 +74,7 @@ class LoginController extends Controller
             'confirmPassword'    => 'required',
             'nik'           => 'required|numeric'
 
-        ],[
+        ], [
             'firstName.required' => "Nama Depan harus dilengkapi",
             'lastName.required' => "Nama Belakang harus dilengkapi",
             'email.required' => "Email harus dilengkapi",
@@ -80,17 +86,17 @@ class LoginController extends Controller
             'passwird.confirmed'       => "Password dan Konfirmasi password harus sama",
         ]);
 
-        if($validate->fails()){
+        if ($validate->fails()) {
             return $validate->errors()->first();
             return redirect()->back()
-                    ->withInput($request->input())
-                    ->withErrors($validate);
+                ->withInput($request->input())
+                ->withErrors($validate);
         }
 
-        $checkUsers = ModelUsers::where('email',$request->email)->first();
-        if($checkUsers != null){
-            Session::flash('message', 'Mohon maaf, Email sudah digunakan.'); 
-            Session::flash('alert-class', 'alert-danger'); 
+        $checkUsers = ModelUsers::where('email', $request->email)->first();
+        if ($checkUsers != null) {
+            Session::flash('message', 'Mohon maaf, Email sudah digunakan.');
+            Session::flash('icon', 'error');
             return redirect()->back();
         }
 
@@ -106,11 +112,9 @@ class LoginController extends Controller
             'is_verif'         => 0
         ]);
         $users->save();
-        Session::flash('message', 'Berhasil membuat akun, Silahkan login.'); 
-        Session::flash('alert-class', 'alert-success'); 
-        return redirect()->back();
+        Session::flash('message', 'Berhasil membuat akun, Silahkan login.');
+        Session::flash('icon', 'success');
         
+        return redirect()->back();
     }
-
-
 }

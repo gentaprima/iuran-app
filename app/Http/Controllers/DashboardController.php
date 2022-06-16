@@ -55,10 +55,16 @@ class DashboardController extends Controller
         if ($isLogin == null) {
             return redirect('/');
         }
-        $dataVerifikasi =  DB::table('tbl_users')
-            ->where('role', '=', 0)
-            ->where('is_verif', '=', 0)
-            ->get();
+        // $dataVerifikasi =  DB::table('tbl_users')
+        //     ->where('role', '=', 0)
+        //     ->where('is_verif', '=', 0)
+        //     ->get();
+
+        $dataVerifikasi = ModelUsers::select('rumah.*','blok.*','tbl_users.*', 'tbl_users.id as id_user')
+                            ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
+                            ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
+                            ->where('role','=',0)
+                            ->where('is_verif','=',0)->get();
         $data = [
             'dataVerifikasi'    => $dataVerifikasi
         ];

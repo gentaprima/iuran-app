@@ -94,7 +94,7 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="numberIndentityCard"
                                     value="{{ old('number_identity_card') }}" name="numberIdentityCard"
-                                    placeholder="numberIndentityCard">
+                                    placeholder="NIK">
                             </div>
                         </div>
                         <div class="row">
@@ -205,6 +205,8 @@
             document.getElementById('phoneNumber').value = phoneNumber;
             document.getElementById('blok').value = blok;
             document.getElementById("form").action = `/update-profile/${id}`;
+            console.log(phoneNumber);
         }
+        
     </script>
 @endsection

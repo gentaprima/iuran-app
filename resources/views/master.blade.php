@@ -160,15 +160,9 @@
                                 <p class="menu-title" style="font-weight:800">Laporan</p>
                             </div>
                         <li class="nav-item ">
-                            <a class="nav-link" href="index.html">
-                                <span class="menu-title">Jurnal Pemasukkan</span>
+                            <a class="nav-link" href="/jurnal">
+                                <span class="menu-title">Jurnal Pemasukkan <br> & Pengeluaran</span>
                                 <i class="mdi mdi-file-export menu-icon"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">
-                                <span class="menu-title">Jurnal Pengeluaran</span>
-                                <i class="mdi mdi-file-import menu-icon"></i>
                             </a>
                         </li>
                     @endif

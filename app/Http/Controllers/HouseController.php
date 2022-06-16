@@ -21,7 +21,7 @@ class HouseController extends Controller
 
     public function index()
     {
-        $data['house'] = $this->modelHouse->select('*','rumah.id as id_rumah')->leftJoin('blok', 'rumah.blok', '=', 'blok.id')->get();
+        $data['house'] = $this->modelHouse->select('rumah.*','rumah.id as id_rumah')->leftJoin('blok', 'rumah.blok', '=', 'blok.id')->get();
         
         return view('data-rumah', $data);
     }

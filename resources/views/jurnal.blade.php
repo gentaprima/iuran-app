@@ -51,9 +51,8 @@ use Illuminate\Support\Facades\Session;
                                             <td>{{$row->date}}</td>
                                             <td>{{$row->first_name}} {{$row->last_name}}</td>
                                             <td>
-                                                iuran bulan  <?php for ($i = 0; $i < count($splitMonth); $i++) { ?>
+                                                  <?php for ($i = 0; $i < count($splitMonth); $i++) { ?>
                                                                 <?php if($splitMonth[count($splitMonth) - 1] == $i){ ?>
-
                                                                <span class="font-weight-bold"> <?= $splitMonth[$i] ?>, </span>
                                                                <?php }else{?>
                                                                 <span class="font-weight-bold"> <?= $splitMonth[$i] ?></span>
@@ -61,9 +60,11 @@ use Illuminate\Support\Facades\Session;
                                                             <?php } ?>
                                                 <hr>
                                                 <ul>
+                                                    @if(count($splitIuran) > 0 )
                                                     <?php for ($i = 0; $i < count($splitIuran); $i++) { ?>
                                                         <li><?= $splitIuran[$i] ?></li>
                                                     <?php } ?>
+                                                    @endif
                                                 </ul>
                                             </td>
                                             <td></td>

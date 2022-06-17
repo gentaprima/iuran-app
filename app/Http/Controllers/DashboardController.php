@@ -87,10 +87,12 @@ class DashboardController extends Controller
             ->where('id_users', '=', Session::get('dataUsers')->id)
             ->groupBy('id_transaction')
             ->get();
+        $users  = DB::table("tbl_users")->where('id', Session::get('dataUsers')->id)->first();
         $dataRekening = ModelRekening::all();
         $data = [
             'dataIuran' => $dataIuran,
-            'dataRekening' => $dataRekening
+            'dataRekening' => $dataRekening,
+            'user'=>$users
         ];
         return view('data-iuran', $data);
     }

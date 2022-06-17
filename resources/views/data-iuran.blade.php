@@ -112,6 +112,7 @@
                                     </a> -->
                                     @php if(Session::get('dataUsers')->role == 0){ @endphp
                                     <button type="button" data-target="#modal-form" data-toggle="modal" onclick="updateData('{{$row->id_transaction}}','{{$row->sub_total}}','{{$row->image}}','{{$row->to_rekening}}')" class="btn btn-gradient-success btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></i></button>
+                                    <a href="/iuran/invoice"><button type="button" class="btn btn-gradient-info btn-rounded btn-icon mt-1"><i class="mdi mdi-printer"></i></button></a>   
                                     @php } @endphp
                                     @php if($row->is_verif == 0){ @endphp
                                     @php if(Session::get('dataUsers')->role == 1){ @endphp

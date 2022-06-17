@@ -22,7 +22,7 @@
             </h3>
         </div>
         <div class="card p-5 rounded mb-3">
-            @if (Session::get('dataUsers')->role == 0  && Session::get("dataUsers")->is_verif)
+            @if (Session::get('dataUsers')->role == 0  && $user->is_verif)
             <div class="col-sm-12 col-lg">
                 <a href="/form-tambah-iuran" class="btn btn-gradient-primary btn-fw">Tambah Data</a>
             </div>

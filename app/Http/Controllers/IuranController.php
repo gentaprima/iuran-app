@@ -133,7 +133,6 @@ class IuranController extends Controller
         Storage::disk('uploads')->put('bukti/' . $filename, File::get($image));
         $dataUsers = Session::get('dataUsers')->id;
         if ($request->checkManyMonths == null) {
-
             $dateMonth = (int)explode('-',$request->month)[1];
             $dateYear = date('Y');
             $checkIuran = DB::table('tbl_iuran')->whereMonth('date', $dateMonth)->whereYear('date', $dateYear)->first();
@@ -153,7 +152,7 @@ class IuranController extends Controller
                         'id_users' => $dataUsers,
                         'to_rekening' => $request->toRekening,
                         'id_jenis_iuran' => $request->jenisIuran[$i],
-                        'sub_total' => $request->subTotal,
+                        'sub_total' => $request->subTotal ? $request->subTotal : $request->total,
                         'image' => $filename,
                         'is_verif'  => 0,
                         'is_pay'  => 1,

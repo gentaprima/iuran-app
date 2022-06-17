@@ -35,7 +35,7 @@
                     <div class="form-group row">
                         <label for="exampleInputUsername2" class="col-sm-2 col-form-label">Bulan Iuran</label>
                         <div class="col-sm-9">
-                            <input name="month"  type="month" class="form-control form-control-sm" id="monthPick"
+                            <input name="month" required type="month" class="form-control form-control-sm" id="monthPick"
                                 placeholder="Bulan">
                         </div>
                     </div>
@@ -45,9 +45,9 @@
                             @php $total = 0; @endphp
                             @foreach ($dataJenisIuran as $row)
                                 <div class="form-check form-check-flat form-check-primary">
-                                    <input class="custom-control-input"
+                                    <input class="custom-control-input selectedv"
                                         onclick="checkIuran(this,'{{ $loop->iteration }}','{{ $row->nominal }}','{{ $loop->count }}')"
-                                        type="checkbox" id="check{{ $loop->iteration }}" value="{{ $row->id }}"
+                                        type="radio" id="check{{ $loop->iteration }}" value="{{ $row->id }}"
                                         name="jenisIuran[]">
                                     <label for="check{{ $loop->iteration }}"
                                         class="custom-control-label">{{ $row->jenis_iuran }}</label>
@@ -57,11 +57,14 @@
                                 </div>
                             @endforeach
                             <input type="hidden" id="sumJumlahIuran" value="{{ $total }}">
-                            <hr>
-                            <div class="form-check form-check-flat form-check-primary">
+                            <div class="col-lg-5">
+                                <hr>
+                            </div>
+                            <div style="display: none" id="monthCheck"
+                                class="form-check form-check-flat form-check-primary">
                                 <input class="custom-control-input" type="checkbox" onclick="checkAllIuran()" id="checkAll"
                                     name="checkManyMonths" value="1">
-                                <label for="checkAll" class="custom-control-label">Ingir membayar untuk beberapa bulan
+                                <label for="checkAll" class="custom-control-label">Ingin membayar untuk beberapa bulan
                                     kedepan?</label>
                             </div>
                         </div>
@@ -78,7 +81,7 @@
                     <div class="form-group row">
                         <label for="exampleInputUsername2" class="col-sm-2 col-form-label">Total Yang Dibayarkan</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control form-control-sm" readonly id="total">
+                            <input type="text" name="total" class="form-control form-control-sm" readonly id="total">
                             <input type="hidden" name="subTotal" readonly id="totalHide" class="form-control">
                         </div>
                     </div>
@@ -100,8 +103,8 @@
                         <label for="inputPassword" class="col-sm-2 col-form-label">Bukti Transfer</label>
                         <div class="col-sm-9">
                             <div class="input-group col-xs-12">
-                                <input type="file" required name="image" id="image" class="form-control file-upload-info"
-                                    placeholder="Upload Image">
+                                <input type="file" required name="image" id="image"
+                                    class="form-control file-upload-info" placeholder="Upload Image">
                             </div>
                             <!-- <p id="optionalImage">(Optional) Kosongkan jika tidak ingin merubah bukti transfer</p> -->
                         </div>
@@ -128,16 +131,20 @@
             } else {
                 document.getElementById(`nominal-${iteration}`).value = 0;
             }
-
             for (let i = 1; i <= count; i++) {
                 let jumlahIuran = document.getElementById(`nominal-${i}`).value;
                 total += parseInt(jumlahIuran)
             }
-
-            document.getElementById('total').value = 'Rp ' + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            document.getElementById('totalHide').value = total;
-
-
+            if (iteration == 1) {
+                document.getElementById('monthCheck').style.display = 'block';
+                document.getElementById('total').readOnly = true;
+                document.getElementById('total').value = 'Rp ' + total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                document.getElementById('totalHide').value = total;
+            } else {
+                document.getElementById('monthCheck').style.display = 'none';
+                document.getElementById('total').readOnly = false;
+                document.getElementById('total').value =  0;
+            }
         }
 
         function checkAllIuran() {
@@ -146,7 +153,7 @@
             if (checkIuran == true) {
                 let total = document.getElementById("sumJumlahIuran").value;
                 for (let i = 1; i <= countJumlahIuran; i++) {
-                    document.getElementById(`check${i}`).checked = true;
+                    // document.getElementById(`check${i}`).checked = true;
                     document.getElementById(`check${i}`).disabled = true;
                     document.getElementById('formBulan').hidden = false;
                 }

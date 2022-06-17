@@ -22,7 +22,7 @@
             </h3>
         </div>
         <div class="card p-5 rounded mb-3">
-            @if (Session::get('dataUsers')->role == 0)
+            @if (Session::get('dataUsers')->role == 0  && Session::get("dataUsers")->is_verif)
             <div class="col-sm-12 col-lg">
                 <a href="/form-tambah-iuran" class="btn btn-gradient-primary btn-fw">Tambah Data</a>
             </div>
@@ -212,14 +212,14 @@
 
 <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg" role="document">
-        <div class="modal-content rounded">
+        <div class="modal-content rounded bg-white">
             <div class="modal-header">
-                <h5 class="modal-title" id="titleModal">Tambah Rekening</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <h5 class="modal-title" id="titleModal">Bayar Langsung</h5>
+                <button type="button" class="btn btn-gradient-primary close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body px-5">
                 <form class="form" method="post" id="form" action="/add-rekening" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
@@ -266,7 +266,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-gradient-primary">Simpan</button>
                 </form>
             </div>
             <div class="bg-red rounded-modal" style="color: red;height:15px;"></div>

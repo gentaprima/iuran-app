@@ -103,7 +103,6 @@
                                 <td>-</td>
                             <?php } ?>
                             <td>
-                                <?php if ($row->is_verif == 0) { ?>
                                     <!-- <a href="btn-link" style="text-decoration: none;"><button type="button"
                                             class="btn btn-gradient-success btn-rounded btn-icon" data-target="#modal-form"
                                             data-toggle="modal">
@@ -112,7 +111,7 @@
                                     </a> -->
                                     @php if(Session::get('dataUsers')->role == 0){ @endphp
                                     <button type="button" data-target="#modal-form" data-toggle="modal" onclick="updateData('{{$row->id_transaction}}','{{$row->sub_total}}','{{$row->image}}','{{$row->to_rekening}}')" class="btn btn-gradient-success btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></i></button>
-                                    <a href="/iuran/invoice"><button type="button" class="btn btn-gradient-info btn-rounded btn-icon mt-1"><i class="mdi mdi-printer"></i></button></a>   
+                                    <a href="/iuran/invoice/{{$row->id_transaction}}"><button type="button" class="btn btn-gradient-info btn-rounded btn-icon mt-1"><i class="mdi mdi-printer"></i></button></a>   
                                     @php } @endphp
                                     @php if($row->is_verif == 0){ @endphp
                                     @php if(Session::get('dataUsers')->role == 1){ @endphp
@@ -121,11 +120,11 @@
                                         @php } @endphp
                                         <button type="button" data-target="#modal-detail" data-toggle="modal" onclick="checkData('{{$row->id_transaction}}','{{$row->id_users}}',`{{asset('')}}`)" class="btn btn-gradient-info btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></button>
                                     @php }else{ @endphp
-
+                                        
                                         <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id_transaction}}')" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></i></button>
                                         @php } @endphp
                                     @php } @endphp
-                                <?php } ?>
+                                
                             </td>
                         </tr>
                         @endforeach

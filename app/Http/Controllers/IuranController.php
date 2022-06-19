@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\sendEmail;
 use App\Models\ModelIuran;
 use App\Models\ModelPemasukan;
-use App\Models\ModelUsers;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -133,7 +133,7 @@ class IuranController extends Controller
         $filename = uniqid() . time() . "."  . explode("/", $image->getMimeType())[1];
         Storage::disk('uploads')->put('bukti/' . $filename, File::get($image));
         $dateMonth = (int)explode('-', $request->month)[1];
-        if(isset($request->checkManyMonths)){
+        if (isset($request->checkManyMonths)) {
             $checkIuran = DB::table('tbl_iuran')->where('month', date('F', mktime(0, 0, 0, $dateMonth, 10)))->where('id_users', $dataUsers)->first();
             if ($checkIuran) {
                 Session::flash('message', 'Anda sudah melakukan pembayaran untuk bulan ini.');
@@ -310,7 +310,21 @@ class IuranController extends Controller
         return redirect()->back();
     }
 
-    public function invoice(){
-        return view("invoice");
+    public function invoice($id)
+    {
+        // $data['data'] = ModelIuran::leftJoin('tbl_jenis_iuran', 'id_jenis_iuran', '=', 'tbl_jenis_iuran.id')
+        // ->where('id_transaction', '=', $id)->get();
+        $data['data'] = DB::table('tbl_iuran')
+            ->select('blok.*','blok.blok as blok_name','rumah.*', 'tbl_users.*', 'tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*', DB::raw('GROUP_CONCAT(tbl_jenis_iuran.jenis_iuran) as jenis_iuran'), DB::raw('GROUP_CONCAT(tbl_iuran.month) as month'))
+            ->leftJoin('tbl_jenis_iuran', 'tbl_iuran.id_jenis_iuran', '=', 'tbl_jenis_iuran.id')
+            ->leftJoin('tbl_users', 'tbl_iuran.id_users', '=', 'tbl_users.id')
+            ->leftJoin('tbl_rekening', 'tbl_iuran.to_rekening', '=', 'tbl_rekening.id')
+            ->leftJoin("rumah", 'tbl_users.id_rumah', '=', 'rumah.id')
+            ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
+            ->where('id_users', '=', Session::get('dataUsers')->id)
+            ->groupBy('id_transaction')
+            ->where('id_transaction', '=', $id)->first();
+        $pdf = PDF::loadView('invoice', $data);
+        return $pdf->download($data['data']->id_transaction . ".pdf", array("Attachment" => false));
     }
 }

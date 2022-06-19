@@ -8,6 +8,7 @@ use App\Models\ModelPengeluaran;
 use App\Models\ModelRekening;
 use App\Models\ModelUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Session;
@@ -20,13 +21,39 @@ class DashboardController extends Controller
     {
         $isLogin = Session::get('login');
         $dataIuran = DB::table('tbl_iuran')->whereMonth('date', date('m'))->first();
+        $chartData = DB::table('tbl_iuran')->select('month', DB::raw('SUM(sub_total) as month_total', 'sub_total'))->where('is_pay', 1)->where('is_verif', 1)->groupBy("month")->get()->toArray();
+        $chartOut = DB::table("pengeluaran")->select("tanggal_pengeluaran", DB::raw('MONTH(tanggal_pengeluaran) as month'), DB::raw('SUM(nominal) as month_total', 'nominal'))->groupBy("month")->get()->toArray();
+        usort($chartData, function ($a, $b) {
+            $a = strtotime($a->month);
+            $b = strtotime($b->month);
+            return $a - $b;
+        });
+        foreach ($chartOut as $o) {
+            $newArrChartOut[$o->month] = (int) $o->month_total;
+        }
+        foreach ($chartData as $c) {
+            $newArrChartIn[(int)date('m', strtotime($c->month))] = (int) $c->month_total;
+        }
+        for ($i = 1; $i <= 12; $i++) {
+            if (!isset($newArrChartIn[$i])) {
+                $newArrChartIn[$i] = 0;
+            }
+            if (!isset($newArrChartOut[$i])) {
+                $newArrChartOut[$i] = 0;
+            }
+        }
+        ksort($newArrChartIn);
+        ksort($newArrChartOut);
         $data = [
             'dataIuran' => $dataIuran,
             'dataWarga' => DB::table('tbl_users')->where('is_verif', 1)->where('role', 0)->count(),
             'dataPemasukan' => DB::table('tbl_pemasukan')->sum('jumlah'),
             'dataPengeluaran' => ModelPengeluaran::sum('nominal'),
-            'dataIuranUnVerif'  => DB::table('tbl_iuran')->where('is_verif', 0)->groupBy('id_transaction')->count()
+            'dataIuranUnVerif'  => DB::table('tbl_iuran')->where('is_verif', 0)->groupBy('id_transaction')->count(),
+            'chartDataIn' => json_encode(collect($newArrChartIn)->values()),
+            'chartDataOut' => json_encode(collect($newArrChartOut)->values())
         ];
+
         if ($isLogin == null) {
             return redirect('/');
         }
@@ -92,7 +119,7 @@ class DashboardController extends Controller
         $data = [
             'dataIuran' => $dataIuran,
             'dataRekening' => $dataRekening,
-            'user'=>$users
+            'user' => $users
         ];
         return view('data-iuran', $data);
     }

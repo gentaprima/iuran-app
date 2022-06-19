@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+@php
+// dd($chartDataIn);
+@endphp
 
 <head>
     <!-- Required meta tags -->
@@ -24,6 +27,7 @@
             color: black !important;
             /*change the hover text color*/
         }
+
         /*below block of css for change style when active*/
 
         .dataTables_wrapper .dataTables_paginate .paginate_button:active {
@@ -225,32 +229,6 @@
     </script>
     <link rel="stylesheet" href="{{ asset('dashboard/new-style.css') }}">
     <script>
-        var xValues = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Ags", "Sep", "Okt", "Nov", "Des"];
-
-        new Chart("myChart", {
-            type: "line",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    label: 'Pengeluaran',
-                    backgroundColor: "#E91E63",
-                    data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478, 5, 0],
-                    borderColor: "#E91E63",
-                    fill: false,
-                }, {
-                    label: 'Pemasukkan',
-                    backgroundColor: "#46c35f",
-                    data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000, 10, 0],
-                    borderColor: "#46c35f",
-                    fill: false,
-                }]
-            },
-            options: {
-                legend: {
-                    display: true
-                }
-            }
-        });
         $('.paginate_button.previous').html("<<<");
         $('.paginate_button.next').html(">>>");
         $('.example1').DataTable({

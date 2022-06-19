@@ -27,12 +27,10 @@ use Illuminate\Support\Facades\Session;
                     <div class="col-md-12">
                         <div class="alert alert-success">
                             <div class="row">
-
                                 <div class="col-md-6 mt-2">
                                     Silahkan klik tombol untuk tagih iuran bulan ini kepada warga
                                 </div>
                                 <div class="col-md-6">
-
                                     <button type="button" data-toggle="modal" data-target="#modal-form"
                                         style="float: right;" class="btn btn-gradient-primary">Tagih Iuran</button>
                                 </div>
@@ -85,9 +83,12 @@ use Illuminate\Support\Facades\Session;
             @endif
 
         </div>
+
         <?php
         if (Session::get('dataUsers')->role == 0) { ?>
-        <?php if (Session::get('dataUsers')->number_family_card == null) { ?>
+        <h1 class="py-2">Selamat Datang,
+            {{ strtoupper(Session::get('dataUsers')->first_name . ' ' . Session::get('dataUsers')->last_name) }}</h1>
+        <?php if (Session::get('dataUsers')->id_rumah == null) { ?>
         <div class="alert alert-warning" style="padding: 0; padding-left:20px;padding-top:10px;">
             <p><span class="font-weight-bold">Pemberitahuan!!</span> Silahkan lengkapi data anda terlebih dahulu untuk
                 melanjutkan pembayaran iuran. <a class="btn btn-link btn-fw" href="/profile"> Lengkapi Data</a></p>
@@ -128,4 +129,32 @@ use Illuminate\Support\Facades\Session;
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script>
+        var xValues = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Ags", "Sep", "Okt", "Nov", "Des"];
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: 'Pengeluaran',
+                    backgroundColor: "#E91E63",
+                    data: {{ $chartDataOut }},
+                    borderColor: "#E91E63",
+                    fill: false,
+                }, {
+                    label: 'Pemasukkan',
+                    backgroundColor: "#46c35f",
+                    data: {{ $chartDataIn }},
+                    borderColor: "#46c35f",
+                    fill: false,
+                }]
+            },
+            options: {
+                legend: {
+                    display: true
+                }
+            }
+        });
+    </script>
 @endsection

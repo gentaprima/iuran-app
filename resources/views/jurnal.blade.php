@@ -124,7 +124,7 @@ use Illuminate\Support\Facades\Session;
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Total</th>
+                                                <th>Total Saldo</th>
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>

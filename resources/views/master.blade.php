@@ -233,7 +233,7 @@
         $('.paginate_button.next').html(">>>");
         $('.example1').DataTable({
             dom: 'Bfrtip',
-            "searching": true
+            "searching": true,
         });
         $('.example1').removeClass("dataTable")
     </script>

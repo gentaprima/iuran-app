@@ -52,7 +52,7 @@ use Illuminate\Support\Facades\Session;
                                                     $splitMonth = explode(',', $month);
                                                 @endphp
                                                 <tr>
-                                                    <td>{{ $row->kode }}</td>
+                                                    <td>1.{{ $row->kode }}</td>
                                                     <td>{{ $row->date }}</td>
                                                     <td>
                                                         <?php for ($i = 0; $i < count($splitMonth); $i++) { ?>
@@ -94,8 +94,6 @@ use Illuminate\Support\Facades\Session;
                                 <h5 class="text-center pt-2 pb-2">Pengeluaran</h5>
                                 <hr>
                                 <div class="table-responsive">
-
-
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -111,7 +109,7 @@ use Illuminate\Support\Facades\Session;
                                             @endphp
                                             @foreach ($dataPengeluaran as $item)
                                                 <tr>
-                                                    <td>{{ $item->id }}</td>
+                                                    <td>2.{{ $item->id }}</td>
                                                     <td>{{ $item->tanggal_pengeluaran }}</td>
                                                     <td>{{ $item->tujuan }}</td>
 

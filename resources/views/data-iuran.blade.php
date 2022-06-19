@@ -36,6 +36,7 @@
                             <th>Nama</th>
                             <th>Nominal Pembayaran</th>
                             <th>Jenis</th>
+                            <th>No Rumah/Blok</th>
                             <th>Bulan</th>
                             <th>No Rekening</th>
                             <th>Bukti</th>
@@ -72,6 +73,7 @@
                                     <?php } ?>
                                 </ul>
                             </td>
+                            <td>{{$row->no_rumah." - ". $row->blok_name}}</td>
                             <td>
                                 <?php for ($i = 0; $i < count($splitMonth); $i++) { ?>
                                     <?= $splitMonth[$i] ?> <br>

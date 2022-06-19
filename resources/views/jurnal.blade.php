@@ -114,6 +114,7 @@ use Illuminate\Support\Facades\Session;
                                                     <td>{{ $item->id }}</td>
                                                     <td>{{ $item->tanggal_pengeluaran }}</td>
                                                     <td>{{ $item->tujuan }}</td>
+
                                                     <td>{{ 'Rp ' . number_format($item->nominal, 2, ',', '.') }}</td>
                                                 </tr>
                                                 @php
@@ -124,7 +125,6 @@ use Illuminate\Support\Facades\Session;
                                         <tfoot>
                                             <tr>
                                                 <th>Total Saldo</th>
-                                                <th></th>
                                                 <th></th>
                                                 <th></th>
                                                 <th>{{ 'Rp ' . number_format($total, 2, ',', '.') }}</th>

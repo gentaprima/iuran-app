@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Session;
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Kode</th>
+                                            <th>Kode Akun</th>
                                             <th>Tanggal</th>
                                             <th>Keterangan</th>
                                             <th>Jumlah</th>
@@ -92,10 +92,9 @@ use Illuminate\Support\Facades\Session;
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Kode</th>
+                                            <th>Kode Akun</th>
                                             <th>Tanggal</th>
                                             <th>Keterangan</th>
-                                            <th>Penanggung Jawab</th>
                                             <th>Jumlah</th>
                                         </tr>
                                     </thead>

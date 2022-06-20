@@ -19,11 +19,12 @@ class ProfileController extends Controller
         if ($isLogin == null) {
             return redirect('/');
         }
-        $dataRumah = ModelHouse::select('rumah.*', 'blok.*', 'blok.id as id_blok')->join("blok", 'rumah.blok', '=', 'blok.id')->get();
+        $dataRumah = ModelHouse::select('rumah.*','rumah.id as rumah_id', 'blok.*', 'blok.id as id_blok')->join("blok", 'rumah.blok', '=', 'blok.id')->get();
         $dataProfile = ModelUsers::select('rumah.*','blok.*','tbl_users.*', 'tbl_users.id as id_user')
                                 ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
                                 ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
                                 ->where('tbl_users.id', session::get('dataUsers')->id)->first();
+        // return $dataProfile;
         $data = [
             'dataProfile' => $dataProfile,
             'dataRumah' => $dataRumah
@@ -59,7 +60,6 @@ class ProfileController extends Controller
                 ->withInput($request->input())
                 ->withErrors($validate);
         }
-
         $checkSameEmail = ModelUsers::where('email', Session::get('dataUsers')->email)->first();
         if ($request->email != $checkSameEmail->email) {
             $checkEmailOther = ModelUsers::where('email', $request->email)->first();
@@ -99,6 +99,7 @@ class ProfileController extends Controller
         $account->gender = $request->gender;
         $account->photo = $filename;
         $account->id_rumah = $request->id_rumah;
+        
         $account->save();
         Session::put('dataUsers', $account);
         Session::flash('message', 'Berhasil memperbarui data diri.');

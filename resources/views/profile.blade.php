@@ -133,7 +133,7 @@
                                     name="id_rumah">
                                     <option value="">-- Pilih No-Blok Rumah --</option>
                                     @foreach ($dataRumah as $item)
-                                        <option value="{{ $item->id }}">{{ $item->no_rumah . ' - ' . $item->blok }}
+                                        <option value="{{ $item->rumah_id }}">{{ $item->no_rumah . ' - ' . $item->blok }}
                                         </option>
                                     @endforeach
                                 </select>

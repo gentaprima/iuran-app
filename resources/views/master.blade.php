@@ -229,6 +229,19 @@
     </script>
     <link rel="stylesheet" href="{{ asset('dashboard/new-style.css') }}">
     <script>
+        src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+
+    <script>
+        $('#pdf').click(() => {
+            $('#pdf').css("display",'none')
+            var pdf = new jsPDF('p', 'pt', 'a4');
+            pdf.addHTML($("#content-pdf"), function() {
+                pdf.save('web.pdf');
+            });
+            $('#pdf').css("display",'inline-block')
+        })
         $('.paginate_button.previous').html("<<<");
         $('.paginate_button.next').html(">>>");
         $('.example1').DataTable({
@@ -236,6 +249,26 @@
             "searching": true,
         });
         $('.example1').removeClass("dataTable")
+    </script>
+    <script>
+        tableJurnal = $('.jurnal-table').DataTable({
+            dom: 'Bfrtip',
+            "searching": true,
+            paging: false,
+            ordering: false,
+            info: false,
+            searching: true,
+            dom: 'lrt',
+        });
+        $('#perioed').keyup(function() {
+            console.log(this.value)
+            tableJurnal.columns(1).search(this.value).draw();
+        });
+        $('#perioed').change(function() {
+            console.log(this.value)
+            tableJurnal.columns(1).search(this.value).draw();
+        });
+        $('.jurnal-table').removeClass("dataTable")
     </script>
     <script>
         const Toast = Swal.mixin({

@@ -78,16 +78,14 @@ use Illuminate\Support\Facades\Session;
                     </div>
                     <div class="col-12">
                         <canvas id="myChart" class="bg-white px-5 py-5"></canvas>
-
                     </div>
             @endif
-
         </div>
 
         <?php
         if (Session::get('dataUsers')->role == 0) { ?>
-        <h1 class="py-2">Selamat Datang,
-            {{ strtoupper(Session::get('dataUsers')->first_name . ' ' . Session::get('dataUsers')->last_name) }}</h1>
+        <h3 class="py-2 alert" style="background-color: #9F57FF;text-color:white">Selamat Datang,
+            {{ strtoupper(Session::get('dataUsers')->first_name . ' ' . Session::get('dataUsers')->last_name) }}</h3>
         <?php if (Session::get('dataUsers')->id_rumah == null) { ?>
         <div class="alert alert-warning" style="padding: 0; padding-left:20px;padding-top:10px;">
             <p><span class="font-weight-bold">Pemberitahuan!!</span> Silahkan lengkapi data anda terlebih dahulu untuk

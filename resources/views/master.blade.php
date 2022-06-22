@@ -235,12 +235,13 @@
 
     <script>
         $('#pdf').click(() => {
-            $('#pdf').css("display",'none')
+            $('#pdf').css("display", 'none')
             var pdf = new jsPDF('p', 'pt', 'a4');
             pdf.addHTML($("#content-pdf"), function() {
-                pdf.save('web.pdf');
+                perioed = $('#perioed').val();
+                pdf.save('report' + perioed + '.pdf');
             });
-            $('#pdf').css("display",'inline-block')
+            $('#pdf').css("display", 'inline-block')
         })
         $('.paginate_button.previous').html("<<<");
         $('.paginate_button.next').html(">>>");

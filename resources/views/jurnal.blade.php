@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Session;
             <div class="container-fluid">
                 <div class="card p-5 rounded mb-3" id="content-pdf">
                     <div class="row justify-content-between">
-                        <div class="col-sm-1 col-lg-2">
+                        <div class="col-sm-1 col-lg-3">
                             <button id="pdf" class="btn btn-gradient-primary"><i class="mdi mdi-file-pdf">PDF</i></button>
                         </div>
                         <div class="col-sm-2 col-lg-3">

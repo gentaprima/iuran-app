@@ -325,6 +325,6 @@ class IuranController extends Controller
             ->groupBy('id_transaction')
             ->where('id_transaction', '=', $id)->first();
         $pdf = PDF::loadView('invoice', $data);
-        return $pdf->download($data['data']->id_transaction . ".pdf", array("Attachment" => false));
+        return $pdf->download("receipt.pdf", array("Attachment" => false));
     }
 }

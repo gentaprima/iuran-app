@@ -12,7 +12,7 @@
 @endif
 <!-- Main content -->
 
-<div class="content-wrapper" style="padding: 10px 12px 0px 37px;">
+<div class="content-wrapper">
     <div class="container-fluid">
         <div class="page-header">
             <h3 class="page-title">
@@ -27,7 +27,7 @@
                 <a href="/form-tambah-iuran" class="btn btn-gradient-primary btn-fw">Tambah Data</a>
             </div>
             @endif
-            <div class="col-sm-12 col-lg table-responsive">
+            <div class="col-sm-12 col-lg table-responsive px-2">
                 <table id="example1" class="example1 table table-striped">
                     <thead>
                         <tr>
@@ -111,9 +111,17 @@
                                             <i class="mdi mdi-account-card-details"></i>
                                         </button>
                                     </a> -->
-                                    @php if(Session::get('dataUsers')->role == 0){ @endphp
+                                    @if (Session::get('dataUsers')->role == 0)    
                                     <button type="button" data-target="#modal-form" data-toggle="modal" onclick="updateData('{{$row->id_transaction}}','{{$row->sub_total}}','{{$row->image}}','{{$row->to_rekening}}')" class="btn btn-gradient-success btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></i></button>
-                                    <a href="/iuran/invoice/{{$row->id_transaction}}"><button type="button" class="btn btn-gradient-info btn-rounded btn-icon mt-1"><i class="mdi mdi-printer"></i></button></a>   
+                                        @if ($row->is_pay == 1)
+                                            <a href="/iuran/invoice/{{$row->id_transaction}}"><button type="button" class="btn btn-gradient-info btn-rounded btn-icon mt-1"><i class="mdi mdi-printer"></i></button></a>                                               
+                                        @else
+                                            <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id_transaction}}')" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></i></button>
+                                        @endif
+                                    @endif
+                                    
+                                    {{-- @php if(Session::get('dataUsers')->role == 0){ @endphp
+
                                     @php } @endphp
                                     @php if($row->is_verif == 0){ @endphp
                                     @php if(Session::get('dataUsers')->role == 1){ @endphp
@@ -122,10 +130,9 @@
                                         @php } @endphp
                                         <button type="button" data-target="#modal-detail" data-toggle="modal" onclick="checkData('{{$row->id_transaction}}','{{$row->id_users}}',`{{asset('')}}`)" class="btn btn-gradient-info btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></button>
                                     @php }else{ @endphp
-                                        
                                         <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id_transaction}}')" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></i></button>
                                         @php } @endphp
-                                    @php } @endphp
+                                    @php } @endphp --}}
                                 
                             </td>
                         </tr>
@@ -258,7 +265,7 @@
                     </div> -->
                     <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Bukti Transfer</label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-10">
                             <div class="input-group col-xs-12">
                                 <input type="file" required name="image" id="image" class="form-control file-upload-info" placeholder="Upload Image">
                             </div>

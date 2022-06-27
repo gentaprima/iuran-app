@@ -55,7 +55,7 @@ use Illuminate\Support\Facades\Session;
                                     </td>
                                     <td>
                                         @php
-                                            $status = ($row->status == 0 ? 'Rumah Kosong' : $row->status == 1) ? 'Rumah Dijual' : 'Rumah Terisi';
+                                            $status = ($row->status == 0 ? 'Rumah Kosong' : $row->status == 1) ? 'Rumah Dijual' : ($row->status == 2 ?  'Rumah Terisi' : 'Rumah DiKontrakkan');
                                         @endphp
                                         {{ $status }}
                                     </td>

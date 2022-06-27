@@ -66,6 +66,9 @@
                                     <option value="2"
                                         {{ request()->type == 'update' && $house->status == 2 ? 'selected' : '' }}>Rumah
                                         Terisi</option>
+                                    <option value="3"
+                                        {{ request()->type == 'update' && $house->status == 2 ? 'selected' : '' }}>Rumah
+                                        DiKontrakkan</option>
                                 </select>
                             </div>
                         </div>

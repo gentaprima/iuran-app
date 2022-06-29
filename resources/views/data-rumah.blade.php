@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Session;
                             <tr>
                                 <th>No</th>
                                 <th>Nama Kepemilikan</th>
-                                <th>No Rumah - Blok</th>
+                                <th>Blok - No Rumah</th>
                                 <th>Status Tempat Tinggal</th>
                                 <th>Tahun Ditempati</th>
                                 <th>Aksi</th>
@@ -51,7 +51,7 @@ use Illuminate\Support\Facades\Session;
                                         {{ $row->atas_nama }}
                                     </td>
                                     <td>
-                                        {{ $row->no_rumah . ' - ' . $row->blok }}
+                                        {{  $row->blok . ' - ' . $row->no_rumah}}
                                     </td>
                                     <td>
                                         @php
@@ -67,7 +67,7 @@ use Illuminate\Support\Facades\Session;
                                                 class="btn btn-gradient-warning btn-rounded btn-icon">
                                                 <i class="mdi mdi-table-edit"></i>
                                             </button></a>
-                                        <a href="/data-rumah/delete/{{ $row->id }}"> <button type="button"
+                                        <a href="/data-rumah/delete/{{ $row->id_rumah }}"> <button type="button"
                                                 class="btn btn-gradient-danger btn-rounded btn-icon">
                                                 <i class="mdi mdi-delete-sweep"></i>
                                             </button></a>

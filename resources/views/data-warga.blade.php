@@ -42,13 +42,18 @@ use Illuminate\Support\Facades\Session;
                                     <td>{{ $row->first_name }} {{ $row->last_name }}</td>
                                     <td>{{ $row->phone_number }}</td>
                                     <td>
-                                        <button onclick="setData(this)"
+                                        <button id="detail{{$loop->iteration}}" onclick="setData(this)"
                                             data-fullname='{{ $row->first_name . ' ' . $row->last_name }}'
-                                            data-email='{{ $row->email }}' data-nik='{{ $row->number_identity_card }}'
-                                            data-phonenumber ='{{ $row->phone_number }}' data-gender='{{ $row->gender }}'
-                                            data-atasnama='{{ $row->atas_nama }}' data-norumah='{{ $row->no_rumah }}'
-                                            data-blok='{{ $row->blok }}' data-tahun='{{ $row->tahun }}'
-                                            data-status='{{ $row->status }}' type="button" data-target=".modal-form"
+                                            data-email='{{ $row->email }}' 
+                                            data-nik='{{ $row->number_identity_card }}'
+                                            data-phonenumber ='{{ $row->phone_number }}' 
+                                            data-gender='{{ $row->gender }}'
+                                            data-atasnama='{{ $row->atas_nama }}' 
+                                            data-norumah='{{ $row->no_rumah }}'
+                                            data-blok='{{ $row->blok }}'
+                                            data-tahun='{{ $row->tahun }}'
+                                            data-status='{{ $row->status }}' 
+                                            type="button" data-target=".modal-form"
                                             data-toggle="modal"
                                             class="btn-detail btn btn-gradient-info btn-rounded btn-icon"><i
                                                 class="mdi mdi-account-card-details"></i></button>
@@ -135,13 +140,17 @@ use Illuminate\Support\Facades\Session;
     </div>
     <script>
         function setData(elem) {
+            console.log("OK")
             $('.name-user').text($(elem).data("fullname"))
             $('.email').text($(elem).data("email"))
             $('.nik').text($(elem).data("nik"))
             $('.gender').text($(elem).data("gender"))
             $('.no_telp').text($(elem).data("phonenumber"))
             $('.name_house').text($(elem).data("atasnama"))
-            $('.no_house').text($(elem).data("nohouse"))
+            $('.no_house').text($(elem).data("norumah"))
+            $('.blok_house').text($(elem).data("blok"))
+            $('.year').text($(elem).data("tahun"))
+            $('.status').text(($(elem).data("status")  == 0 ? 'Rumah Kosong' : $(elem).data("status")  == 1) ? 'Rumah Dijual' : ($(elem).data("status")  == 2 ?  'Rumah Terisi' : 'Rumah DiKontrakkan'))
         }
 
         function deleteData(id) {

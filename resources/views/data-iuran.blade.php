@@ -111,28 +111,27 @@
                                             <i class="mdi mdi-account-card-details"></i>
                                         </button>
                                     </a> -->
-                                    @if (Session::get('dataUsers')->role == 0)    
-                                    <button type="button" data-target="#modal-form" data-toggle="modal" onclick="updateData('{{$row->id_transaction}}','{{$row->sub_total}}','{{$row->image}}','{{$row->to_rekening}}')" class="btn btn-gradient-success btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></i></button>
-                                        @if ($row->is_pay == 1)
-                                            <a href="/iuran/invoice/{{$row->id_transaction}}"><button type="button" class="btn btn-gradient-info btn-rounded btn-icon mt-1"><i class="mdi mdi-printer"></i></button></a>                                               
-                                        @else
+                                    {{-- @if (Session::get('dataUsers')->role == 0)     --}}
+                                    {{-- <button type="button" data-target="#modal-form" data-toggle="modal" onclick="updateData('{{$row->id_transaction}}','{{$row->sub_total}}','{{$row->image}}','{{$row->to_rekening}}')" class="btn btn-gradient-success btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></i></button>
+                                        
                                             <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id_transaction}}')" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></i></button>
-                                        @endif
-                                    @endif
+                                        @endif --}}
+                                    {{-- @endif --}}
                                     
-                                    {{-- @php if(Session::get('dataUsers')->role == 0){ @endphp
-
+                                    @php if(Session::get('dataUsers')->role == 0){ @endphp
+                                        @if ($row->is_pay == 1)
+                                                <a href="/iuran/invoice/{{$row->id_transaction}}"><button type="button" class="btn btn-gradient-success btn-rounded btn-icon mt-1"><i class="mdi mdi-printer"></i></button></a>                                               
+                                        @endif
                                     @php } @endphp
                                     @php if($row->is_verif == 0){ @endphp
                                     @php if(Session::get('dataUsers')->role == 1){ @endphp
                                         @php if($row->is_pay == 1){ @endphp
-                                        <button type="button" data-target="#modal-check" onclick="confirmData('{{$row->id_transaction}}')" data-toggle="modal" class="btn btn-gradient-success btn-rounded btn-icon mt-1"><i class="mdi mdi-check-circle"></i></button>
+                                            <button type="button" data-target="#modal-check" onclick="confirmData('{{$row->id_transaction}}')" data-toggle="modal" class="btn btn-gradient-success btn-rounded btn-icon mt-1"><i class="mdi mdi-check-circle"></i></button>
+                                            <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id_transaction}}')" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></i></button>
                                         @php } @endphp
-                                        <button type="button" data-target="#modal-detail" data-toggle="modal" onclick="checkData('{{$row->id_transaction}}','{{$row->id_users}}',`{{asset('')}}`)" class="btn btn-gradient-info btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></button>
-                                    @php }else{ @endphp
-                                        <button type="button" data-target="#modal-delete" data-toggle="modal" onclick="deleteData('{{$row->id_transaction}}')" class="btn btn-gradient-danger btn-rounded btn-icon"><i class="mdi mdi-delete"></i></i></button>
                                         @php } @endphp
-                                    @php } @endphp --}}
+                                        @php } @endphp
+                                    <button type="button" data-target="#modal-detail" data-toggle="modal" onclick="checkData('{{$row->id_transaction}}','{{$row->id_users}}',`{{asset('')}}`)" class="btn btn-gradient-info btn-rounded btn-icon"><i class="mdi mdi-account-card-details"></i></button>
                                 
                             </td>
                         </tr>

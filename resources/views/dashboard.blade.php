@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Session;
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                     <i class="mdi mdi-home"></i>
-                </span> Dashboard
+                </span> Beranda
             </h3>
         </div>
         <div class="row">

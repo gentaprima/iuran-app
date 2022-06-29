@@ -22,8 +22,8 @@
                             <tbody>
                                 <tr>
                                     <td class="font-weight-bold">
-                                        <span>Invoice</span>
-                                        <small>{{ $data->id_transaction }}</small>
+                                        <span>Receipt  :</span>
+                                        <small>{{$data->id_transaction}}</small>
                                     </td>
                                 </tr>
                                 <tr class="add font-weight-bold">
@@ -46,7 +46,7 @@
                                 <tr class="add font-weight-bold">
                                     <td width="40%">IURAN</td>
                                     <td width="40%">BULAN</td>
-                                    <td>Total</td>
+                                    <td>Jumlah</td>
                                 </tr>
                                 @php
                                     $splitMonth = explode(',', $data->month);
@@ -77,12 +77,14 @@
                         <table class="table table-borderless">
                             <tbody>
                                 <tr class="add">
-                                    <td>Bank Detail</td>
-                                </tr>
-                                <tr class="content">
-                                    <td> Nama Bank : {{ $data->bank_name }} <br> Nama Tertera Direkening :
-                                        {{ $data->account_name }} <br> No Rekening : {{ $data->number_account }}
-                                        <br>
+                                    <td>Bank Detail <br>
+                                         Nama Bank : {{ $data->bank_name }} <br> Nama Tertera Direkening :
+                                            {{ $data->account_name }} <br> No Rekening : {{ $data->number_account }}
+                                            <br>
+                                        </td>
+                                    <td class="text-right">
+                                        Perumahan Duta Graha <br>
+                                        Jl. Pasir Randu, Binong, Kec. Curug, Kabupaten Tangerang, Banten 15810
                                     </td>
                                 </tr>
                             </tbody>

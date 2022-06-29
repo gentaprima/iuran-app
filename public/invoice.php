@@ -341,7 +341,7 @@
                                                                                 </tr>
                                                                                 <tr class="total">
                                                                                     <td class="alignright"
-                                                                                        width="80%">Total</td>
+                                                                                        width="80%">Jumlah</td>
                                                                                     <td class="alignright">Rp. 40.000</td>
                                                                                 </tr>
                                                                             </tbody>
@@ -354,7 +354,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="content-block">
-                                                        Terimakasih Telah Menggunakan Aplikasi,<b style="color:purple">IURANQU WKAOKWOA
+                                                        Terimakasih Telah Menggunakan Aplikasi,<b style="color:purple">IURANQU
                                                     </td>
                                                 </tr>
                                             </tbody>

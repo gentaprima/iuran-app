@@ -6,6 +6,7 @@ use App\Models\ModelIuran;
 use App\Models\ModelJenisIuran;
 use App\Models\ModelPengeluaran;
 use App\Models\ModelRekening;
+use App\Models\ModelHouse;
 use App\Models\ModelUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -66,6 +67,7 @@ class DashboardController extends Controller
         if ($isLogin == null) {
             return redirect('/');
         }
+        // $dataRumah = ModelHouse::select('rumah.*','rumah.id as rumah_id', 'blok.*', 'blok.id as id_blok')->join("blok", 'rumah.blok', '=', 'blok.id')->get();
         $dataWarga =  DB::table('tbl_users')->select('rumah.*', 'blok.*', 'tbl_users.*', 'tbl_users.id as id_user')
             ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
             ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')

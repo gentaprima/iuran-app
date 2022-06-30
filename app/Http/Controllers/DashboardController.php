@@ -232,6 +232,8 @@ class DashboardController extends Controller
             ->leftJoin('tbl_jenis_iuran', 'tbl_iuran.id_jenis_iuran', '=', 'tbl_jenis_iuran.id')
             ->leftJoin('tbl_users', 'tbl_iuran.id_users', '=', 'tbl_users.id')
             ->leftJoin('tbl_rekening', 'tbl_iuran.to_rekening', '=', 'tbl_rekening.id')
+            ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
+            ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
             ->whereMonth('tbl_pemasukan.date', '=', $month)
             ->whereYear('tbl_pemasukan.date', '=', $year)
             ->groupBy('tbl_iuran.id_transaction')

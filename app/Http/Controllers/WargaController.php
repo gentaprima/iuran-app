@@ -80,7 +80,8 @@ class WargaController extends Controller
     }
 
     public function getDataById($id){
-        $data = ModelUsers::find($id);
+        $data = ModelUsers::leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
+        ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')->find($id);
         return response()->json($data);
     }
 }

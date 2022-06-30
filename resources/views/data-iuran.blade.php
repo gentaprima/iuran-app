@@ -174,16 +174,22 @@
                                 <p id="email"></p>
                                 <p class="font-weight-bold">NIK</p>
                                 <p id="nik"></p>
-                            </div>
-                            <div class="col-6">
-                                <p class="font-weight-bold">Nomor Kartu Keluarga</p>
-                                <p id="kk"></p>
-                                <p class="font-weight-bold">Jenis Kelamin</p>
-                                <p id="gender"></p>
-                                <p class="font-weight-bold">Jumlah Anggota Keluarga</p>
-                                <p id="numberOfFamily"></p>
                                 <p class="font-weight-bold">Nomor Telepon</p>
                                 <p id="phoneNumber"></p>
+                                <p class="font-weight-bold">Jenis Kelamin</p>
+                                <p id="gender"></p>
+                            </div>
+                            <div class="col-6">
+                                <p class="font-weight-bold">Atas Nama Rumah</p>
+                                <p id="atas-nama"> </p>
+                                <p class="font-weight-bold">No Rumah</p>
+                                <p id="no_rumah"> </p>
+                                <p class="font-weight-bold">Blok Rumah</p>
+                                <p id="blok"> </p>
+                                <p class="font-weight-bold">Status Tempat Tinggal</p>
+                                <p id="status"> </p>
+                                <p class="font-weight-bold">Tahun Ditempati</p>
+                                <p id="tahun"></p>
                             </div>
                         </div>
                     </div>
@@ -362,9 +368,12 @@
                 document.getElementById("email").innerHTML = data.email
                 document.getElementById("phoneNumber").innerHTML = data.phone_number
                 document.getElementById("nik").innerHTML = data.number_identity_card
-                document.getElementById("kk").innerHTML = data.number_family_card
                 document.getElementById("gender").innerHTML = data.gender
-                document.getElementById("numberOfFamily").innerHTML = data.number_of_family
+                document.getElementById("blok").innerHTML = data.blok
+                document.getElementById("atas-nama").innerHTML = data.atas_nama
+                document.getElementById("no_rumah").innerHTML = data.no_rumah
+                document.getElementById("tahun").innerHTML = data.tahun
+                document.getElementById("status").innerHTML = (data.status == 0 ? 'Rumah Kosong' : data.status == 1) ? 'Rumah Dijual' : (data.status == 2 ?  'Rumah Terisi' : 'Rumah DiKontrakkan')
                 if (data.photo == null) {
                     document.getElementById("profilePicture").src = linkImage + 'user.png';
                 } else {

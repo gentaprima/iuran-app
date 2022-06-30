@@ -282,10 +282,12 @@ class IuranController extends Controller
     public function getDataById($id)
     {
         $dataIuran = DB::table('tbl_iuran')
-            ->select('tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*',)
+            ->select('tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*','blok.*','rumah.*','blok.blok as blok_name')
             ->leftJoin('tbl_jenis_iuran', 'tbl_iuran.id_jenis_iuran', '=', 'tbl_jenis_iuran.id')
             ->leftJoin('tbl_users', 'tbl_iuran.id_users', '=', 'tbl_users.id')
             ->leftJoin('tbl_rekening', 'tbl_iuran.to_rekening', '=', 'tbl_rekening.id')
+            ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
+            ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
             ->where('id_transaction', '=', $id)
             ->get();
         return response()->json($dataIuran);

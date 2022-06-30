@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Session;
                                 <th>ID transaksi</th>
                                 <th>Nama</th>
                                 <th>Jumlah</th>
+                                <th>Blok - No Rumah</th>
                                 <th>Tanggal</th>
                                 <th>Aksi</th>
                             </tr>
@@ -43,6 +44,7 @@ use Illuminate\Support\Facades\Session;
                                     <td>{{ $row->id_transaction }}</td>
                                     <td>{{ $row->first_name }} {{ $row->last_name }}</td>
                                     <td>@php echo number_format($row->sub_total, 2, ".", ","); @endphp</td>
+                                    <td>dsaokodsa</td>
                                     <?php if ($row->is_pay == 1) { ?>
                                     <td>{{ $row->date }}</td>
                                     <?php } else { ?>

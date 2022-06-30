@@ -42,6 +42,7 @@ use Illuminate\Support\Facades\Session;
                                             <tr>
                                                 <th>Kode Akun</th>
                                                 <th>Tanggal</th>
+                                                <th>Blok - No Rumah</th>
                                                 <th>Keterangan</th>
                                                 <th>Jumlah</th>
                                             </tr>
@@ -60,6 +61,7 @@ use Illuminate\Support\Facades\Session;
                                                 <tr>
                                                     <td>1.{{ $row->kode }}</td>
                                                     <td>{{ $row->date }}</td>
+                                                    <td>{{$row->blok . " - ". $row->no_rumah}}</td>
                                                     <td>
                                                         <?php for ($i = 0; $i < count($splitMonth); $i++) { ?>
                                                         <?php if($splitMonth[count($splitMonth) - 1] == $i){ ?>
@@ -77,6 +79,7 @@ use Illuminate\Support\Facades\Session;
                                                             @endif
                                                         </ul>
                                                     </td>
+                                                    
                                                     <td>{{ 'Rp ' . number_format($row->sub_total, 2, ',', '.') }}</td>
                                                 </tr>
                                                 @php

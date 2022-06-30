@@ -31,11 +31,11 @@ use Illuminate\Support\Facades\Session;
                             <input type="month" min="2000-01" class="form-control" id="perioed">
                         </div>
                     </div>
+                    <div class="table-responsive">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-lg-6">
                                 <h5 class="text-center pt-2 pb-2">Pemasukan</h5>
                                 <hr>
-                                <div class="table-responsive">
                                     <table class="table jurnal-table">
                                         <thead>
                                             <tr>
@@ -96,7 +96,6 @@ use Illuminate\Support\Facades\Session;
                                             </tr>
                                         </tfoot>
                                     </table>
-                                </div>
                             </div>
                             <div class="col-md-12 col-sm-12 col-lg-6">
                                 <h5 class="text-center pt-2 pb-2">Pengeluaran</h5>
@@ -140,6 +139,7 @@ use Illuminate\Support\Facades\Session;
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div><!-- /.container-fluid -->
         </div>

@@ -73,7 +73,7 @@
                                     <?php } ?>
                                 </ul>
                             </td>
-                            <td>{{  $row->no_rumah." - ". $row->blok}}</td>
+                            <td>{{  $row->blok_name." - ". $row->no_rumah}}</td>
                             <td>
                                 <?php for ($i = 0; $i < count($splitMonth); $i++) { ?>
                                     <?= $splitMonth[$i] ?> <br>

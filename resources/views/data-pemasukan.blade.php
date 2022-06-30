@@ -92,12 +92,8 @@ use Illuminate\Support\Facades\Session;
                                     <p id="nik"></p>
                                 </div>
                                 <div class="col-6">
-                                    <p class="font-weight-bold">Nomor Kartu Keluarga</p>
-                                    <p id="kk"></p>
                                     <p class="font-weight-bold">Jenis Kelamin</p>
                                     <p id="gender"></p>
-                                    <p class="font-weight-bold">Jumlah Anggota Keluarga</p>
-                                    <p id="numberOfFamily"></p>
                                     <p class="font-weight-bold">Nomor Telepon</p>
                                     <p id="phoneNumber"></p>
                                 </div>

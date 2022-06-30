@@ -44,7 +44,7 @@ use Illuminate\Support\Facades\Session;
                                     <td>{{ $row->id_transaction }}</td>
                                     <td>{{ $row->first_name }} {{ $row->last_name }}</td>
                                     <td>@php echo number_format($row->sub_total, 2, ".", ","); @endphp</td>
-                                    <td>dsaokodsa</td>
+                                    <td>{{$row->blok." - ".$row->no_rumah}}</td>
                                     <?php if ($row->is_pay == 1) { ?>
                                     <td>{{ $row->date }}</td>
                                     <?php } else { ?>

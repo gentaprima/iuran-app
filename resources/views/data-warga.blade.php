@@ -150,7 +150,7 @@ use Illuminate\Support\Facades\Session;
             $('.no_house').text($(elem).data("norumah"))
             $('.blok_house').text($(elem).data("blok"))
             $('.year').text($(elem).data("tahun"))
-            $('.status').text(($(elem).data("status")  == 0 ? 'Rumah Kosong' : w$(elem).data("status")  == 1) ? 'Rumah Dijual' : ($(elem).data("status")  == 2 ?  'Rumah Terisi' : 'Rumah DiKontrakkan'))
+            $('.status').text(($(elem).data("status")  == 0 ? 'Rumah Kosong' : $(elem).data("status")  == 1) ? 'Rumah Dijual' : ($(elem).data("status")  == 2 ?  'Rumah Terisi' : 'Rumah Dikontrakan'))
         }
 
         function deleteData(id) {

@@ -68,7 +68,7 @@
                                         Terisi</option>
                                     <option value="3"
                                         {{ request()->type == 'update' && $house->status == 2 ? 'selected' : '' }}>Rumah
-                                        DiKontrakkan</option>
+                                        Dikontrakan</option>
                                 </select>
                             </div>
                         </div>

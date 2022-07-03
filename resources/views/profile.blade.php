@@ -56,7 +56,7 @@
                                 <p>{{ $dataProfile->blok }} </p>
                                 <p class="font-weight-bold">Status Tempat Tinggal</p>
                                 @php
-                                    $status = ($dataProfile->status == 0 ? 'Rumah Kosong' : $dataProfile->status == 1) ? 'Rumah Dijual' : ($dataProfile->status == 2 ?  'Rumah Terisi' : 'Rumah DiKontrakkan');
+                                    $status = ($dataProfile->status == 0 ? 'Rumah Kosong' : $dataProfile->status == 1) ? 'Rumah Dijual' : ($dataProfile->status == 2 ?  'Rumah Terisi' : 'Rumah Dikontrakan');
                                 @endphp
                                 <p>{{ $status }} </p>
                                 <p class="font-weight-bold">Tahun Ditempati</p>

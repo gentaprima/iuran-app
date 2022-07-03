@@ -44,9 +44,9 @@
                         <table class="table table-borderless">
                             <tbody>
                                 <tr class="add font-weight-bold">
-                                    <td width="40%">IURAN</td>
+                                    <td width="40%">JENIS IURAN</td>
                                     <td width="40%">BULAN</td>
-                                    <td>Jumlah</td>
+                                    <td>JUMLAH</td>
                                 </tr>
                                 @php
                                     $splitMonth = explode(',', $data->month);

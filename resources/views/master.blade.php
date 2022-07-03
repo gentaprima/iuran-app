@@ -92,7 +92,7 @@
                 <ul class="nav">
                     <li class="nav-item nav-link {{ Request::is('home') ? 'active' : '' }}">
                         <a class="nav-link" href="/">
-                            <span class="menu-title">Beranda</span>
+                            <span class="menu-title">{{ Session::get('dataUsers')->role == 1  ?'Dashboard' :'Beranda'}}</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
                     </li>

@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Session;
 ?>
 @extends('master')
 
-@section('title-link',{{ Session::get('dataUsers')->role == 1  ?'Dashboard' :'Beranda'}})
-@section('sub-title-link',{{ Session::get('dataUsers')->role == 1  ?'Dashboard' :'Beranda'}})
+@section('title-link', 'Beranda')
+@section('sub-title-link', 'Beranda')
 @section('active', 'beranda')
 @section('title', 'Dashboard')
 
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Session;
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                     <i class="mdi mdi-home"></i>
-                </span> Beranda
+                </span> {{ Session::get('dataUsers')->role == 1  ?'Dashboard' :'Beranda'}}
             </h3>
         </div>
         <div class="row">
@@ -84,7 +84,7 @@ use Illuminate\Support\Facades\Session;
 
         <?php
         if (Session::get('dataUsers')->role == 0) { ?>
-        <h3 class="py-2 alert" style="background-color: #9F57FF;text-color:white">Selamat Datang,
+        <h3 class="py-2 alert" style="background-color: #E6BEF8;text-color:white">Selamat Datang,
             {{ strtoupper(Session::get('dataUsers')->first_name . ' ' . Session::get('dataUsers')->last_name) }}</h3>
         <?php if (Session::get('dataUsers')->id_rumah == null) { ?>
         <div class="alert alert-warning" style="padding: 0; padding-left:20px;padding-top:10px;">

@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Session;
 ?>
 @extends('master')
 
-@section('title-link', 'Beranda')
-@section('sub-title-link', 'Beranda')
+@section('title-link',{{ Session::get('dataUsers')->role == 1  ?'Dashboard' :'Beranda'}})
+@section('sub-title-link',{{ Session::get('dataUsers')->role == 1  ?'Dashboard' :'Beranda'}})
 @section('active', 'beranda')
 @section('title', 'Dashboard')
 

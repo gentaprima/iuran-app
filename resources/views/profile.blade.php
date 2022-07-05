@@ -86,7 +86,7 @@
                     </button>
                 </div>
                 <div class="modal-body px-5">
-                    <form class="form" method="post" id="form" action="/update-profile"
+                    <form class="form" method="post" id="form" enctype="multipart/form-data" action="/update-profile"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
@@ -155,7 +155,7 @@
                             <label for="inputPassword" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-sm-10">
                                 <div class="input-group col-xs-12">
-                                    <input type="file" class="form-control file-upload-info" placeholder="Upload Image">
+                                    <input type="file" name="image" class="form-control file-upload-info" placeholder="Upload Image">
                                 </div>
                             </div>
                             <p class="mt-1">(kosongkan jika tidak ingin mengubah foto)</p>

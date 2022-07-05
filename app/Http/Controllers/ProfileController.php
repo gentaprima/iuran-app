@@ -24,7 +24,6 @@ class ProfileController extends Controller
                                 ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
                                 ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
                                 ->where('tbl_users.id', session::get('dataUsers')->id)->first();
-        // return $dataProfile;
         $data = [
             'dataProfile' => $dataProfile,
             'dataRumah' => $dataRumah
@@ -69,10 +68,8 @@ class ProfileController extends Controller
                 return redirect()->back();
             }
         }
-
-
         $imageProfile = $request->file('image');
-
+        
         $account = ModelUsers::find(Session::get("dataUsers")->id);
         if ($imageProfile == null) {
             $filename = $account['photo'];
@@ -90,7 +87,6 @@ class ProfileController extends Controller
 
             $account->password = Hash::make($request->password);
         }
-
         $account->first_name = $request->firstName;
         $account->last_name = $request->lastName;
         $account->email = $request->email;

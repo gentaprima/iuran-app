@@ -40,7 +40,7 @@ use Illuminate\Support\Facades\Session;
                                         <thead>
                                             <tr>
                                                 <th>Kode Akun</th>
-                                                <th>Tanggal</th>
+                                                <th>Tanggal Transaksi</th>
                                                 <th>Keterangan</th>
                                                 <th>Jumlah</th>
                                             </tr>
@@ -103,7 +103,7 @@ use Illuminate\Support\Facades\Session;
                                         <thead>
                                             <tr>
                                                 <th>Kode Akun</th>
-                                                <th>Tanggal</th>
+                                                <th>Tanggal Transaksi</th>
                                                 <th>Keterangan</th>
                                                 <th>Jumlah</th>
                                             </tr>

@@ -41,7 +41,7 @@
                             <th>No Rekening</th>
                             <th>Bukti</th>
                             <th>Status</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal Transaksi</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>

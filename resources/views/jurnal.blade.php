@@ -28,12 +28,12 @@ use Illuminate\Support\Facades\Session;
                             <button id="pdf" class="btn btn-gradient-primary"><i class="mdi mdi-file-pdf">PDF</i></button>
                         </div>
                         <div class="col-sm-2 col-lg-3">
-                            <input type="month" min="2000-01" class="form-control" id="perioed">
+                            <input typfe="month" min="2000-01" class="form-control" id="perioed">
                         </div>
                     </div>
                     <div class="table-responsive">
                         <div class="row">
-                            <div class="col-md-12 col-sm-12 col-lg-6">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
                                 <h5 class="text-center pt-2 pb-2">Pemasukan</h5>
                                 <hr>
                                     <table class="table jurnal-table">
@@ -95,7 +95,7 @@ use Illuminate\Support\Facades\Session;
                                         </tfoot>
                                     </table>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-6">
+                            <div class="col-md-12 col-sm-12 col-lg-12">
                                 <h5 class="text-center pt-2 pb-2">Pengeluaran</h5>
                                 <hr>
                                 <div class="table-responsive">
@@ -127,10 +127,16 @@ use Illuminate\Support\Facades\Session;
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>Total Saldo</th>
+                                                <th>Total Pengeluaran</th>
                                                 <th></th>
                                                 <th></th>
                                                 <th>{{ 'Rp ' . number_format($total, 2, ',', '.') }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Total Saldo</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>{{ 'Rp ' . number_format($totalPemasukkan-$total, 2, ',', '.') }}</th>
                                             </tr>
                                         </tfoot>
                                     </table>

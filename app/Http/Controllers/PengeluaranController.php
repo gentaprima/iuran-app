@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ModelPengeluaran;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,10 +18,17 @@ class PengeluaranController extends Controller
     public function index()
     {
         $isLogin = Session::get('login');
-        $data['pengeluaran'] = ModelPengeluaran::all();
+        $data['pengeluaran'] = ModelPengeluaran::where('tipe_pengeluaran',0)->get();
+        $data['jenis_pengeluaran'] = DB::table("jenis_pengeluaran")->where('tipe_pengeluaran','=',0)->get();
+        
         return view("data-pengeluaran", $data);
     }
 
+    public function indexTTP(){
+        $data['pengeluaran'] = ModelPengeluaran::where('tipe_pengeluaran',1)->get();
+        $data['jenis_pengeluaran'] = DB::table("jenis_pengeluaran")->where("tipe_pengeluaran",'=',1)->get();
+        return view("data-pengeluaran-ttp",$data);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -52,6 +60,7 @@ class PengeluaranController extends Controller
         }
         $input = $request->all();
         $input['id_transaksi'] = "I-" . uniqid();
+        $input['tipe_pengeluaran'] = !isset($input['tipe_pengeluaran']) ? 0 :1;
         ModelPengeluaran::create($input);
         Session::flash('message', 'Berhasil Tambah Data Anggaran');
         Session::flash('icon', 'success');
@@ -77,7 +86,7 @@ class PengeluaranController extends Controller
      */
     public function edit($id)
     {
-        //
+        
     }
 
     /**
@@ -89,7 +98,12 @@ class PengeluaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        ModelPengeluaran::where("id_transaksi",$id)->update([
+            'status'=>1
+        ]);
+        Session::flash('message', 'Berhasil Konfirmasi Data Anggaran');
+        Session::flash('icon', 'success');
+        return redirect()->back();
     }
 
     /**

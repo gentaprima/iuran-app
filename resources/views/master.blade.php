@@ -92,7 +92,7 @@
                 <ul class="nav">
                     <li class="nav-item nav-link {{ Request::is('home') ? 'active' : '' }}">
                         <a class="nav-link" href="/">
-                            <span class="menu-title">{{ Session::get('dataUsers')->role == 1  ?'Dashboard' :'Beranda'}}</span>
+                            <span class="menu-title">{{ Session::get('dataUsers')->role == 1 || Session::get('dataUsers')->role == 2   ?'Dashboard' :'Beranda'}}</span>
                             <i class="mdi mdi-home menu-icon"></i>
                         </a>
                     </li>
@@ -133,14 +133,16 @@
                             </div>
                         </li>
                     @endif
+                    @if (Session::get('dataUsers')->role == 1 || Session::get('dataUsers')->role == 1)
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ Session::get('dataUsers')->role == 0 ? '/data-iuran' : '/data-iuran-warga' }}">
-                            <span class="menu-title">Data Iuran</span>
-                            <i class="mdi mdi-arrow-up-bold-circle menu-icon"></i>
-                        </a>
-                    </li>
-                    @if (Session::get('dataUsers')->role == 1)
+                        href="{{ Session::get('dataUsers')->role == 0 ? '/data-iuran' : '/data-iuran-warga' }}">
+                        <span class="menu-title">Data Iuran</span>
+                        <i class="mdi mdi-arrow-up-bold-circle menu-icon"></i>
+                    </a>
+                </li>
+                @endif
+                    @if (Session::get('dataUsers')->role == 1 ||Session::get('dataUsers')->role == 2 )
                         <li class="nav-item sidebar-actions">
                             {{-- <div class="mt-4"> --}}
                             <div class="border-bottom">
@@ -153,9 +155,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/data-pengeluaran">
-                                <span class="menu-title">Pengeluaran</span>
+                            <a class="nav-link" href="/data-pengeluaran" class="nav-item {{ Request::is('data-pengeluaran') ? 'active' : '' }}">
+                                <span class="menu-title">Pengeluaran Tetap</span>
                                 <i class="mdi mdi-call-received menu-icon"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/data-tidak-tetap" class="nav-item {{ Request::is('data-pengeluaran-tidak-tetap') ? 'active' : '' }}">
+                                <span class="menu-title">Pengeluaran Tidak Tetap</span>
+                                <i class="mdi mdi-call-made menu-icon"></i>
                             </a>
                         </li>
                         </li>

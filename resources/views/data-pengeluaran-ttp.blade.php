@@ -30,9 +30,8 @@ use Illuminate\Support\Facades\Session;
                     <div class="col-sm-12 col-lg">
                         <button class="btn btn-gradient-primary btn-fw" data-target="#modal-form" data-toggle="modal">Buat
                             Anggaran</button>
-                    </div>
+                        </div>
                     @endif
-                    
                     <table id="example1" class="example1 table table-striped">
                         <thead>
                             <tr>
@@ -40,14 +39,13 @@ use Illuminate\Support\Facades\Session;
                                 <th>ID transaksi</th>
                                 <th>Penanggung Jawab</th>
                                 <th>Keterangan</th>
-                                <th>Ditujukan Kepada</th>
+                                <th>Jumlah</th>
+                                <th>Satuan</th>
                                 <th>Nominal</th>
                                 <th>Tanggal Pengeluaran</th>
                                 <th>Tanggal Transaksi</th>
                                 <th>Status</th>
-                                @if (Session::get('dataUsers')->role == 2)
-                                    <th>Aksi</th>
-                                @endif
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,14 +58,13 @@ use Illuminate\Support\Facades\Session;
                                     <td>{{ $item->id_transaksi }}</td>
                                     <td>{{ $item->penanggung_jawab }}</td>
                                     <td>{{ $item->tujuan }}</td>
-                                    <td>{{ $item->ditujukkan }}</td>
-                                    <td>{{ number_format($item->nominal, 2, '.', ',') }}</td>
+                                    <td>{{ $item->jumlah }}</td>
+                                    <td>{{ $item->satuan }}</td>
+
+                                    <td>{{ number_format($item->nominal, 2, ".", ",")}}</td>
                                     <td>{{ $item->tanggal_pengeluaran }}</td>
                                     <td>{{ $item->created_at }}</td>
-                                    <td>
-                                        <div class="badge {{ $item->status == 1 ? 'badge-success' : 'badge-danger' }}">
-                                            {{ $item->status == 1 ? 'Sudah Diterima' : 'Menunggu Diterima' }}</div>
-                                    </td>
+                                    <td><div class="badge {{$item->status == 1 ? 'badge-success' : 'badge-danger' }}">{{$item->status == 1 ? "Sudah Diterima" : "Menunggu Diterima"}}</div></td>
                                     @if (Session::get('dataUsers')->role == 2)
 
                                         <td><a onclick="{{ $item->status == 1 ? 'return false' : ''}}" 
@@ -77,9 +74,9 @@ use Illuminate\Support\Facades\Session;
                                         </td>
                                     @endif
                                 </tr>
-                                @php
-                                    $i++;
-                                @endphp
+                            @php
+                                $i++
+                            @endphp
                             @endforeach
                         </tbody>
 
@@ -112,32 +109,37 @@ use Illuminate\Support\Facades\Session;
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Keterangan</label>
-                                    <select class="form-control form-control-sm" required="" value=""
-                                        name="tujuan">
-                                        <option value="">-- Jenis Keterangan --</option>
-                                        @foreach ($jenis_pengeluaran as $row)
-                                            <option value="{{ $row->keterangan }}">
-                                                {{ $row->keterangan }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" name="tujuan" class="form-control">
+                                    <input type="hidden" name="tipe_pengeluaran" value="1" class="form-control">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Ditujukan Kepada</label>
-                                    <input name="ditujukkan" type="text" class="form-control" id="exampleInputUsername1"
-                                        placeholder="ditujukkan">
+                                    <label for="exampleInputUsername1">Jumlah</label>
+                                    <input name="jumlah" type="number" class="form-control" id="exampleInputUsername1"
+                                        placeholder="jumlah">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="exampleInputUsername1">Satuan</label>
+                                    <select class="form-control form-control-sm" name="satuan" id="">
+                                        <option value="buah">----Pilih Satuan----</option>
+                                        <option value="buah">Buah</option>
+                                        <option value="galon">Galon</option>
+                                        <option value="pcs">Pcs</option>
+                                        <option value="lainnya">Lainnya</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Nominal</label>
                                     <input name="nominal" type="number" class="form-control" id="exampleInputUsername1"
                                         placeholder="Nominal">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Tanggal Pengeluaran</label>
                                     <input name="tanggal_pengeluaran" type="date" class="form-control"
@@ -161,8 +163,7 @@ use Illuminate\Support\Facades\Session;
             <div class="modal-content rounded bg-white">
                 <div class="modal-header">
                     <h5 class="modal-title" id="titleModal">Filter Data</h5>
-                    <button type="button" class="btn btn-gradient-primary close" data-dismiss="modal"
-                        aria-label="Close">
+                    <button type="button" class="btn btn-gradient-primary close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

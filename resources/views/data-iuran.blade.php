@@ -121,7 +121,6 @@
                                     @php if(Session::get('dataUsers')->role == 0){ @endphp
                                         @if ($row->is_pay == 1)
                                             <a href="/iuran/invoice/{{$row->id_transaction}}"><button type="button" class="btn btn-gradient-success btn-rounded btn-icon mt-1"><i class="mdi mdi-printer"></i></button></a>                                               
-                                            
                                             @endif
                                             @php } @endphp
                                     @php if($row->is_verif == 0){ @endphp

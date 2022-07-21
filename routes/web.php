@@ -76,7 +76,10 @@ Route::group(['prefix' => '/data-rumah'], function () {
 Route::group(['prefix' => '/data-pengeluaran'], function () {
     Route::get('/', 'PengeluaranController@index');
     Route::post('/', 'PengeluaranController@store');
+    Route::get('/acc/{id}', 'PengeluaranController@update');
 });
+
+Route::get('/data-tidak-tetap',"PengeluaranController@indexTTP");
 Route::get('/logout', function () {
     Session::flush();
     return redirect('/');

@@ -133,7 +133,7 @@
                             </div>
                         </li>
                     @endif
-                    @if (Session::get('dataUsers')->role == 1 || Session::get('dataUsers')->role == 1)
+                    @if (Session::get('dataUsers')->role == 1 || Session::get('dataUsers')->role == 0)
                     <li class="nav-item">
                         <a class="nav-link"
                         href="{{ Session::get('dataUsers')->role == 0 ? '/data-iuran' : '/data-iuran-warga' }}">

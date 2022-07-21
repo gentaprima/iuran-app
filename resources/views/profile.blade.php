@@ -127,7 +127,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="inputPassword" class="col-sm-2 col-form-label">No Rumah - Blok</label>
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Blok - No Rumah</label>
                             <div class="col-sm-10">
                                 <select class="form-control form-control-sm" id="id_rumah" value="{{ old('id_rumah') }}"
                                     name="id_rumah">

@@ -76,7 +76,7 @@
                                 </div>
                                 @csrf
                                 <div class="text-center mt-4 font-weight-light"> Sudah Punya Akun ? <a href="../"
-                                        class="text-primary">Login</a>
+                                        class="text-primary">Masuk</a>
                                 </div>
                             </form>
                         </div>

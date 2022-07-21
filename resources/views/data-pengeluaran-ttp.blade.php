@@ -45,7 +45,10 @@ use Illuminate\Support\Facades\Session;
                                 <th>Tanggal Pengeluaran</th>
                                 <th>Tanggal Transaksi</th>
                                 <th>Status</th>
+                                @if (Session::get('dataUsers')->role == 2)
+
                                 <th>Aksi</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>

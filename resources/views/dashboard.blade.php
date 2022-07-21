@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\Session;
             </h3>
         </div>
         <div class="row">
-            @if (Session::get('dataUsers')->role === 1)
-                <?php if ($dataIuran == null) { ?>
+            @if (Session::get('dataUsers')->role === 1 || Session::get('dataUsers')->role === 2)
+                <?php if ($dataIuran == null && Session::get('dataUsers')->role === 1) { ?>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="alert alert-success">

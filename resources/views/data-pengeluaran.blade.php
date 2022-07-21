@@ -27,12 +27,13 @@ use Illuminate\Support\Facades\Session;
             <div class="container-fluid">
                 <div class="card p-5 rounded mb-3">
                     @if (Session::get('dataUsers')->role == 1)
-                    <div class="col-sm-12 col-lg">
-                        <button class="btn btn-gradient-primary btn-fw" data-target="#modal-form" data-toggle="modal">Buat
-                            Anggaran</button>
-                    </div>
+                        <div class="col-sm-12 col-lg">
+                            <button class="btn btn-gradient-primary btn-fw" data-target="#modal-form"
+                                data-toggle="modal">Buat
+                                Anggaran</button>
+                        </div>
                     @endif
-                    
+
                     <table id="example1" class="example1 table table-striped">
                         <thead>
                             <tr>
@@ -65,15 +66,27 @@ use Illuminate\Support\Facades\Session;
                                     <td>{{ $item->tanggal_pengeluaran }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td>
-                                        <div class="badge {{ $item->status == 1 ? 'badge-success' : 'badge-danger' }}">
-                                            {{ $item->status == 1 ? 'Sudah Diterima' : 'Menunggu Diterima' }}</div>
+                                        <div
+                                            class="badge {{ $item->status == 1 ? 'badge-success' : ($item->status == 0 ? 'badge-warning' : 'badge-danger') }}">
+                                            {{ ($item->status == 1 ? 'Sudah Diterima' : $item->status == 0) ? 'Menunggu Diterima' : 'Tidak Diterima' }}
+                                        </div>
                                     </td>
-                                    @if (Session::get('dataUsers')->role == 2)
 
-                                        <td><a onclick="{{ $item->status == 1 ? 'return false' : ''}}" 
-                                                href="data-pengeluaran/acc/{{ $item->id_transaksi }}"> <button
-                                                    class="btn {{$item->status == 1 ? 'btn-gradient-disabled' : 'btn-gradient-success '}}btn-rounded btn-icon mt-1"><i
-                                                        class="mdi mdi-check-circle"></i></button></a>
+                                    @if (Session::get('dataUsers')->role == 2)
+                                        <td>
+
+                                            @if ($item->is_action == 0)
+                                                <a onclick="{{ $item->status == 1 ? 'return false' : '' }}"
+                                                    href="data-pengeluaran/acc/{{ $item->id_transaksi }}?status=1"> <button
+                                                        class="btn {{ $item->status == 1 ? 'btn-gradient-disabled' : 'btn-gradient-success' }} btn-rounded btn-icon mt-1"><i
+                                                            class="mdi mdi-check-circle"></i></button></a>
+                                                <a onclick="{{ $item->status == 1 ? 'return false' : '' }}"
+                                                    href="data-pengeluaran/acc/{{ $item->id_transaksi }}?status=2"> <button
+                                                        class="btn {{ $item->status == 2 ? 'btn-gradient-disabled' : 'btn-gradient-danger ' }}btn-rounded btn-icon mt-1"><i
+                                                            class="mdi mdi-close-circle"></i></button></a>
+                                            @else
+                                            <i class="mdi {{$item->status == 1 ? 'mdi-check-circle' :'mdi-close-circle' }} "></i>
+                                            @endif
                                         </td>
                                     @endif
                                 </tr>

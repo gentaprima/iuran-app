@@ -99,7 +99,8 @@ class PengeluaranController extends Controller
     public function update(Request $request, $id)
     {
         ModelPengeluaran::where("id_transaksi",$id)->update([
-            'status'=>1
+            'status'=> $request->status,
+            'is_action'=>1
         ]);
         Session::flash('message', 'Berhasil Konfirmasi Data Anggaran');
         Session::flash('icon', 'success');

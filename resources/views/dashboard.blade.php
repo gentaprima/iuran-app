@@ -56,11 +56,11 @@ use Illuminate\Support\Facades\Session;
                         <div class="card bg-gradient-info card-img-holder text-white">
                             <div class="card-body">
                                 <img src="assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
-                                <h4 class="font-weight-normal mb-3">Pemasukkan <i
+                                <h4 class="font-weight-normal mb-3">Pemasukan <i
                                         class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
                                 </h4>
                                 <h2 class="mb-5">Rp. {{ number_format($dataPemasukan, 2, '.', ',') }}</h2>
-                                <h6 class="card-text">Total Pemasukkan</h6>
+                                <h6 class="card-text">Total Pemasukan</h6>
                             </div>
                         </div>
                     </div>
@@ -141,7 +141,7 @@ use Illuminate\Support\Facades\Session;
                     borderColor: "#E91E63",
                     fill: false,
                 }, {
-                    label: 'Pemasukkan',
+                    label: 'Pemasukan',
                     backgroundColor: "#46c35f",
                     data: {{ $chartDataIn }},
                     borderColor: "#46c35f",

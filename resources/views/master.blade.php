@@ -150,7 +150,7 @@
                             </div>
                         <li class="nav-item">
                             <a class="nav-link" href="/data-pemasukan">
-                                <span class="menu-title">Pemasukkan</span>
+                                <span class="menu-title">Pemasukan</span>
                                 <i class="mdi mdi-call-made menu-icon"></i>
                             </a>
                         </li>
@@ -176,7 +176,7 @@
                             </div>
                         <li class="nav-item ">
                             <a class="nav-link" href="/jurnal">
-                                <span class="menu-title">Jurnal Pemasukkan <br> & Pengeluaran</span>
+                                <span class="menu-title">Jurnal Pemasukan <br> & Pengeluaran</span>
                                 <i class="mdi mdi-file-export menu-icon"></i>
                             </a>
                         </li>

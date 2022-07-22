@@ -106,6 +106,7 @@ use Illuminate\Support\Facades\Session;
                                                 <th>Tanggal Transaksi</th>
                                                 <th>Keterangan</th>
                                                 <th>Jumlah</th>
+                                                <th>Jenis Pengeluaran</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -117,8 +118,8 @@ use Illuminate\Support\Facades\Session;
                                                     <td>2.{{ $item->id }}</td>
                                                     <td>{{ $item->tanggal_pengeluaran }}</td>
                                                     <td>{{ $item->tujuan }}</td>
-
                                                     <td>{{ 'Rp ' . number_format($item->nominal, 2, ',', '.') }}</td>
+                                                    <td>{{$item->tipe_pengeluaran == 0 ? "Pengluaran Tetap" : "Pengeluaran Tidak Tetap" }}</td>
                                                 </tr>
                                                 @php
                                                     $total = $total + $item->nominal;

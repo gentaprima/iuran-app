@@ -34,6 +34,59 @@ use Illuminate\Support\Facades\Session;
                     <div class="table-responsive">
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-lg-12">
+                                <h5 class="text-center pt-2 pb-2">Pengeluaran</h5>
+                                <hr>
+                                @php
+                                    $totalPemasukkan = 0;
+                                @endphp
+                                <div class="table-responsive">
+                                    <table class="table jurnal-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Kode Akun</th>
+                                                <th>Tanggal Transaksi</th>
+                                                <th>Keterangan</th>
+                                                <th>Jenis Pengeluaran</th>
+                                                <th>Jumlah</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $total = 0;
+                                            @endphp
+                                            @foreach ($dataPengeluaran as $item)
+                                                <tr>
+                                                    <td>2.{{ $item->id }}</td>
+                                                    <td>{{ $item->tanggal_pengeluaran }}</td>
+                                                    <td>{{ $item->tujuan }}</td>
+                                                    <td>{{$item->tipe_pengeluaran == 0 ? "Pengluaran Tetap" : "Pengeluaran Tidak Tetap" }}</td>
+                                                    <td>{{ 'Rp ' . number_format($item->nominal, 2, ',', '.') }}</td>
+                                                </tr>
+                                                @php
+                                                    $total = $total + $item->nominal;
+                                                @endphp
+                                            @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Total Pengeluaran</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>{{ 'Rp ' . number_format($total, 2, ',', '.') }}</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Total Saldo</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th>{{ 'Rp ' . number_format($totalPemasukkan-$total, 2, ',', '.') }}</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>  
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-lg-12">
                                 <h5 class="text-center pt-2 pb-2">Pemasukan</h5>
                                 <hr>
                                     <table class="table jurnal-table">
@@ -95,54 +148,7 @@ use Illuminate\Support\Facades\Session;
                                         </tfoot>
                                     </table>
                             </div>
-                            <div class="col-md-12 col-sm-12 col-lg-12">
-                                <h5 class="text-center pt-2 pb-2">Pengeluaran</h5>
-                                <hr>
-                                <div class="table-responsive">
-                                    <table class="table jurnal-table">
-                                        <thead>
-                                            <tr>
-                                                <th>Kode Akun</th>
-                                                <th>Tanggal Transaksi</th>
-                                                <th>Keterangan</th>
-                                                <th>Jumlah</th>
-                                                <th>Jenis Pengeluaran</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @php
-                                                $total = 0;
-                                            @endphp
-                                            @foreach ($dataPengeluaran as $item)
-                                                <tr>
-                                                    <td>2.{{ $item->id }}</td>
-                                                    <td>{{ $item->tanggal_pengeluaran }}</td>
-                                                    <td>{{ $item->tujuan }}</td>
-                                                    <td>{{ 'Rp ' . number_format($item->nominal, 2, ',', '.') }}</td>
-                                                    <td>{{$item->tipe_pengeluaran == 0 ? "Pengeluaran Tetap" : "Pengeluaran Tidak Tetap" }}</td>
-                                                </tr>
-                                                @php
-                                                    $total = $total + $item->nominal;
-                                                @endphp
-                                            @endforeach
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Total Pengeluaran</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th>{{ 'Rp ' . number_format($total, 2, ',', '.') }}</th>
-                                            </tr>
-                                            <tr>
-                                                <th>Total Saldo</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th>{{ 'Rp ' . number_format($totalPemasukkan-$total, 2, ',', '.') }}</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

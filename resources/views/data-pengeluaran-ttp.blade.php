@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Session;
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                     <i class="mdi mdi-home"></i>
-                </span> Data Pengeluaran Tetap
+                </span> Data Pengeluaran Tidak Tetap
             </h3>
         </div>
         <div class="row">
@@ -46,7 +46,6 @@ use Illuminate\Support\Facades\Session;
                                 <th>Tanggal Transaksi</th>
                                 <th>Status</th>
                                 @if (Session::get('dataUsers')->role == 2)
-
                                 <th>Aksi</th>
                                 @endif
                             </tr>
@@ -67,13 +66,28 @@ use Illuminate\Support\Facades\Session;
                                     <td>{{ number_format($item->nominal, 2, ".", ",")}}</td>
                                     <td>{{ $item->tanggal_pengeluaran }}</td>
                                     <td>{{ $item->created_at }}</td>
-                                    <td><div class="badge {{$item->status == 1 ? 'badge-success' : 'badge-danger' }}">{{$item->status == 1 ? "Sudah Diterima" : "Menunggu Diterima"}}</div></td>
-                                    @if (Session::get('dataUsers')->role == 2)
+                                    <td>
+                                        <div
+                                            class="badge {{ $item->status == 1 ? 'badge-success' : ($item->status == 0 ? 'badge-warning' : 'badge-danger') }}">
+                                            {{ $item->status == 1  ? 'Sudah Diterima' : ($item->status == 0 ? 'Menunggu Diterima' : 'Tidak Diterima') }}
+                                        </div>
+                                    </td>
 
-                                        <td><a onclick="{{ $item->status == 1 ? 'return false' : ''}}" 
-                                                href="data-pengeluaran/acc/{{ $item->id_transaksi }}"> <button
-                                                    class="btn {{$item->status == 1 ? 'btn-gradient-disabled' : 'btn-gradient-success '}}btn-rounded btn-icon mt-1"><i
-                                                        class="mdi mdi-check-circle"></i></button></a>
+                                    @if (Session::get('dataUsers')->role == 2)
+                                        <td>
+
+                                            @if ($item->is_action == 0)
+                                                <a onclick="{{ $item->status == 1 ? 'return false' : '' }}"
+                                                    href="data-pengeluaran/acc/{{ $item->id_transaksi }}?status=1"> <button
+                                                        class="btn {{ $item->status == 1 ? 'btn-gradient-disabled' : 'btn-gradient-success' }} btn-rounded btn-icon mt-1"><i
+                                                            class="mdi mdi-check-circle"></i></button></a>
+                                                <a onclick="{{ $item->status == 1 ? 'return false' : '' }}"
+                                                    href="data-pengeluaran/acc/{{ $item->id_transaksi }}?status=2"> <button
+                                                        class="btn {{ $item->status == 2 ? 'btn-gradient-disabled' : 'btn-gradient-danger ' }}btn-rounded btn-icon mt-1"><i
+                                                            class="mdi mdi-close-circle"></i></button></a>
+                                            @else
+                                            <i class="mdi {{$item->status == 1 ? 'mdi-check-circle' :'mdi-close-circle' }} "></i>
+                                            @endif
                                         </td>
                                     @endif
                                 </tr>

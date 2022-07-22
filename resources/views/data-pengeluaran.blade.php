@@ -68,7 +68,7 @@ use Illuminate\Support\Facades\Session;
                                     <td>
                                         <div
                                             class="badge {{ $item->status == 1 ? 'badge-success' : ($item->status == 0 ? 'badge-warning' : 'badge-danger') }}">
-                                            {{ ($item->status == 1 ? 'Sudah Diterima' : $item->status == 0) ? 'Menunggu Diterima' : 'Tidak Diterima' }}
+                                            {{ $item->status == 1  ? 'Sudah Diterima' : ($item->status == 0 ? 'Menunggu Diterima' : 'Tidak Diterima') }}
                                         </div>
                                     </td>
 

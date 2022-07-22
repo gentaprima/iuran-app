@@ -20,7 +20,7 @@ class JurnalController extends Controller
             ->join('tbl_rekening', 'tbl_iuran.to_rekening', '=', 'tbl_rekening.id')
             ->groupBy('tbl_iuran.id_transaction')
             ->get();
-        $dataPengeluaran = DB::table("pengeluaran")->get();
+        $dataPengeluaran = DB::table("pengeluaran")->where('status',1)->get();
         $data['dataPengeluaran'] = $dataPengeluaran;
         $data['dataPemasukan'] = $dataPemasukan;
         return view('jurnal', $data);

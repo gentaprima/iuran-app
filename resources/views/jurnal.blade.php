@@ -59,7 +59,7 @@ use Illuminate\Support\Facades\Session;
                                                     <td>2.{{ $item->id }}</td>
                                                     <td>{{ $item->tanggal_pengeluaran }}</td>
                                                     <td>{{ $item->tujuan }}</td>
-                                                    <td>{{$item->tipe_pengeluaran == 0 ? "Pengluaran Tetap" : "Pengeluaran Tidak Tetap" }}</td>
+                                                    <td>{{$item->tipe_pengeluaran == 0 ? "Pengeluaran Tetap" : "Pengeluaran Tidak Tetap" }}</td>
                                                     <td>{{ 'Rp ' . number_format($item->nominal, 2, ',', '.') }}</td>
                                                 </tr>
                                                 @php

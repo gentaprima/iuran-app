@@ -49,7 +49,7 @@ class DashboardController extends Controller
             'dataIuran' => $dataIuran,
             'dataWarga' => DB::table('tbl_users')->where('is_verif', 1)->where('role', 0)->count(),
             'dataPemasukan' => DB::table('tbl_iuran')->where('is_verif', 1)->where('is_pay', 1)->sum('sub_total'),
-            'dataPengeluaran' => ModelPengeluaran::sum('nominal'),
+            'dataPengeluaran' => ModelPengeluaran::where("status",1)->sum('nominal'),
             'dataIuranUnVerif'  => DB::table('tbl_iuran')->where('is_verif', 0)->groupBy('id_transaction')->count(),
             'chartDataIn' => json_encode(collect($newArrChartIn)->values()),
             'chartDataOut' => json_encode(collect($newArrChartOut)->values())

@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Session;
                             <button id="pdf" class="btn btn-gradient-primary"><i class="mdi mdi-file-pdf">PDF</i></button>
                         </div>
                         <div class="col-sm-2 col-lg-3">
-                            <input typfe="month" min="2000-01" class="form-control" id="perioed">
+                            <input type="month" id="perioed" value="01-2022" name="bdaymonth" class="form-control">
                         </div>
                     </div>
                     <div class="table-responsive">

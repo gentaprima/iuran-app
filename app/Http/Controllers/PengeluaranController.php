@@ -102,8 +102,13 @@ class PengeluaranController extends Controller
             'status'=> $request->status,
             'is_action'=>1
         ]);
-        Session::flash('message', 'Berhasil Konfirmasi Data Anggaran');
-        Session::flash('icon', 'success');
+        if($request->status == 2){
+            Session::flash('message', 'Berhasil Menolak Data Anggaran');
+            Session::flash('icon', 'error');
+        }else{
+            Session::flash('message', 'Berhasil Menerima Data Anggaran');
+            Session::flash('icon', 'success');
+        }
         return redirect()->back();
     }
 

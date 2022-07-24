@@ -74,7 +74,6 @@ use Illuminate\Support\Facades\Session;
 
                                     @if (Session::get('dataUsers')->role == 2)
                                         <td>
-
                                             @if ($item->is_action == 0)
                                                 <a onclick="{{ $item->status == 1 ? 'return false' : '' }}"
                                                     href="data-pengeluaran/acc/{{ $item->id_transaksi }}?status=1"> <button

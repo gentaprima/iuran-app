@@ -99,9 +99,7 @@ use Illuminate\Support\Facades\Session;
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @php
-                                                $totalPemasukkan = 0;
-                                            @endphp
+                                            
                                             @foreach ($dataPemasukan as $row)
                                                 @php
                                                     $jenisIuran = $row->keterangan;
@@ -132,9 +130,6 @@ use Illuminate\Support\Facades\Session;
                                                     
                                                     <td>{{ 'Rp ' . number_format($row->sub_total, 2, ',', '.') }}</td>
                                                 </tr>
-                                                @php
-                                                    $totalPemasukkan += $row->sub_total;
-                                                @endphp
                                             @endforeach
                                         </tbody>
                                         <tfoot>
@@ -142,7 +137,7 @@ use Illuminate\Support\Facades\Session;
                                                 <th>Total Saldo</th>
                                                 <th></th>
                                                 <th></th>
-                                                <th>{{ 'Rp ' . number_format($totalPemasukkan, 2, ',', '.') }}
+                                                <th>{{ 'Rp ' . number_format($totalMasuk, 2, ',', '.') }}
                                                 </th>
                                             </tr>
                                         </tfoot>

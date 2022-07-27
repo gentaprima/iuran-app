@@ -21,6 +21,7 @@ class JurnalController extends Controller
             ->groupBy('tbl_iuran.id_transaction')
             ->get();
         $dataPengeluaran = DB::table("pengeluaran")->where('status',1)->get();
+        $data['totalMasuk'] = DB::table('tbl_iuran')->where('is_verif', 1)->where('is_pay', 1)->sum('sub_total');
         $data['dataPengeluaran'] = $dataPengeluaran;
         $data['dataPemasukan'] = $dataPemasukan;
         return view('jurnal', $data);

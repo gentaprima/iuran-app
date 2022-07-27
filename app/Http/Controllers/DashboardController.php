@@ -45,10 +45,22 @@ class DashboardController extends Controller
         }
         ksort($newArrChartIn);
         ksort($newArrChartOut);
+        $dataPemasukan =   DB::table('tbl_pemasukan')
+            ->select('rumah.*','blok.*','tbl_pemasukan.id as kode','tbl_pemasukan.*', 'tbl_users.*', 'tbl_iuran.*', 'tbl_jenis_iuran.*', 'tbl_rekening.*',
+             DB::raw('GROUP_CONCAT(tbl_jenis_iuran.jenis_iuran) as jenis_iuran'), DB::raw('GROUP_CONCAT(tbl_iuran.month) as month'))
+            ->join('tbl_iuran', 'tbl_pemasukan.id_transaction', '=', 'tbl_iuran.id_transaction')
+            ->join('tbl_jenis_iuran', 'tbl_iuran.id_jenis_iuran', '=', 'tbl_jenis_iuran.id')
+            ->join('tbl_users', 'tbl_iuran.id_users', '=', 'tbl_users.id')
+            ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
+            ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
+            ->join('tbl_rekening', 'tbl_iuran.to_rekening', '=', 'tbl_rekening.id')
+            ->groupBy('tbl_iuran.id_transaction')
+            ->get()->sum("sub_total");
+            
         $data = [
             'dataIuran' => $dataIuran,
             'dataWarga' => DB::table('tbl_users')->where('is_verif', 1)->where('role', 0)->count(),
-            'dataPemasukan' => DB::table('tbl_iuran')->where('is_verif', 1)->where('is_pay', 1)->sum('sub_total'),
+            'dataPemasukan' =>$dataPemasukan,
             'dataPengeluaran' => ModelPengeluaran::where("status",1)->sum('nominal'),
             'dataIuranUnVerif'  => DB::table('tbl_iuran')->where('is_verif', 0)->groupBy('id_transaction')->count(),
             'chartDataIn' => json_encode(collect($newArrChartIn)->values()),

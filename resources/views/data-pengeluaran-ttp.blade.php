@@ -86,7 +86,7 @@ use Illuminate\Support\Facades\Session;
                                                         class="btn {{ $item->status == 2 ? 'btn-gradient-disabled' : 'btn-gradient-danger ' }}btn-rounded btn-icon mt-1"><i
                                                             class="mdi mdi-close-circle"></i></button></a>
                                             @else
-                                            <i class="mdi {{$item->status == 1 ? 'mdi-check-circle' :'mdi-close-circle' }} "></i>
+                                            <i class="mdi mdi-24px {{$item->status == 1 ? 'mdi-check-circle' :'mdi-close-circle' }}" style="color:{{$item->status == 1 ? '#1bcfb4' : '#fe7c96'}}"></i>
                                             @endif
                                         </td>
                                     @endif

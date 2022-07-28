@@ -80,7 +80,7 @@ use Illuminate\Support\Facades\Session;
                                                 <th></th>
                                                 <th></th>
                                                 <th></th>
-                                                <th>{{ 'Rp ' . number_format($totalPemasukkan-$total, 2, ',', '.') }}</th>
+                                                <th>{{ 'Rp ' . number_format($totalMasuk - $total, 2, ',', '.') }}</th>
                                             </tr>
                                         </tfoot>
                                     </table>  

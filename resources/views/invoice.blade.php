@@ -84,7 +84,7 @@
                                         </td>
                                     <td class="text-right">
                                         Perumahan Duta Graha <br>
-                                        Jl. Pasir Randu, Binong, Kec. Curug, Kabupaten Tangerang, Banten 15810
+                                       x
                                     </td>
                                 </tr>
                             </tbody>

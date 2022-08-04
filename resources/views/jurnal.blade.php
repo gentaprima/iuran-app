@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Session;
 ?>
 @extends('master')
 
-@section('title-link', 'Jurnal')
-@section('sub-title-link', 'Jurnal')
+@section('title-link', 'Laporan Keuangan')
+@section('sub-title-link', 'Laporan Keuangan')
 @section('active', 'beranda')
-@section('title', 'Jurnal')
+@section('title', 'Laporan Keuangan')
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Session;
             <h3 class="page-title">
                 <span class="page-title-icon bg-gradient-primary text-white me-2">
                     <i class="mdi mdi-home"></i>
-                </span> Jurnal Pemasukan dan Pengeluaran
+                </span> Laporan Keuangan
             </h3>
         </div>
         <div class="row">
@@ -25,8 +25,8 @@ use Illuminate\Support\Facades\Session;
                 <div class="card p-5 rounded mb-3" id="content-pdf">
                     <div class="row justify-content-between">
                         <div class="col-sm-1 col-lg-3">
-                            <a href="/print?date={{Request::get("date")}}" id="pdf" class="btn btn-gradient-primary"><i
-                                    class="mdi mdi-file-pdf">PDF</i></a>
+                            <a href="/print?date={{ Request::get('date') }}" id="pdf"
+                                class="btn btn-gradient-primary"><i class="mdi mdi-file-pdf">PDF</i></a>
                         </div>
                         <form action="" method="get">
                             <div class="row justify-content-end align-items-center">
@@ -46,6 +46,7 @@ use Illuminate\Support\Facades\Session;
                             <hr>
                             @php
                                 $totalPemasukkan = 0;
+                                $i = 1;
                             @endphp
                             <div class="table-responsive">
                                 <table class="table jurnal-table">
@@ -64,7 +65,7 @@ use Illuminate\Support\Facades\Session;
                                         @endphp
                                         @foreach ($dataPengeluaran as $item)
                                             <tr>
-                                                <td>2.{{ $item->id }}</td>
+                                                <td>{{ $i }}.</td>
                                                 <td>{{ $item->tanggal_pengeluaran }}</td>
                                                 <td>{{ $item->tujuan }}</td>
                                                 <td>{{ $item->tipe_pengeluaran == 0 ? 'Pengeluaran Tetap' : 'Pengeluaran Tidak Tetap' }}
@@ -72,6 +73,7 @@ use Illuminate\Support\Facades\Session;
                                                 <td>{{ 'Rp ' . number_format($item->nominal, 2, ',', '.') }}</td>
                                             </tr>
                                             @php
+                                                $i++;
                                                 $total = $total + $item->nominal;
                                             @endphp
                                         @endforeach
@@ -104,6 +106,7 @@ use Illuminate\Support\Facades\Session;
                                 <tbody>
                                     @php
                                         $totalPemasukkan = 0;
+                                        $j = 1;
                                     @endphp
                                     @foreach ($dataPemasukan as $row)
                                         @php
@@ -113,7 +116,7 @@ use Illuminate\Support\Facades\Session;
                                             $splitMonth = explode(',', $month);
                                         @endphp
                                         <tr>
-                                            <td>1.{{ $row->kode }}</td>
+                                            <td>{{ $j }}.</td>
                                             <td>{{ $row->date }}</td>
                                             <td>
                                                 <?php for ($i = 0; $i < count($splitMonth); $i++) { ?>
@@ -136,6 +139,7 @@ use Illuminate\Support\Facades\Session;
                                             <td>{{ 'Rp ' . number_format($row->sub_total, 2, ',', '.') }}</td>
                                         </tr>
                                         @php
+                                            $j++;
                                             $totalPemasukkan += $row->sub_total;
                                         @endphp
                                     @endforeach

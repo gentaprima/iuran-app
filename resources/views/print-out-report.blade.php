@@ -146,7 +146,7 @@
         <hr>
 
         <div class="content">
-            <h3><u>Laporan</u>
+            <h3><u>Laporan Keuangan</u>
             </h3>
             <center style="margin-top: -20px;">
                 <label class="nomor"></label>
@@ -163,21 +163,22 @@
             </table> --}}
             <table border="0" width="100%" style="font-size: 10px">
                 {{-- <thead> --}}
-                    <tr>
-                        <th>No</th>
-                        <th>Tanggal Transaksi</th>
-                        <th>Keterangan</th>
-                        <th>Jenis Pengeluaran</th>
-                        <th>Jumlah</th>
-                    </tr>
+                <tr>
+                    <th>No</th>
+                    <th>Tanggal Transaksi</th>
+                    <th>Keterangan</th>
+                    <th>Jenis Pengeluaran</th>
+                    <th>Jumlah</th>
+                </tr>
                 {{-- </thead> --}}
                 <tbody>
                     @php
                         $total = 0;
+                        $i = 1;
                     @endphp
                     @foreach ($dataPengeluaran as $item)
                         <tr>
-                            <td style="margin-left: auto">2.{{ $item->id }}</td>
+                            <td style="margin-left: auto">{{ $i }}.</td>
                             <td>{{ $item->tanggal_pengeluaran }}</td>
                             <td>{{ $item->tujuan }}</td>
                             <td>{{ $item->tipe_pengeluaran == 0 ? 'Pengeluaran Tetap' : 'Pengeluaran Tidak Tetap' }}
@@ -185,6 +186,7 @@
                             <td>{{ 'Rp ' . number_format($item->nominal, 2, ',', '.') }}</td>
                         </tr>
                         @php
+                            $i++;
                             $total = $total + $item->nominal;
                         @endphp
                     @endforeach
@@ -213,6 +215,7 @@
                 <tbody>
                     @php
                         $totalPemasukkan = 0;
+                        $j = 1;
                     @endphp
                     @foreach ($dataPemasukan as $row)
                         @php
@@ -222,7 +225,7 @@
                             $splitMonth = explode(',', $month);
                         @endphp
                         <tr>
-                            <td>1.{{ $row->kode }}</td>
+                            <td>{{ $j }}.</td>
                             <td>{{ $row->date }}</td>
                             <td>
                                 <?php for ($i = 0; $i < count($splitMonth); $i++) { ?>
@@ -245,6 +248,7 @@
                             <td>{{ 'Rp ' . number_format($row->sub_total, 2, ',', '.') }}</td>
                         </tr>
                         @php
+                            $j++;
                             $totalPemasukkan += $row->sub_total;
                         @endphp
                     @endforeach

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" initial-scale="1.0">
 
-    <title>Kop Surat</title>
+    <title>Laporan Keuangan</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -95,7 +95,16 @@
         }
 
         td {
-            padding-bottom: 10px;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
         }
 
         .signature {
@@ -130,7 +139,6 @@
 <body>
     <page size="A4">
         <header>
-
             <center>
                 <label>
                     <government>
@@ -152,16 +160,8 @@
                 <label class="nomor"></label>
             </center>
             <br>
-            <br>
-
-            {{-- <table border="0" width="100%" style="font-size: 14px">
-                <tr>
-                    <td>No. Surat Masuk</td>
-                    <td>:</td>
-                    <td>cek</td>
-                </tr>
-            </table> --}}
-            <table border="0" width="100%" style="font-size: 10px">
+            <h5>Pengeluaran : </h5>
+            <table width="100%" style="font-size: 10px">
                 {{-- <thead> --}}
                 <tr>
                     <th>No</th>
@@ -178,12 +178,12 @@
                     @endphp
                     @foreach ($dataPengeluaran as $item)
                         <tr>
-                            <td style="margin-left: auto">{{ $i }}.</td>
-                            <td>{{ $item->tanggal_pengeluaran }}</td>
-                            <td>{{ $item->tujuan }}</td>
-                            <td>{{ $item->tipe_pengeluaran == 0 ? 'Pengeluaran Tetap' : 'Pengeluaran Tidak Tetap' }}
+                            <td style="text-align:center">{{ $i }}.</td>
+                            <td style="text-align:center">{{ $item->tanggal_pengeluaran }}</td>
+                            <td style="text-align:center">{{ $item->tujuan }}</td>
+                            <td style="text-align:center">{{ $item->tipe_pengeluaran == 0 ? 'Pengeluaran Tetap' : 'Pengeluaran Tidak Tetap' }}
                             </td>
-                            <td>{{ 'Rp ' . number_format($item->nominal, 2, ',', '.') }}</td>
+                            <td style="text-align:center">{{ 'Rp ' . number_format($item->nominal, 2, ',', '.') }}</td>
                         </tr>
                         @php
                             $i++;
@@ -202,8 +202,9 @@
 
                 </tfoot>
             </table>
-            <br><br><br><br>
-            <table class="table jurnal-table" border="0" width="100%" style="font-size: 10px">
+            
+            <h5>Pemasukan : </h5>
+            <table class="table jurnal-table" width="100%" style="font-size: 10px">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -225,14 +226,15 @@
                             $splitMonth = explode(',', $month);
                         @endphp
                         <tr>
-                            <td>{{ $j }}.</td>
-                            <td>{{ $row->date }}</td>
+                            <td style="text-align:center">{{ $j }}.</td>
+                            <td style="text-align:center">{{ $row->date }}</td>
                             <td>
                                 <?php for ($i = 0; $i < count($splitMonth); $i++) { ?>
                                 <?php if($splitMonth[count($splitMonth) - 1] == $i){ ?>
-                                <span class="font-weight-bold"> <?= $splitMonth[$i] ?>, </span>
+                                
+                                <span style="margin-left:{{$i == 0 ? "44px" : "0px"}}" class="font-weight-bold"> <?= $splitMonth[$i] ?>, </span>
                                 <?php }else{?>
-                                <span class="font-weight-bold"> <?= $splitMonth[$i] ?></span>
+                                <span style="margin-left:{{$i == 0 ? "44px" : "0px"}}" class="font-weight-bold"> <?= $splitMonth[$i] ?></span>
                                 <?php }?>
                                 <?php } ?>
                                 <hr>
@@ -245,7 +247,7 @@
                                 </ul>
                             </td>
 
-                            <td>{{ 'Rp ' . number_format($row->sub_total, 2, ',', '.') }}</td>
+                            <td style="text-align:center">{{ 'Rp ' . number_format($row->sub_total, 2, ',', '.') }}</td>
                         </tr>
                         @php
                             $j++;

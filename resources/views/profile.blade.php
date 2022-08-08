@@ -27,9 +27,8 @@
 
                         <img class="ml-5" src="{{ asset('user.png') }}" width="50%" alt="">
                         <?php }else{ ?>
-                        <img class="ml-5"
-                            src="{{ asset('uploads/profile') }}/{{ Session::get('dataUsers')->photo }}" width="50%"
-                            alt="">
+                        <img class="ml-5" src="{{ asset('uploads/profile') }}/{{ Session::get('dataUsers')->photo }}"
+                            width="50%" alt="">
                         <?php } ?>
                     </div>
                     <div class="col-8">
@@ -56,7 +55,7 @@
                                 <p>{{ $dataProfile->blok }} </p>
                                 <p class="font-weight-bold">Status Tempat Tinggal</p>
                                 @php
-                                    $status = ($dataProfile->status == 0 ? 'Rumah Kosong' : $dataProfile->status == 1) ? 'Rumah Dijual' : ($dataProfile->status == 2 ?  'Rumah Terisi' : 'Rumah Dikontrakan');
+                                    $status = ($dataProfile->status == 0 ? 'Rumah Kosong' : $dataProfile->status == 1) ? 'Rumah Dijual' : ($dataProfile->status == 2 ? 'Rumah Terisi' : 'Rumah Dikontrakan');
                                 @endphp
                                 <p>{{ $status }} </p>
                                 <p class="font-weight-bold">Tahun Ditempati</p>
@@ -86,35 +85,28 @@
                     </button>
                 </div>
                 <div class="modal-body px-5">
-                    <form class="form" method="post" id="form" enctype="multipart/form-data" action="/update-profile"
-                        enctype="multipart/form-data">
+                    <form class="form needs-validation" method="post" id="form" enctype="multipart/form-data"
+                        action="/update-profile" enctype="multipart/form-data" novalidate>
                         @csrf
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">NIK</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="numberIndentityCard"
-                                    value="{{ old('number_identity_card') }}" name="numberIdentityCard"
-                                    placeholder="NIK">
+                                <input minlength="16" maxlength="16" required pattern="\d*" type="text"
+                                    class="form-control needs-validation" id="numberIndentityCard"
+                                    value="{{ old('number_identity_card') }}" name="numberIdentityCard" placeholder="NIK">
+                                <div class="invalid-feedback">
+                                    Pastikan 16 digit angka sesuai dengan identitas KTP anda.
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Nama Depan</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="firstName"
-                                            value="{{ old('firstName') }}" name="firstName" placeholder="Nama Depan">
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label for="inputPassword" class="col-sm-4 col-form-label">Nama Belakang</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" class="form-control" id="lastName"
-                                            value="{{ old('lastName') }}" name="lastName" placeholder="Nama Belakang">
-                                    </div>
+                        <div class="form-group row">
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Nama Lengkap</label>
+                            <div class="col-sm-10">
+                                <input required type="text" class="form-control needs-validation" id="firstName"
+                                    value="{{ old('first_name') . ' ' . old('last_name') }}" name="namaLengkap"
+                                    placeholder="Nama Lengkap">
+                                <div class="invalid-feedback">
+                                    Pastikan Nama Lengkap Terisi.
                                 </div>
                             </div>
                         </div>
@@ -129,8 +121,8 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Blok - No Rumah</label>
                             <div class="col-sm-10">
-                                <select class="form-control form-control-sm" id="id_rumah" value="{{ old('id_rumah') }}"
-                                    name="id_rumah">
+                                <select class="form-control form-control-sm" id="id_rumah"
+                                    value="{{ old('id_rumah') }}" name="id_rumah">
                                     <option value="">-- Pilih No-Blok Rumah --</option>
                                     @foreach ($dataRumah as $item)
                                         <option value="{{ $item->rumah_id }}">{{ $item->no_rumah . ' - ' . $item->blok }}
@@ -155,7 +147,8 @@
                             <label for="inputPassword" class="col-sm-2 col-form-label">Foto</label>
                             <div class="col-sm-10">
                                 <div class="input-group col-xs-12">
-                                    <input type="file" name="image" class="form-control file-upload-info" placeholder="Upload Image">
+                                    <input type="file" name="image" class="form-control file-upload-info"
+                                        placeholder="Upload Image">
                                 </div>
                             </div>
                             <p class="mt-1">(kosongkan jika tidak ingin mengubah foto)</p>
@@ -163,15 +156,18 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Nomor Telepon</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="phoneNumber"
+                                <input minlength="10" type="text" class="form-control" id="phoneNumber"
                                     value="{{ old('phoneNumber') }}" name="phoneNumber" placeholder="Nomor Telepon">
+                                <div class="invalid-feedback">
+                                    Gunakan minimal 10 digit angka
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="password" value="{{ old('password') }}"
-                                    name="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password"
+                                    value="{{ old('password') }}" name="password" placeholder="Password">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -194,10 +190,29 @@
     </div>
 
     <script>
+        (function() {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
         function updateData(id, email, firstName, lastName, nik, kk, gender, numberFamily, phoneNumber, blok) {
             document.getElementById('email').value = email;
-            document.getElementById('firstName').value = firstName;
-            document.getElementById('lastName').value = lastName;
+            document.getElementById('firstName').value = firstName + " " + lastName;
             document.getElementById('numberIndentityCard').value = nik;
             document.getElementById('numberFamilyCard').value = kk;
             document.getElementById('gender').value = gender;
@@ -207,6 +222,5 @@
             document.getElementById("form").action = `/update-profile/${id}`;
             console.log(phoneNumber);
         }
-        
     </script>
 @endsection

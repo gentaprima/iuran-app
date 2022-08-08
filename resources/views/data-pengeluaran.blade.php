@@ -117,7 +117,7 @@ use Illuminate\Support\Facades\Session;
                             <div class="col-lg-6 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Penanggung Jawab</label>
-                                    <input name="penanggung_jawab" type="text" class="form-control"
+                                    <input name="penanggung_jawab" required type="text" class="form-control"
                                         id="exampleInputUsername1" placeholder="Penanggung Jawab">
                                 </div>
                             </div>
@@ -138,14 +138,14 @@ use Illuminate\Support\Facades\Session;
                             <div class="col-lg-3 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Ditujukan Kepada</label>
-                                    <input name="ditujukkan" type="text" class="form-control" id="exampleInputUsername1"
+                                    <input name="ditujukkan" required type="text" class="form-control" id="exampleInputUsername1"
                                         placeholder="ditujukkan">
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-12 col-sm-12">
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Nominal</label>
-                                    <input name="nominal" type="number" class="form-control" id="exampleInputUsername1"
+                                    <input name="nominal" required type="number" class="form-control" id="exampleInputUsername1"
                                         placeholder="Nominal">
                                 </div>
                             </div>
@@ -153,7 +153,7 @@ use Illuminate\Support\Facades\Session;
                                 <div class="form-group">
                                     <label for="exampleInputUsername1">Tanggal Pengeluaran</label>
                                     <input name="tanggal_pengeluaran" type="date" class="form-control"
-                                        id="exampleInputUsername1" placeholder="Nominal">
+                                        id="exampleInputUsername1" required placeholder="Nominal">
                                 </div>
                             </div>
                         </div>

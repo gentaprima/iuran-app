@@ -19,11 +19,11 @@ class ProfileController extends Controller
         if ($isLogin == null) {
             return redirect('/');
         }
-        $dataRumah = ModelHouse::select('rumah.*','rumah.id as rumah_id', 'blok.*', 'blok.id as id_blok')->join("blok", 'rumah.blok', '=', 'blok.id')->get();
-        $dataProfile = ModelUsers::select('rumah.*','blok.*','tbl_users.*', 'tbl_users.id as id_user')
-                                ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
-                                ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
-                                ->where('tbl_users.id', session::get('dataUsers')->id)->first();
+        $dataRumah = ModelHouse::select('rumah.*', 'rumah.id as rumah_id', 'blok.*', 'blok.id as id_blok')->join("blok", 'rumah.blok', '=', 'blok.id')->get();
+        $dataProfile = ModelUsers::select('rumah.*', 'blok.*', 'tbl_users.*', 'tbl_users.id as id_user')
+            ->leftJoin('rumah', 'tbl_users.id_rumah', '=', 'rumah.id')
+            ->leftJoin("blok", 'rumah.blok', '=', 'blok.id')
+            ->where('tbl_users.id', session::get('dataUsers')->id)->first();
         $data = [
             'dataProfile' => $dataProfile,
             'dataRumah' => $dataRumah
@@ -34,16 +34,12 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'firstName' => 'required',
-            'lastName'  => 'required',
             'email'  => 'required|email',
             'numberIdentityCard'  => 'required|numeric',
             'id_rumah' => 'required|numeric',
             'gender'  => 'required',
             'phoneNumber'  => 'required',
         ], [
-            'firstName.required'    => "Nama Depan harus dilengkapi",
-            'lastName.required'    => "Nama Belakang harus dilengkapi",
             'email.required'    => "Email harus dilengkapi",
             'numberIndentityCard.required'    => "NIK harus dilengkapi",
             'numberIndentityCard.numeric'    => "NIK harus angka",
@@ -69,7 +65,6 @@ class ProfileController extends Controller
             }
         }
         $imageProfile = $request->file('image');
-        
         $account = ModelUsers::find(Session::get("dataUsers")->id);
         if ($imageProfile == null) {
             $filename = $account['photo'];
@@ -87,15 +82,16 @@ class ProfileController extends Controller
 
             $account->password = Hash::make($request->password);
         }
-        $account->first_name = $request->firstName;
-        $account->last_name = $request->lastName;
+        $namaLengkap = explode(" ", $request->namaLengkap);
+        $account->first_name = $namaLengkap[0];
+        $account->last_name = (isset($namaLengkap[1]) ? $namaLengkap[1] : "") . " " . (isset($namaLengkap[2]) ? $namaLengkap[2] : " ");
         $account->email = $request->email;
         $account->phone_number = $request->phoneNumber;
         $account->number_identity_card = $request->numberIdentityCard;
         $account->gender = $request->gender;
         $account->photo = $filename;
         $account->id_rumah = $request->id_rumah;
-        
+
         $account->save();
         Session::put('dataUsers', $account);
         Session::flash('message', 'Berhasil memperbarui data diri.');

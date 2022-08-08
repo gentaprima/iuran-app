@@ -48,14 +48,14 @@ class LoginController extends Controller
             Session::flash('message', 'Mohon maaf, Akun tidak ditemukan.');
             Session::flash('icon', 'error');
             return redirect()->back()
-            ->withInput($request->input());
+                ->withInput($request->input());
         }
-        
+
         if (!Hash::check($request->password, $checkUsers->password)) {
 
             Session::flash('message', 'Mohon maaf, Email atau Password tidak sesuai.');
             Session::flash('icon', 'error');
-            
+
             return redirect()->back()
                 ->withInput($request->input());
         }
@@ -68,8 +68,6 @@ class LoginController extends Controller
     public function proccesRegister(Request $request)
     {
         $validate = Validator::make($request->all(), [
-            'firstName'    => 'required',
-            'lastName'    => 'required',
             'email'    => 'required|email',
             'phoneNumber'    => 'required|numeric|min:11',
             'password'    => 'required_with:confirmPassword|same:confirmPassword',
@@ -77,8 +75,6 @@ class LoginController extends Controller
             'nik'           => 'required|numeric'
 
         ], [
-            'firstName.required' => "Nama Depan harus dilengkapi",
-            'lastName.required' => "Nama Belakang harus dilengkapi",
             'email.required' => "Email harus dilengkapi",
             'password.required' => "Password harus dilengkapi",
             'confirm.required' => "Password harus dilengkapi",
@@ -103,11 +99,14 @@ class LoginController extends Controller
             return redirect()->back();
         }
 
+        $namaLengkap = explode(" ", $request->nama_lengkap);
+
+
         $users = ModelUsers::create([
             'number_identity_card' => $request->nik,
             'email' => $request->email,
-            'first_name'    => $request->firstName,
-            'last_name'    => $request->lastName,
+            'first_name'    => $namaLengkap[0],
+            'last_name'    => (isset($namaLengkap[1]) ? $namaLengkap[1] : "") . " ".(isset($namaLengkap[2]) ? $namaLengkap[2] : " "),
             'email'    => $request->email,
             'phone_number'    => $request->phoneNumber,
             'password'    => Hash::make($request->password),
@@ -117,7 +116,7 @@ class LoginController extends Controller
         $users->save();
         Session::flash('message', 'Berhasil membuat akun, Silahkan login.');
         Session::flash('icon', 'success');
-        
+
         return redirect()->back();
     }
 }

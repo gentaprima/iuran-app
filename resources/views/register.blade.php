@@ -39,36 +39,53 @@
                             </div>
                             <h4>Form Pendaftaran</h4>
                             <h6 class="font-weight-light">Silahkan Lakukan Pendaftaran.</h6>
-                            <form method="post" action="/process_register" class="pt-3">
+                            <form method="post" action="/process_register" class="pt-3 needs-validation" novalidate
+                                required>
                                 @csrf
                                 <div class="form-group">
-                                    <input name="nik" type="nik" class="form-control form-control-lg"
-                                        id="exampleInputnik1" placeholder="NIK">
+                                    <input type="text" pattern="\d*" minlength="16" maxlength="16" name="nik"
+                                        class="form-control form-control-lg" id="validationCustom01" placeholder="NIK"
+                                        required>
+                                    <div class="invalid-feedback">
+                                        Pastikan 16 digit angka sesuai dengan identitas KTP anda
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input name="firstName" type="firstName" class="form-control form-control-lg"
-                                        id="exampleInputfirstName" placeholder="Nama Depan">
-                                </div>
-                                <div class="form-group">
-                                    <input name="lastName" type="lastName" class="form-control form-control-lg"
-                                        id="exampleInputfirstName" placeholder="Nama Belakang">
+                                    <input name="nama_lengkap" type="text"  class="form-control form-control-lg"
+                                        id="exampleInputfirstName" placeholder="Nama Lengkap" required>
+                                    <div class="invalid-feedback">
+                                        Pastikan Nama Lengkap terisi
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input name="email" type="email" class="form-control form-control-lg"
-                                        id="exampleInputEmail1" placeholder="Email">
+                                        id="exampleInputEmail1" placeholder="Email" required>
+                                    <div class="invalid-feedback">
+                                        Pastikan Email terisi
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input name="phoneNumber" type="phoneNumber" class="form-control form-control-lg"
-                                        id="exampleInputphoneNumber1" placeholder="No telepon">
+                                    <input minlength="10" name="phoneNumber" type="phoneNumber"
+                                        class="form-control form-control-lg" id="exampleInputphoneNumber1"
+                                        placeholder="No telepon" pattern="\d*" required>
+                                    <div class="invalid-feedback">
+                                        Gunakan minimal 10 digit angka
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-lg"
-                                        id="exampleInputPassword1" name="password" placeholder="Password">
+                                        id="exampleInputPassword1" name="password" placeholder="Password" required>
+                                    <div class="invalid-feedback">
+                                        Pastikan Password terisi
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-lg"
                                         id="exampleInputconfirmPassword1" name="confirmPassword"
-                                        placeholder="Konfirmasi Password">
+                                        placeholder="Konfirmasi Password" required>
+                                    <div class="invalid-feedback">
+                                        Pastikan Konfirmasi Password terisi
+                                    </div>
                                 </div>
                                 <div class="mt-3">
                                     <button style="width: 100%;" type="submit"
@@ -98,6 +115,25 @@
     <script src="{{ asset('assets/js/hoverable-collapse.js') }}"></script>
     <script src="{{ asset('assets/js/misc.js') }}"></script>
     <script>
+        (function() {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-right',

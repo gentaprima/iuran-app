@@ -166,8 +166,12 @@
                         <div class="form-group row">
                             <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="password"
-                                    value="{{ old('password') }}" name="password" placeholder="Password">
+                                <input type="password"
+                                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                                    class="form-control" id="password" value="{{ old('password') }}" name="password"
+                                    placeholder="Password">
+                                <div class="invalid-feedback">
+                                    Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -175,7 +179,10 @@
                             <div class="col-sm-10">
                                 <input type="password" class="form-control" id="confirmPassword"
                                     value="{{ old('confirmPassword') }}" name="confirmPassword"
+                                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                     placeholder="Konfirmasi Password">
+                                <div class="invalid-feedback">
+                                    Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                                 <p class="mt-1">(kosongkan jika tidak ingin mengubah password)</p>
                             </div>
                         </div>

@@ -40,14 +40,17 @@
                             </div>
                             <h4>Selamat Datang</h4>
                             <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
-                            <form method="post" action="/auth" class="pt-3">
+                            <form method="post" action="/auth" class="pt-3 needs-validation" novalidate>
                                 <div class="form-group">
                                     <input name="email" type="email" class="form-control form-control-lg"
                                         id="exampleInputEmail1" placeholder="Email">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-lg"
-                                        id="exampleInputPassword1" name="password" placeholder="Password">
+                                        pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                                        id="exampleInputPassword1" name="password" placeholder="Password" required> 
+                                    <div class="invalid-feedback">
+                                        Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                                 </div>
                                 <div class="mt-3">
                                     <button style="width: 100%;" type="submit"
@@ -78,6 +81,25 @@
     <script src="{{ asset('assets/js/misc.js') }}"></script>
     <!-- endinject -->
     <script>
+        (function() {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-right',

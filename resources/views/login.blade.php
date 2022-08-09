@@ -42,10 +42,12 @@
                             <h6 class="font-weight-light">Masuk untuk melanjutkan.</h6>
                             <form method="post" action="/auth" class="pt-3 needs-validation" novalidate>
                                 <div class="form-group">
+                                    <label for="">Email</label>
                                     <input name="email" type="email" class="form-control form-control-lg"
                                         id="exampleInputEmail1" placeholder="Email">
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Password</label>
                                     <input type="password" class="form-control form-control-lg"
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                         id="exampleInputPassword1" name="password" placeholder="Password" required>

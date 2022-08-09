@@ -43,6 +43,7 @@
                                 required>
                                 @csrf
                                 <div class="form-group">
+                                    <label for="">NIK</label>
                                     <input type="text" pattern="\d*" minlength="16" maxlength="16" name="nik"
                                         class="form-control form-control-lg" id="validationCustom01" placeholder="NIK"
                                         required>
@@ -54,6 +55,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Nama Lengkap</label>
                                     <input name="nama_lengkap" type="text" class="form-control form-control-lg"
                                         id="exampleInputfirstName" placeholder="Nama Lengkap" required>
                                     <div class="invalid-feedback">
@@ -64,6 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Email</label>
                                     <input name="email" type="email" class="form-control form-control-lg"
                                         id="exampleInputEmail1" placeholder="Email" required>
                                     <div class="invalid-feedback">
@@ -74,6 +77,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Nomor Telepon</label>
                                     <input minlength="10" name="phoneNumber" type="phoneNumber"
                                         class="form-control form-control-lg" id="exampleInputphoneNumber1"
                                         placeholder="No telepon" pattern="\d*" required>
@@ -85,6 +89,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Password</label>
                                     <input type="password" class="form-control form-control-lg" minlength="8"
                                         id="exampleInputPassword1"
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
@@ -95,6 +100,7 @@
                                         Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Konfirmasi Password</label>
                                     <input type="password" class="form-control form-control-lg"
                                         id="exampleInputconfirmPassword1" name="confirmPassword"
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
@@ -141,7 +147,7 @@
             Array.prototype.slice.call(forms)
                 .forEach(function(form) {
                     form.addEventListener('submit', function(event) {
-                        $(".text-info-alert").css("display","none")
+                        $(".text-info-alert").css("display", "none")
                         if (!form.checkValidity()) {
                             event.preventDefault()
                             event.stopPropagation()

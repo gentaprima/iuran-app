@@ -48,10 +48,11 @@
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-lg"
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
-                                        id="exampleInputPassword1" name="password" placeholder="Password" required> 
-                                    <div class="invalid-feedback">
+                                        id="exampleInputPassword1" name="password" placeholder="Password" required>
+                                    <div class="invalid-feedback" style="display: block">
                                         Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                                 </div>
+
                                 <div class="mt-3">
                                     <button style="width: 100%;" type="submit"
                                         class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn">Masuk</a>

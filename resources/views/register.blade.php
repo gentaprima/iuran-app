@@ -46,21 +46,21 @@
                                     <input type="text" pattern="\d*" minlength="16" maxlength="16" name="nik"
                                         class="form-control form-control-lg" id="validationCustom01" placeholder="NIK"
                                         required>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="display: block">
                                         Pastikan 16 digit angka sesuai dengan identitas KTP anda
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input name="nama_lengkap" type="text" class="form-control form-control-lg"
                                         id="exampleInputfirstName" placeholder="Nama Lengkap" required>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="display: block">
                                         Pastikan Nama Lengkap terisi
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input name="email" type="email" class="form-control form-control-lg"
                                         id="exampleInputEmail1" placeholder="Email" required>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="display: block">
                                         Pastikan Email terisi
                                     </div>
                                 </div>
@@ -68,7 +68,7 @@
                                     <input minlength="10" name="phoneNumber" type="phoneNumber"
                                         class="form-control form-control-lg" id="exampleInputphoneNumber1"
                                         placeholder="No telepon" pattern="\d*" required>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="display: block">
                                         Gunakan minimal 10 digit angka
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                                         id="exampleInputPassword1"
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                         name="password" placeholder="Password" required>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="display: block">
                                         Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                                 </div>
                                 <div class="form-group">
@@ -85,7 +85,7 @@
                                         id="exampleInputconfirmPassword1" name="confirmPassword"
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                         placeholder="Konfirmasi Password" required>
-                                    <div class="invalid-feedback">
+                                    <div class="invalid-feedback" style="display: block">
                                         Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                                 </div>
                                 <div class="mt-3">

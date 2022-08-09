@@ -94,7 +94,7 @@
                                 <input minlength="16" maxlength="16" required pattern="\d*" type="text"
                                     class="form-control needs-validation" id="numberIndentityCard"
                                     value="{{ old('number_identity_card') }}" name="numberIdentityCard" placeholder="NIK">
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: block">
                                     Pastikan 16 digit angka sesuai dengan identitas KTP anda.
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                                 <input required type="text" class="form-control needs-validation" id="firstName"
                                     value="{{ old('first_name') . ' ' . old('last_name') }}" name="namaLengkap"
                                     placeholder="Nama Lengkap">
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: block">
                                     Pastikan Nama Lengkap Terisi.
                                 </div>
                             </div>
@@ -116,6 +116,9 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="email" value="{{ old('email') }}"
                                     name="email" placeholder="Email">
+                                <div class="invalid-feedback" style="display: block">
+                                    Pastikan Email Terisi.
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -158,7 +161,7 @@
                             <div class="col-sm-10">
                                 <input minlength="10" type="text" class="form-control" id="phoneNumber"
                                     value="{{ old('phoneNumber') }}" name="phoneNumber" placeholder="Nomor Telepon">
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: block">
                                     Gunakan minimal 10 digit angka
                                 </div>
                             </div>
@@ -170,7 +173,7 @@
                                     pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                     class="form-control" id="password" value="{{ old('password') }}" name="password"
                                     placeholder="Password">
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: block">
                                     Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                             </div>
                         </div>
@@ -181,7 +184,7 @@
                                     value="{{ old('confirmPassword') }}" name="confirmPassword"
                                     pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                     placeholder="Konfirmasi Password">
-                                <div class="invalid-feedback">
+                                <div class="invalid-feedback" style="display: block">
                                     Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                                 <p class="mt-1">(kosongkan jika tidak ingin mengubah password)</p>
                             </div>

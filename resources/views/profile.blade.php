@@ -225,6 +225,8 @@
             Array.prototype.slice.call(forms)
                 .forEach(function(form) {
                     form.addEventListener('submit', function(event) {
+                        $(".text-info-alert").css("display","none")
+
                         if (!form.checkValidity()) {
                             event.preventDefault()
                             event.stopPropagation()

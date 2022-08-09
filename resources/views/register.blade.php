@@ -46,21 +46,30 @@
                                     <input type="text" pattern="\d*" minlength="16" maxlength="16" name="nik"
                                         class="form-control form-control-lg" id="validationCustom01" placeholder="NIK"
                                         required>
-                                    <div class="invalid-feedback" style="display: block">
+                                    <div class="invalid-feedback">
+                                        Pastikan 16 digit angka sesuai dengan identitas KTP anda
+                                    </div>
+                                    <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
                                         Pastikan 16 digit angka sesuai dengan identitas KTP anda
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input name="nama_lengkap" type="text" class="form-control form-control-lg"
                                         id="exampleInputfirstName" placeholder="Nama Lengkap" required>
-                                    <div class="invalid-feedback" style="display: block">
+                                    <div class="invalid-feedback">
+                                        Pastikan Nama Lengkap terisi
+                                    </div>
+                                    <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
                                         Pastikan Nama Lengkap terisi
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input name="email" type="email" class="form-control form-control-lg"
                                         id="exampleInputEmail1" placeholder="Email" required>
-                                    <div class="invalid-feedback" style="display: block">
+                                    <div class="invalid-feedback">
+                                        Pastikan Email terisi
+                                    </div>
+                                    <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
                                         Pastikan Email terisi
                                     </div>
                                 </div>
@@ -68,7 +77,10 @@
                                     <input minlength="10" name="phoneNumber" type="phoneNumber"
                                         class="form-control form-control-lg" id="exampleInputphoneNumber1"
                                         placeholder="No telepon" pattern="\d*" required>
-                                    <div class="invalid-feedback" style="display: block">
+                                    <div class="invalid-feedback">
+                                        Gunakan minimal 10 digit angka
+                                    </div>
+                                    <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
                                         Gunakan minimal 10 digit angka
                                     </div>
                                 </div>
@@ -77,7 +89,9 @@
                                         id="exampleInputPassword1"
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                         name="password" placeholder="Password" required>
-                                    <div class="invalid-feedback" style="display: block">
+                                    <div class="invalid-feedback">
+                                        Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
+                                    <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
                                         Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                                 </div>
                                 <div class="form-group">
@@ -85,7 +99,9 @@
                                         id="exampleInputconfirmPassword1" name="confirmPassword"
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                         placeholder="Konfirmasi Password" required>
-                                    <div class="invalid-feedback" style="display: block">
+                                    <div class="invalid-feedback">
+                                        Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
+                                    <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
                                         Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                                 </div>
                                 <div class="mt-3">
@@ -121,16 +137,15 @@
 
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.querySelectorAll('.needs-validation')
-
             // Loop over them and prevent submission
             Array.prototype.slice.call(forms)
                 .forEach(function(form) {
                     form.addEventListener('submit', function(event) {
+                        $(".text-info-alert").css("display","none")
                         if (!form.checkValidity()) {
                             event.preventDefault()
                             event.stopPropagation()
                         }
-
                         form.classList.add('was-validated')
                     }, false)
                 })

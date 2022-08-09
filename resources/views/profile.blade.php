@@ -97,6 +97,9 @@
                                 <div class="invalid-feedback" style="display: block">
                                     Pastikan 16 digit angka sesuai dengan identitas KTP anda.
                                 </div>
+                                <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
+                                    Pastikan 16 digit angka sesuai dengan identitas KTP anda.
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -108,6 +111,9 @@
                                 <div class="invalid-feedback" style="display: block">
                                     Pastikan Nama Lengkap Terisi.
                                 </div>
+                                <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
+                                    Pastikan Nama Lengkap Terisi.
+                                </div>
                             </div>
                         </div>
 
@@ -117,6 +123,9 @@
                                 <input type="text" class="form-control" id="email" value="{{ old('email') }}"
                                     name="email" placeholder="Email">
                                 <div class="invalid-feedback" style="display: block">
+                                    Pastikan Email Terisi.
+                                </div>
+                                <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
                                     Pastikan Email Terisi.
                                 </div>
                             </div>
@@ -164,6 +173,9 @@
                                 <div class="invalid-feedback" style="display: block">
                                     Gunakan minimal 10 digit angka
                                 </div>
+                                <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
+                                    Gunakan minimal 10 digit angka
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -175,6 +187,9 @@
                                     placeholder="Password">
                                 <div class="invalid-feedback" style="display: block">
                                     Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
+                                <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
+                                    Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol
+                                </div>
                             </div>
                         </div>
                         <div class="form-group row">

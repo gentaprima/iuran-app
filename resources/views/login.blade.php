@@ -49,7 +49,9 @@
                                     <input type="password" class="form-control form-control-lg"
                                         pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                         id="exampleInputPassword1" name="password" placeholder="Password" required>
-                                    <div class="invalid-feedback" style="display: block">
+                                    <div class="invalid-feedback">
+                                        Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
+                                    <div class="text-info-alert" style="font-size:0.875em;margin-top:0.25rem">
                                         Gunakan minimal 8 karakter dengan campuran huruf,angka, dan simbol </div>
                                 </div>
 
@@ -92,6 +94,7 @@
             Array.prototype.slice.call(forms)
                 .forEach(function(form) {
                     form.addEventListener('submit', function(event) {
+                        $(".text-info-alert").css("display", "none")
                         if (!form.checkValidity()) {
                             event.preventDefault()
                             event.stopPropagation()

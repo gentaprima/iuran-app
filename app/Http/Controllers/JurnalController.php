@@ -87,7 +87,7 @@ class JurnalController extends Controller
         $data['dataPengeluaran'] = $dataPengeluaran;
         $data['totalMasuk'] = $dataPemasukan->sum("sub_total");
         $pdf = Pdf::loadView('print-out-report', $data)->setPaper('a4', 'landscape');
-        return $pdf->download(date('m-d-Y hsi'  ) . '.pdf');
-        // return view('print-out-report',$data);
+        // return $pdf->download(date('m-d-Y hsi'  ) . '.pdf');
+        return view('print-out-report',$data);
     }
 }

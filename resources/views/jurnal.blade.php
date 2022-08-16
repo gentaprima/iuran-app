@@ -41,8 +41,8 @@ use Illuminate\Support\Facades\Session;
                 </div>
                 <div class="table-responsive">
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-lg-12">
-                            <h5 class="text-center pt-2 pb-2">Pengeluaran</h5>
+                        <div class="col-md-12 mt-5 col-sm-12 col-lg-12">
+                            <h4 class="pt-2 pb-2">Pengeluaran</h5>
                             <hr>
                             @php
                                 $totalPemasukkan = 0;
@@ -91,8 +91,8 @@ use Illuminate\Support\Facades\Session;
                                 </table>
                             </div>
                         </div>
-                        <div class="col-md-12 col-sm-12 col-lg-12">
-                            <h5 class="text-center pt-2 pb-2">Pemasukan</h5>
+                        <div class="col-md-12 mt-5 col-sm-12 col-lg-12">
+                            <h4 class="pt-2 pb-2">Pemasukan</h5>
                             <hr>
                             <table class="table jurnal-table">
                                 <thead>
@@ -118,7 +118,7 @@ use Illuminate\Support\Facades\Session;
                                         <tr>
                                             <td>{{ $j }}.</td>
                                             <td>{{ $row->date }}</td>
-                                            <td>
+                                            <td style="width: 400px;">
                                                 <?php for ($i = 0; $i < count($splitMonth); $i++) { ?>
                                                 <?php if($splitMonth[count($splitMonth) - 1] == $i){ ?>
                                                 <span class="font-weight-bold"> <?= $splitMonth[$i] ?>, </span>
@@ -136,7 +136,7 @@ use Illuminate\Support\Facades\Session;
                                                 </ul>
                                             </td>
 
-                                            <td>{{ 'Rp ' . number_format($row->sub_total, 2, ',', '.') }}</td>
+                                            <td style="width: 220.406px;">{{ 'Rp ' . number_format($row->sub_total, 2, ',', '.') }}</td>
                                         </tr>
                                         @php
                                             $j++;

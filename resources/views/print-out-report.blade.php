@@ -247,7 +247,7 @@
                                 </ul>
                             </td>
 
-                            <td style="text-align:center">{{ 'Rp ' . number_format($row->sub_total, 2, ',', '.') }}</td>
+                            <td style="text-align:center;width:110px;">{{ 'Rp ' . number_format($row->sub_total, 2, ',', '.') }}</td>
                         </tr>
                         @php
                             $j++;
